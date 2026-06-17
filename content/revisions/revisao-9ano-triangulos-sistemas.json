@@ -109,21 +109,21 @@
           "options": [
             {
               "text": "Não, porque os conjuntos de ângulos são diferentes.",
-              "isCorrect": true,
-              "feedback": "Correto. O primeiro triângulo tem ângulos 50°, 70° e 60°. O segundo tem 50°, 60° e 70°. Espera — são os mesmos ângulos! Revisando: primeiro = 50+70+x=180 → x=60°. Segundo = 50+60+y=180 → y=70°. Ambos têm 50°, 60° e 70°. São semelhantes!",
+              "isCorrect": false,
+              "feedback": "Cuidado! O primeiro triângulo tem ângulos 50°, 70° e 60° (pois 180-50-70=60). O segundo tem 50°, 60° e 70° (180-50-60=70). Ambos têm os mesmos ângulos, então são semelhantes.",
               "errorCategory": "cálculo numérico"
             },
             {
               "text": "Sim, porque ambos têm o ângulo de 50°.",
               "isCorrect": false,
-              "feedback": "Um ângulo igual não basta. Precisamos verificar se o segundo ângulo também coincide. Calcule o terceiro ângulo de cada triângulo.",
+              "feedback": "Um ângulo igual não basta. Precisamos verificar se um segundo ângulo também coincide. Calcule o terceiro ângulo de cada triângulo.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "Sim, porque os três ângulos dos dois triângulos são iguais.",
-              "isCorrect": false,
-              "feedback": "Essa seria a resposta correta! Primeiro: 50°+70°+60°=180°. Segundo: 50°+60°+70°=180°. Os conjuntos de ângulos são idênticos. Eles são semelhantes.",
-              "errorCategory": "interpretação"
+              "isCorrect": true,
+              "feedback": "Correto! Primeiro: 50°+70°+60°=180°. Segundo: 50°+60°+70°=180°. Os conjuntos de ângulos são idênticos. Eles são semelhantes.",
+              "errorCategory": null
             },
             {
               "text": "Não, porque os lados não foram informados.",
@@ -767,7 +767,7 @@
           "type": "multiple_choice",
           "difficulty": "intermediate",
           "skillTag": "solve_system_substitution",
-          "statement": "Resolva: { 2x − y = 1 | x² + y = 7 }. Qual é a solução?",
+          "statement": "Resolva: { 2x − y = 1 | x² + y = 7 }. Qual é a solução com x > 0?",
           "options": [
             {
               "text": "x = 2, y = 3",
