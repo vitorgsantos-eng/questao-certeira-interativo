@@ -122,6 +122,10 @@ export async function createServiceClient(): Promise<AnySupabaseClient> {
         }
 
         if (table === 'access_codes') {
+          const updateChain: any = {
+            eq: () => updateChain,
+            then: (resolve: any) => resolve({ data: null, error: null }),
+          }
           return {
             select: () => ({
               eq: (field1: string, val1: any) => ({
@@ -133,16 +137,15 @@ export async function createServiceClient(): Promise<AnySupabaseClient> {
                           {
                             id: 'code-valid',
                             student_id: 'stud-123',
-                            // Hash of 'VALID-CODE' using bcrypt (rounds: 10)
+                            // bcrypt hash of 'VALID-CODE' (rounds: 10)
                             code_hash:
-                              '$2a$10$V04r43cT.mX9sJvUq9mHnO4r8c/cK62p0UvS2zGqK4L5qF.7UfSmG',
+                              '$2a$10$qk/glsjjLoPrAAPY5kdYuOqcFodYjrc8TilUqeP6TwhKlbXlc5IcK',
                             status: 'active',
                             expires_at: new Date(Date.now() + 1000 * 60 * 60).toISOString(),
                           },
                           {
                             id: 'code-expired',
                             student_id: 'stud-123',
-                            // Hash of 'EXPIRED-CODE'
                             code_hash:
                               '$2a$10$E04r43cT.mX9sJvUq9mHnO4r8c/cK62p0UvS2zGqK4L5qF.7UfSmG',
                             status: 'active',
@@ -155,12 +158,8 @@ export async function createServiceClient(): Promise<AnySupabaseClient> {
                   }
                 },
               }),
-              update: () => ({
-                eq: async () => {
-                  return { data: null, error: null }
-                },
-              }),
             }),
+            update: () => updateChain,
           }
         }
 

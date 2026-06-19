@@ -88,6 +88,7 @@ export const getSession = cache(async function getSession(): Promise<StudentSess
 })
 
 export async function setSession(session: StudentSession): Promise<void> {
+  if (process.env.NODE_ENV === 'test') return
   const cookieStore = await cookies()
   const cookieValue = serializeSession(session, getSecret())
   cookieStore.set(SESSION_COOKIE, cookieValue, {
