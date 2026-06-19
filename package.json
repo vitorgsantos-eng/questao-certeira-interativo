@@ -9,6 +9,8 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "validate-content": "tsx scripts/validate-content.ts",
+    "validate-content:ci": "tsx scripts/validate-content.ts content/revisions/revisao-9ano-triangulos-sistemas.json",
+    "test": "npx tsx scripts/test-validation-logic.ts && npx tsx scripts/test-session-signing.ts && npx tsx scripts/test-rate-limiting.ts",
     "import-revision": "tsx scripts/import-revision.ts",
     "generate-codes": "tsx scripts/generate-access-codes.ts"
   },
