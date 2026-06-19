@@ -42,6 +42,7 @@ Auditoria completa das 4 missões contra as questões de cada missão. Pergunta 
 - **REORDENAÇÃO CRÍTICA**: `visual_explanation` (nomenclatura h, m, n, a, b, c) movida para **antes** do `concept` (fórmulas)
 - `concept`: texto ajustado para referenciar nomenclatura "já definida acima"
 - `worked_example 1`: adicionadas linhas de abertura "Dados: ... Queremos: ..."
+- `worked_example` **NOVO (#3)**: demonstra `h = a·b/c` passo a passo (a=6, b=8 → Pitágoras c=10 → h=48/10=4,8) com instrução de quando usar essa via
 - `hint`: adicionada fórmula `h = a·b/c` com explicação de quando usá-la
 - `summary`: adicionado ponto `h = a·b/c` (use quando conhecer catetos e hipotenusa)
 
@@ -50,17 +51,19 @@ Auditoria completa das 4 missões contra as questões de cada missão. Pergunta 
 **Blocos:**
 - `concept`: adicionado exemplo concreto ("em qualquer triângulo retângulo com 30°, a razão oposto/hipotenusa é sempre 0,5")
 - `worked_example 1`: adicionada linha de abertura "Dado: α = 30°, hipotenusa = 20 cm. Queremos: cateto oposto."
-- `worked_example` **NOVO (#2)**: encontrar ângulo dados catetos (oposto=3, adjacente=3√3, tg=1/√3, α=30°)
+- `worked_example` **NOVO (#2)**: encontrar ângulo dados catetos (oposto=3, adjacente=$3\sqrt{3}$, tg=1/√3, α=30°)
 - `summary`: adicionado ponto sobre encontrar o ângulo pela tabela
+- **Conversão KaTeX**: expressões `5√3`, `3√3` e `6√3` (cruas em texto de questão/opção) convertidas para `$5\sqrt{3}$`, `$3\sqrt{3}$` e `$6\sqrt{3}$`
 
 ### M4 — Sistemas com Equações do 2º Grau
 
 **Blocos:**
 - `intro`: reescrita com definição de "sistema" para alunos que podem não conhecer o termo
 - `worked_example`: expansão de `(5-x)²` dividida em **dois passos** explícitos (primeiro mostra `(5-x)² = 25-10x+x²`, depois substitui); adicionado passo de verificação final
-- `concept` **NOVO**: bloco "Identidade útil: x²+y² sem calcular x e y" com `x²+y² = (x+y)² − 2xy` — ensinada antes de Q4 e Q5 usá-la
+- `concept` **NOVO (identidade)**: bloco "Identidade útil: x²+y² sem calcular x e y" com `x²+y² = (x+y)² − 2xy` — ensinada antes de Q4 e Q5 usá-la
+- `worked_example` **NOVO (soma/produto)**: demonstra que dado x+y=S e xy=P, os números são raízes de `t²−St+P=0`; exemplo completo x+y=7, xy=12 → t²−7t+12=0 → (t−3)(t−4)=0 → {3, 4}
 - `hint`: melhorado com exemplo concreto de como subtrair duas equações do 2º grau
-- `summary`: adicionado atalho da identidade
+- `summary`: adicionado atalho da identidade e da estratégia soma/produto
 
 ---
 
@@ -78,7 +81,7 @@ Auditoria completa das 4 missões contra as questões de cada missão. Pergunta 
 
 ## 4. Preservação de Gabaritos
 
-Nenhum `isCorrect`, `correctNumericAnswer`, `tolerance`, `errorCategory` foi alterado. Apenas blocos de lição (`blocks[]`) foram modificados.
+Nenhum gabarito, resposta numérica, tolerância ou categoria de erro foi alterado. Além dos blocos de lição, alguns feedbacks foram refinados pedagogicamente sem alterar alternativas corretas.
 
 ---
 

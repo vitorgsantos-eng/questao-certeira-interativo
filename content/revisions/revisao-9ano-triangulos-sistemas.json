@@ -280,6 +280,16 @@
           ]
         },
         {
+          "type": "worked_example",
+          "problem": "Num triângulo retângulo, os catetos são a = 6 e b = 8. Calcule a altura h relativa à hipotenusa usando a fórmula alternativa.",
+          "steps": [
+            "Dados: a = 6, b = 8. Queremos: h. Não temos m nem n — usamos a fórmula $h = \\dfrac{a \\cdot b}{c}$.",
+            "Passo 1 — calcule a hipotenusa por Pitágoras: $c = \\sqrt{a^2 + b^2} = \\sqrt{6^2 + 8^2} = \\sqrt{36 + 64} = \\sqrt{100} = 10$.",
+            "Passo 2 — aplique a fórmula: $h = \\dfrac{a \\cdot b}{c} = \\dfrac{6 \\times 8}{10} = \\dfrac{48}{10} = 4{,}8$."
+          ],
+          "conclusion": "h = 4,8. Use $h = \\dfrac{a \\cdot b}{c}$ sempre que conhecer os dois catetos e precisar da altura, sem ter m e n."
+        },
+        {
           "type": "hint",
           "text": "Atenção: $h^2 = m \\cdot n$ usa as duas projeções (produto de m por n). Já $a^2 = m \\cdot c$ usa a projeção do próprio cateto a (não do outro). Uma relação derivada também útil: $h = \\dfrac{a \\cdot b}{c}$ — use quando conhecer os dois catetos e a hipotenusa em vez das projeções."
         },
@@ -617,7 +627,7 @@
           "type": "multiple_choice",
           "difficulty": "intermediate",
           "skillTag": "find_angle",
-          "statement": "Num triângulo retângulo, o cateto oposto a α mede 5 cm e o cateto adjacente mede 5√3 cm. Qual é o ângulo α?",
+          "statement": "Num triângulo retângulo, o cateto oposto a α mede 5 cm e o cateto adjacente mede $5\\sqrt{3}$ cm. Qual é o ângulo α?",
           "options": [
             {
               "text": "α = 30°",
@@ -652,7 +662,7 @@
           "statement": "Uma escada de 6 m apoia-se numa parede vertical formando um ângulo de 60° com o chão. A que altura do chão o topo da escada toca a parede?",
           "options": [
             {
-              "text": "3√3 m ≈ 5,2 m",
+              "text": "$3\\sqrt{3}$ m ≈ 5,2 m",
               "isCorrect": true,
               "feedback": "Correto. A escada é a hipotenusa (6 m). Queremos o cateto oposto ao ângulo de 60°. $\\text{sen}\\, 60° = \\dfrac{\\text{oposto}}{6} \\Rightarrow \\text{oposto} = 6 \\times \\dfrac{\\sqrt{3}}{2} = 3\\sqrt{3} \\approx 5{,}2$ m.",
               "errorCategory": null
@@ -670,7 +680,7 @@
               "errorCategory": "identificação de elementos"
             },
             {
-              "text": "6√3 m",
+              "text": "$6\\sqrt{3}$ m",
               "isCorrect": false,
               "feedback": "Você multiplicou $6 \\times \\sqrt{3}$. Mas $\\text{sen}\\, 60° = \\dfrac{\\sqrt{3}}{2}$, portanto altura $= 6 \\times \\dfrac{\\sqrt{3}}{2} = 3\\sqrt{3}$, não $6\\sqrt{3}$.",
               "errorCategory": "cálculo numérico"
@@ -720,6 +730,17 @@
           "title": "Identidade útil: $x^2 + y^2$ sem calcular $x$ e $y$",
           "text": "Em alguns sistemas você conhece $x + y$ e $x \\cdot y$, mas precisa de $x^2 + y^2$ sem encontrar $x$ e $y$ separadamente. Desenvolva $(x+y)^2$:",
           "highlight": "$(x+y)^2 = x^2 + 2xy + y^2 \\Rightarrow x^2 + y^2 = (x+y)^2 - 2xy$"
+        },
+        {
+          "type": "worked_example",
+          "problem": "Você sabe que $x + y = 7$ e $xy = 12$. Encontre $x$ e $y$.",
+          "steps": [
+            "Quando conhecemos a soma S = x + y e o produto P = xy, os dois números são as raízes da equação: $t^2 - S \\cdot t + P = 0$.",
+            "Substitua S = 7 e P = 12: $t^2 - 7t + 12 = 0$.",
+            "Fatore: $(t - 3)(t - 4) = 0 \\Rightarrow t = 3$ ou $t = 4$.",
+            "Verifique: $3 + 4 = 7$ ✓ e $3 \\times 4 = 12$ ✓."
+          ],
+          "conclusion": "Os números são 3 e 4. Sempre que tiver x + y = S e xy = P, forme $t^2 - St + P = 0$ e fatore."
         },
         {
           "type": "hint",
