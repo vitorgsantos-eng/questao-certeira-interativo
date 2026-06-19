@@ -2,10 +2,13 @@
  * Generate individual access codes for students.
  *
  * Usage:
- *   tsx scripts/generate-access-codes.ts [path-to-students-file]
+ *   tsx scripts/generate-access-codes.ts [path-to-students-file] [--dry-run]
  *
  * Default file: data/students.local.json  (gitignored — never commit real student data)
  * Template:     data/students.sample.json (safe to commit — no real names)
+ *
+ * --dry-run  Validates the student file format without connecting to the database,
+ *            generating codes, or printing any sensitive data. Safe for CI.
  *
  * File format:
  *   {
@@ -41,9 +44,14 @@ interface StudentsFile {
   students: StudentEntry[]
 }
 
-// ── Load student file ─────────────────────────────────────────────────────────
+// ── Parse CLI args ─────────────────────────────────────────────────────────────
 
-const filePath = process.argv[2] ?? path.resolve('data/students.local.json')
+const args = process.argv.slice(2)
+const isDryRun = args.includes('--dry-run')
+const fileArg = args.find((a) => !a.startsWith('--'))
+const filePath = fileArg ?? path.resolve('data/students.local.json')
+
+// ── Load student file ─────────────────────────────────────────────────────────
 
 if (!fs.existsSync(filePath)) {
   console.error(`Student file not found: ${filePath}`)
@@ -63,12 +71,56 @@ try {
   process.exit(1)
 }
 
-if (!studentsFile.revisionSlug || !studentsFile.students?.length || !studentsFile.daysValid) {
-  console.error('Invalid file format. Expected: { revisionSlug, daysValid, students: [...] }')
+// ── File format validation ────────────────────────────────────────────────────
+
+function validateFileFormat(data: StudentsFile): string[] {
+  const errs: string[] = []
+  if (!data.revisionSlug || typeof data.revisionSlug !== 'string') {
+    errs.push('revisionSlug must be a non-empty string')
+  }
+  if (!data.daysValid || typeof data.daysValid !== 'number' || data.daysValid <= 0) {
+    errs.push('daysValid must be a positive number')
+  }
+  if (!Array.isArray(data.students) || data.students.length === 0) {
+    errs.push('students must be a non-empty array')
+  } else {
+    data.students.forEach((s, i) => {
+      if (!s.displayName || typeof s.displayName !== 'string') {
+        errs.push(`students[${i}]: displayName must be a non-empty string`)
+      }
+      if (!s.grade || typeof s.grade !== 'string') {
+        errs.push(`students[${i}]: grade must be a non-empty string`)
+      }
+      if (s.groupLabel !== undefined && typeof s.groupLabel !== 'string') {
+        errs.push(`students[${i}]: groupLabel must be a string if provided`)
+      }
+    })
+  }
+  return errs
+}
+
+const formatErrors = validateFileFormat(studentsFile)
+if (formatErrors.length > 0) {
+  console.error(`Invalid file format in ${filePath}:`)
+  formatErrors.forEach((e) => console.error(`  ✗ ${e}`))
   process.exit(1)
 }
 
-// ── Supabase client ────────────────────────────────────────────────────────────
+// ── Dry-run mode (no Supabase, no codes generated) ────────────────────────────
+
+if (isDryRun) {
+  console.log('\n[DRY-RUN] Validating student file — no codes will be generated.\n')
+  console.log(`  File        : ${filePath}`)
+  console.log(`  revisionSlug: ${studentsFile.revisionSlug}`)
+  console.log(`  daysValid   : ${studentsFile.daysValid}`)
+  console.log(`  students    : ${studentsFile.students.length} entr${studentsFile.students.length === 1 ? 'y' : 'ies'}`)
+  console.log('')
+  console.log('[DRY-RUN] File format is valid.')
+  console.log('[DRY-RUN] No codes generated. Nothing written to the database.')
+  process.exit(0)
+}
+
+// ── Production mode: require Supabase credentials ─────────────────────────────
 
 const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
 const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
