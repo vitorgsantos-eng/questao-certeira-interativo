@@ -18,26 +18,26 @@
 
 ### `SimilarTrianglesDiagram` — M1 Semelhança de Triângulos
 - SVG com dois triângulos poligonais lado a lado
-- Triângulo menor (azul) + triângulo maior (verde, ~1.6× o menor)
-- Marcas de arco nos ângulos correspondentes (A↔A′, B↔B′)
+- Triângulo menor (azul): A=(60,50), B=(20,130), C=(100,130)
+- Triângulo maior (verde): A′=(220,30), B′=(160,150), C′=(280,150)
+- Semelhança exata com k=1,5: BC=80→120, AB=(−40,80)→(−60,120), AC=(40,80)→(60,120) — todos os lados 1,5× ✓
+- Badge "k = 1,5" com seta entre os dois triângulos
+- Marcas de arco duplas em B/B′ para indicar ângulos iguais
 - Lados do menor: a, b, c / lados do maior: ka, kb, kc
-- Badge "×k" com seta entre os dois triângulos
-- Legenda de cores integrada no canto superior
-- `aria-label` descritivo; `<figcaption>` explicativa
+- Legenda de cores e `<figcaption>` explicativos
 
 ### `RightTriangleMetricsDiagram` — M2 Relações Métricas (visual mais importante)
-- SVG do triângulo retângulo com ângulo reto no ápice (A)
-- Altitude h traçada com linha pontilhada de A até H (pé)
-- Código de cores com significado fixo:
-  - **Azul** → c (hipotenusa)
-  - **Vermelho** → a (cateto)
-  - **Verde** → b (cateto)
-  - **Roxo** → h (altura)
-  - **Laranja** → m (projeção esquerda)
-  - **Verde-água** → n (projeção direita)
-- Marcadores de ângulo reto em A e em H
+- SVG do triângulo retângulo com ângulo reto em A, geometricamente consistente:
+  - A=(110,48), B=(20,168), H=(110,168), C=(270,168)
+  - AB=(−90,120), AC=(160,120) → AB·AC = −14400 + 14400 = **0** ✓
+  - AH=(0,120) — perpendicular à hipotenusa horizontal ✓
+  - m=BH=90, n=HC=160, c=BC=250, h=AH=120
+- Altitude h traçada com linha pontilhada de A até H
+- Marcador de ângulo reto em A com segmentos paralelos a AB e AC (usando vetores unitários uAB=(−0.6,0.8) e uAC=(0.8,0.6))
+- Marcador de ângulo reto em H com quadrado (AH vertical ⊥ BC horizontal)
+- Código de cores: azul=c, vermelho=a, verde=b, roxo=h, laranja=m, verde-água=n
 - Traços de delimitação de m e n abaixo da base
-- Legenda de cores na margem inferior
+- Legenda em 2 linhas na margem inferior
 - Cobre o gap de ambiguidade identificado no diagnóstico pedagógico da VIT-50
 
 ### `TrigonometryDiagram` — M3 Trigonometria no Triângulo Retângulo
@@ -154,15 +154,22 @@ Novos visuais podem ser adicionados sem alterar tipos ou validador — apenas ad
 
 ---
 
-## 8. Resultados dos Testes
+## 8. Correções Pós-Inspeção (commit 2)
 
-| Teste | Resultado |
-|-------|-----------|
-| `npm run lint` | ✓ (1 warning pré-existente em `server.ts`) |
-| `npm run type-check` | ✓ |
-| `npm run build` | ✓ bundle da missão: 6,1 kB → 203 kB (esperado; SVGs inline são leves) |
-| `npm run validate-content:ci` | ✓ 0 erros, 0 warnings |
-| `npm test` | ✓ 47/47 |
+Aprovada a arquitetura geral; corrigidas inconsistências geométricas:
+
+- **`SimilarTrianglesDiagram`**: coordenadas atualizadas para semelhança exata k=1,5 em todos os lados. Badge alterado de "×k" para "k = 1,5". Figcaption explica a proporcionalidade.
+- **`RightTriangleMetricsDiagram`**: coordenadas A=(110,48), B=(20,168), H=(110,168), C=(270,168) — AB·AC=0 verificado. Marcador de ângulo reto em A substituído por segmentos paralelos a AB e AC (usando vetores unitários), eliminando o L genérico anterior.
+
+## 9. Resultados dos Testes
+
+| Teste | Resultado (commit inicial) | Resultado (pós-correção) |
+|-------|---------------------------|--------------------------|
+| `npm run lint` | ✓ | ✓ |
+| `npm run type-check` | ✓ | ✓ |
+| `npm run build` | ✓ | ✓ |
+| `npm run validate-content:ci` | ✓ 0 erros | ✓ 0 erros |
+| `npm test` | ✓ 47/47 | ✓ 47/47 |
 
 ---
 
