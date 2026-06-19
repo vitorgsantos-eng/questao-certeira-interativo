@@ -13,6 +13,7 @@ export type ContentBlockType =
   | 'worked_example'
   | 'hint'
   | 'summary'
+  | 'diagram'
 
 export type ErrorCategory =
   | 'interpretação'
@@ -183,6 +184,18 @@ export interface SummaryBlock {
   points: string[]
 }
 
+export type DiagramId =
+  | 'similar-triangles'
+  | 'metric-relations'
+  | 'trigonometry'
+  | 'systems-strategy'
+
+export interface DiagramBlock {
+  type: 'diagram'
+  diagramId: DiagramId
+  caption?: string
+}
+
 export type ContentBlockData =
   | IntroBlock
   | ConceptBlock
@@ -190,6 +203,7 @@ export type ContentBlockData =
   | WorkedExampleBlock
   | HintBlock
   | SummaryBlock
+  | DiagramBlock
 
 // ─── Session / auth-lite types ─────────────────────────────────────────────────
 

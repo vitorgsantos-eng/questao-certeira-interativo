@@ -1,4 +1,9 @@
+import React from 'react'
 import { MathText } from '@/components/math/MathText'
+import { SimilarTrianglesDiagram } from '@/components/visuals/SimilarTrianglesDiagram'
+import { RightTriangleMetricsDiagram } from '@/components/visuals/RightTriangleMetricsDiagram'
+import { TrigonometryDiagram } from '@/components/visuals/TrigonometryDiagram'
+import { SystemsStrategyCard } from '@/components/visuals/SystemsStrategyCard'
 import type { ContentBlockData } from '@/types'
 
 interface LessonBlockProps {
@@ -122,6 +127,27 @@ export function LessonBlock({ block }: LessonBlockProps) {
           </ul>
         </div>
       )
+
+    case 'diagram': {
+      const diagrams: Record<string, React.ReactElement> = {
+        'similar-triangles': <SimilarTrianglesDiagram />,
+        'metric-relations': <RightTriangleMetricsDiagram />,
+        'trigonometry': <TrigonometryDiagram />,
+        'systems-strategy': <SystemsStrategyCard />,
+      }
+      const diagram = diagrams[block.diagramId]
+      if (!diagram) return null
+      return (
+        <div className="card space-y-2 animate-fade-in">
+          {diagram}
+          {block.caption && (
+            <p className="text-xs text-brand-gray-mid text-center italic">
+              {block.caption}
+            </p>
+          )}
+        </div>
+      )
+    }
 
     default:
       return null
