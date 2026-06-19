@@ -160,6 +160,48 @@ Guarde esses códigos — eles não ficam salvos no banco em texto puro.
 
 Nenhum hash, ID, ou dado interno é impresso.
 
+### Modo --dry-run (refinamento — rodada 2)
+
+Adicionado `--dry-run` ao script para validação sem banco, sem credenciais, sem geração de código:
+
+```
+tsx scripts/generate-access-codes.ts data/students.sample.json --dry-run
+```
+
+**Saída do dry-run:**
+```
+[DRY-RUN] Validating student file — no codes will be generated.
+
+  File        : data/students.sample.json
+  revisionSlug: revisao-9ano-triangulos-sistemas
+  daysValid   : 15
+  students    : 3 entries
+
+[DRY-RUN] File format is valid.
+[DRY-RUN] No codes generated. Nothing written to the database.
+```
+
+**Validações do dry-run:**
+- `revisionSlug`: string não vazia
+- `daysValid`: número positivo
+- `students`: array não vazio com `displayName` e `grade` por entrada
+- `groupLabel`: string se presente, ou ausente
+
+**Arquivo inválido retorna exit 1:**
+```
+Invalid file format in bad.json:
+  ✗ revisionSlug must be a non-empty string
+  ✗ daysValid must be a positive number
+  ✗ students must be a non-empty array
+```
+
+**Script `test:generate-codes`** adicionado em `package.json`:
+```json
+"test:generate-codes": "tsx scripts/generate-access-codes.ts data/students.sample.json --dry-run"
+```
+
+O dry-run **também está integrado em `npm test`** — roda como última etapa da bateria. Sem credenciais necessárias, seguro para CI.
+
 ---
 
 ## 4. Arquivos alterados/criados
@@ -167,9 +209,10 @@ Nenhum hash, ID, ou dado interno é impresso.
 | Arquivo | Mudança |
 |---|---|
 | `scripts/validate-content.ts` | Regras pedagógicas + errorCategory + distribuição de dificuldade |
-| `scripts/generate-access-codes.ts` | Lê de arquivo local em vez de array hardcoded |
+| `scripts/generate-access-codes.ts` | Lê de arquivo local + modo `--dry-run` sem Supabase |
 | `data/students.sample.json` | Criado — exemplo sem dados reais |
 | `.gitignore` | Adicionado padrão `data/*.local.*` |
+| `package.json` | Scripts `test:generate-codes` + dry-run integrado em `npm test` |
 | `docs/agent-reports/...` | Relatório |
 
 ---
@@ -183,9 +226,10 @@ Nenhum hash, ID, ou dado interno é impresso.
 | `npm run type-check` | ✅ |
 | `npm run build` | ✅ |
 | `npm run validate-content:ci` | ✅ 0 errors, 0 warnings |
-| `npm test` | ✅ **47/47** |
+| `npm test` | ✅ **48/48** (14 code + 20 session + 13 rate-limit + 1 dry-run) |
+| `npm run test:generate-codes` | ✅ Dry-run sem credenciais |
 | `generate-access-codes.ts` sem arquivo | ✅ Erro amigável + instrução |
-| `generate-access-codes.ts data/students.sample.json` | ✅ Falha em credencial (esperado — sem .env.local) |
+| `generate-access-codes.ts --dry-run` com arquivo inválido | ✅ Exit 1 com erros detalhados |
 
 ---
 
@@ -206,9 +250,11 @@ Nenhum hash, ID, ou dado interno é impresso.
 - ✅ `students.local.json` não existe no repositório
 - ✅ `students.sample.json` contém apenas dados fictícios
 - ✅ Nenhum hash completo foi impresso em testes
+- ✅ Dry-run não requer `NEXT_PUBLIC_SUPABASE_URL` nem `SUPABASE_SERVICE_ROLE_KEY`
+- ✅ Dry-run não gera código bruto, não grava no banco
 - ✅ Nenhum serviço pago foi adicionado
 - ✅ Nenhuma IA foi adicionada ao runtime do app
 - ✅ Nenhum deploy foi feito
 - ✅ Nenhum merge foi feito
 - ✅ Supabase CLI não foi configurado
-- ✅ CI continua passando (47/47 testes)
+- ✅ CI continua passando (48/48 testes)
