@@ -23,8 +23,9 @@ Regras:
 ## Controle de acesso
 
 O app usa um sistema de "auth-lite":
-- Cookie `qci_session` (httpOnly, sameSite: lax) armazena sessão codificada em base64
+- Cookie `qci_session` (httpOnly, sameSite: lax) armazena sessão assinada com HMAC-SHA256
 - A sessão contém: studentId, revisionId, revisionSlug, displayName, grade, expiresAt
+- Cookie adulterado ou com assinatura inválida é rejeitado automaticamente
 - Toda rota de conteúdo valida a sessão antes de retornar dados
 - Códigos de acesso são salvos **apenas como hash bcrypt** no banco
 
@@ -39,12 +40,17 @@ O conteúdo não é servido de `/public` — é servido via API com verificaçã
 RLS está habilitado em todas as tabelas.
 
 - `service_role`: acesso total (usado pelo backend)
-- `anon`: leitura de revisões ativas, missões e blocos de conteúdo para SSR
+- `anon`: leitura restrita — apenas `revisions` (status=active), `missions` e `content_blocks`
+- `questions`, `question_options`: protegidos (sem acesso anon) — contêm respostas corretas, feedback e categorias de erro
+- `students`, `access_codes`, `attempts`, `mission_progress`, `revision_progress`: sem acesso anon
 - Escrita em `attempts` e `mission_progress`: apenas via API com service_role
+- Páginas com conteúdo sensível usam `createServiceClient()` após verificação de sessão
 
 ## Sessão do professor
 
-- Cookie `qci_professor` separado, válido por 8 horas
+- Cookie `qci_professor` separado, válido por 8 horas, assinado com HMAC-SHA256
+- Payload JSON: `{ role, issuedAt, expiresAt }` em base64 + assinatura
+- Cookie adulterado, expirado ou sem assinatura é rejeitado
 - Código validado via `PROFESSOR_ACCESS_CODE` no servidor
 - Sem JWT, sem OAuth — simples e sem dependência paga
 
@@ -59,5 +65,4 @@ RLS está habilitado em todas as tabelas.
 
 ## Dívidas técnicas de segurança
 
-- A sessão em base64 não é assinada criptograficamente. Para produção com mais usuários, considerar assinar com SESSION_SECRET usando HMAC ou migrar para JWT.
-- Rate limiting nas rotas de validação de código não está implementado. Para produção, adicionar limite de tentativas por IP.
+- Rate limiting é baseado em memória (in-process Map). Em ambientes com múltiplas instâncias, considerar Redis ou solução persistente. Para MVP com instância única, é suficiente.

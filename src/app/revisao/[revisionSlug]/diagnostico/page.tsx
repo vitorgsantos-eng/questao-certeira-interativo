@@ -1,6 +1,6 @@
 import { redirect, notFound } from 'next/navigation'
 import { getSession } from '@/lib/auth-lite/session'
-import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { Header } from '@/components/layout/Header'
 import { DiagnosticPlayer } from '@/components/mission/DiagnosticPlayer'
 import type { QuestionWithOptions } from '@/types'
@@ -17,7 +17,7 @@ export default async function DiagnosticoPage({ params }: Props) {
     redirect(`/acessar/${revisionSlug}`)
   }
 
-  const supabase = await createClient()
+  const supabase = await createServiceClient()
 
   const { data: revision } = await supabase
     .from('revisions')
