@@ -35,24 +35,23 @@ function parseSegments(text: string): Segment[] {
  * our controlled content JSON — it is never derived from user input.
  */
 function KaTeXSpan({ latex }: { latex: string }) {
-  let html: string
   try {
-    html = katex.renderToString(latex, {
+    const html = katex.renderToString(latex, {
       throwOnError: false,
       output: 'html',
       displayMode: false,
       strict: false,
     })
+    return (
+      <span
+        className="katex-inline"
+        // eslint-disable-next-line react/no-danger
+        dangerouslySetInnerHTML={{ __html: html }}
+      />
+    )
   } catch {
-    html = latex
+    return <span className="font-mono text-red-700">{latex}</span>
   }
-  return (
-    <span
-      className="katex-inline"
-      // eslint-disable-next-line react/no-danger
-      dangerouslySetInnerHTML={{ __html: html }}
-    />
-  )
 }
 
 /** Render a list of parsed segments (text + math interleaved). */
