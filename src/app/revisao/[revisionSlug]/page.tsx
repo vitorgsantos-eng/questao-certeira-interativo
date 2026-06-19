@@ -1,5 +1,5 @@
 import { redirect, notFound } from 'next/navigation'
-import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { getSession } from '@/lib/auth-lite/session'
 import { MissionMap } from '@/components/mission/MissionMap'
 import { Header } from '@/components/layout/Header'
@@ -21,7 +21,7 @@ export default async function RevisaoPage({ params }: Props) {
     redirect(`/acessar/${revisionSlug}`)
   }
 
-  const supabase = await createClient()
+  const supabase = await createServiceClient()
 
   const { data: revision } = await supabase
     .from('revisions')
