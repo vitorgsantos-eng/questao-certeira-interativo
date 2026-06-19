@@ -3,14 +3,15 @@ import { createServiceClient } from '@/lib/supabase/server'
 import { TeacherDashboard } from '@/components/reports/TeacherDashboard'
 import { TeacherLogin } from '@/components/reports/TeacherLogin'
 import { Logo } from '@/components/layout/Logo'
-
-const TEACHER_SESSION_COOKIE = 'qci_professor'
+import { getSecret } from '@/lib/auth-lite/session'
+import { deserializeProfessorSession, PROFESSOR_COOKIE } from '@/lib/auth-lite/professor-session'
 
 export default async function ProfessorPage() {
   const cookieStore = await cookies()
-  const teacherSession = cookieStore.get(TEACHER_SESSION_COOKIE)?.value
+  const raw = cookieStore.get(PROFESSOR_COOKIE)?.value
+  const professorSession = raw ? deserializeProfessorSession(raw, getSecret()) : null
 
-  if (!teacherSession || teacherSession !== 'authenticated') {
+  if (!professorSession) {
     return (
       <main className="min-h-screen bg-navy-gradient flex flex-col items-center justify-center px-4">
         <div className="w-full max-w-sm space-y-8">

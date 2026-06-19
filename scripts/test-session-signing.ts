@@ -5,6 +5,11 @@ import {
   deserializeSession,
   timingSafeEqualStrings,
 } from '../src/lib/auth-lite/session'
+import {
+  buildProfessorPayload,
+  serializeProfessorSession,
+  deserializeProfessorSession,
+} from '../src/lib/auth-lite/professor-session'
 import type { StudentSession } from '../src/types'
 
 // Set a mock session secret for testing
@@ -164,6 +169,55 @@ async function runSessionSigningTests() {
     console.error(`[WARN] Header.tsx not found at ${headerPath}`)
     failed++
   }
+
+  // 5. Professor Session Signing
+  console.log('\n--- Tier 5: Professor Session Signing ---')
+  const professorSecret = process.env.SESSION_SECRET!
+
+  const professorPayload = buildProfessorPayload()
+  const professorCookie = serializeProfessorSession(professorPayload, professorSecret)
+
+  assert(
+    professorCookie.includes('.'),
+    'Professor cookie contains signature separator'
+  )
+
+  const decodedProfessor = deserializeProfessorSession(professorCookie, professorSecret)
+  assert(decodedProfessor !== null, 'Valid signed professor cookie is accepted')
+  assert(decodedProfessor?.role === 'professor', 'Professor cookie has correct role')
+
+  // Forgery: wrong signature
+  const [profPayload] = professorCookie.split('.')
+  const forgedProfCookie = `${profPayload}.forgedsignature99999`
+  assert(
+    deserializeProfessorSession(forgedProfCookie, professorSecret) === null,
+    'Forged professor cookie signature is rejected'
+  )
+
+  // Forgery: different secret
+  const wrongSecretProfCookie = serializeProfessorSession(professorPayload, 'wrong-secret-different-from-real')
+  assert(
+    deserializeProfessorSession(wrongSecretProfCookie, professorSecret) === null,
+    'Professor cookie signed with wrong secret is rejected'
+  )
+
+  // Expired professor cookie
+  const expiredPayload = {
+    role: 'professor' as const,
+    issuedAt: new Date(Date.now() - 1000 * 60 * 60 * 9).toISOString(),
+    expiresAt: new Date(Date.now() - 1000 * 60 * 60 * 1).toISOString(), // 1 hour ago
+  }
+  const expiredProfCookie = serializeProfessorSession(expiredPayload, professorSecret)
+  assert(
+    deserializeProfessorSession(expiredProfCookie, professorSecret) === null,
+    'Expired professor cookie is rejected'
+  )
+
+  // Literal "authenticated" must NOT be accepted
+  assert(
+    deserializeProfessorSession('authenticated', professorSecret) === null,
+    'Legacy literal "authenticated" value is rejected'
+  )
 
   console.log(`\n=== RESULTS: ${passed} Passed, ${failed} Failed ===`)
   if (failed > 0) {
