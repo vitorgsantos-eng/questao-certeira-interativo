@@ -168,9 +168,9 @@
               "errorCategory": "identificação de elementos"
             },
             {
-              "text": "x = 4,5",
+              "text": "x = 16/3 ≈ 5,3",
               "isCorrect": false,
-              "feedback": "Parece que você inverteu a razão. O segundo triângulo é maior, não menor. A razão correta é 9/6 = 3/2, então x = 8 × (3/2) = 12.",
+              "feedback": "Parece que você inverteu a razão: usou 6/9 = 2/3 em vez de 9/6 = 3/2. Isso levaria a x = 8 × (2/3) = 16/3 ≈ 5,3. Como o segundo triângulo é maior, a razão correta é 9/6 = 3/2, então x = 8 × (3/2) = 12.",
               "errorCategory": "proporção"
             }
           ]
@@ -369,7 +369,7 @@
             {
               "text": "n = 1,5",
               "isCorrect": false,
-              "feedback": "Você inverteu a divisão. n = h²/m = 36/4 = 9, não m/h².",
+              "feedback": "Você dividiu h por m em vez de h² por m. n = h²/m = 36/4 = 9, não h/m = 6/4 = 1,5.",
               "errorCategory": "proporção"
             }
           ]
@@ -411,7 +411,7 @@
             {
               "text": "h = 2,5",
               "isCorrect": false,
-              "feedback": "Talvez tenha usado h = a²/c = 25/13 ≈ 1,9. A fórmula correta é h = (a·b)/c. Calcule b = 12 e use h = 60/13.",
+              "feedback": "Talvez tenha calculado h = a/2 = 5/2 = 2,5. A fórmula correta é h = (a·b)/c. Calcule b = √(13²−5²) = 12 e use h = 60/13 ≈ 4,6.",
               "errorCategory": "fórmula inadequada"
             }
           ]
@@ -706,27 +706,27 @@
           "statement": "No sistema { x − y = 2 | x² − y² = 8 }, qual é o primeiro passo mais eficiente?",
           "options": [
             {
-              "text": "Isolar x na primeira equação: x = y + 2.",
+              "text": "Fatorar x² − y² como (x − y)(x + y).",
               "isCorrect": true,
-              "feedback": "Correto. Isolando x na equação linear e substituindo na quadrática, reduzimos o sistema a uma equação só.",
+              "feedback": "Correto. x² − y² = (x − y)(x + y). Como x − y = 2, temos 2(x + y) = 8 → x + y = 4. Resolve-se então o sistema linear x − y = 2 e x + y = 4. Esse é o caminho mais direto.",
               "errorCategory": null
             },
             {
-              "text": "Subtrair as equações diretamente.",
+              "text": "Isolar x na primeira equação: x = y + 2.",
               "isCorrect": false,
-              "feedback": "A subtração funciona bem quando os coeficientes são compatíveis. Aqui, isolar x na linear é mais direto.",
+              "feedback": "Isolar x funciona e leva ao resultado correto. Porém há um caminho mais eficiente: fatorar x² − y² = (x − y)(x + y) e usar x − y = 2 diretamente, evitando substituição e expansão.",
               "errorCategory": "fórmula inadequada"
             },
             {
               "text": "Aplicar Bhaskara imediatamente.",
               "isCorrect": false,
-              "feedback": "Bhaskara resolve equações do 2º grau individuais. Primeiro você precisa reduzir o sistema a uma única equação.",
+              "feedback": "Bhaskara resolve equações do 2º grau individuais. Primeiro reduza o sistema: x² − y² = (x − y)(x + y) = 2(x + y) = 8 → x + y = 4.",
               "errorCategory": "fórmula inadequada"
             },
             {
               "text": "Substituir y = 0 para testar.",
               "isCorrect": false,
-              "feedback": "Testar y = 0 não resolve o sistema — só verifica se (x, 0) é solução. Use a metodologia correta: isole e substitua.",
+              "feedback": "Testar y = 0 não resolve o sistema — apenas verifica se (x, 0) é solução. O caminho correto é fatorar x² − y² = (x − y)(x + y) e usar a primeira equação.",
               "errorCategory": "conceito base"
             }
           ]
@@ -772,7 +772,7 @@
             {
               "text": "x = 2, y = 3",
               "isCorrect": true,
-              "feedback": "Correto. Da primeira: y = 2x − 1. Substitua: x² + 2x − 1 = 7 → x² + 2x − 8 = 0 → (x+4)(x−2) = 0. x = 2 → y = 3. x = −4 → y = −9 (verifique se é pedida solução inteira).",
+              "feedback": "Correto. Da primeira: y = 2x − 1. Substitua: x² + 2x − 1 = 7 → x² + 2x − 8 = 0 → (x+4)(x−2) = 0. x = 2 → y = 3. x = −4 → y = −9 (x = −4 é rejeitado pois a questão pede x > 0).",
               "errorCategory": null
             },
             {
