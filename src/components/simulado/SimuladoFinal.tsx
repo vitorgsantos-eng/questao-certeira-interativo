@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { MultipleChoiceQuestion } from '@/components/quiz/MultipleChoiceQuestion'
 import { ProgressBar } from '@/components/progress/ProgressBar'
@@ -170,9 +171,17 @@ export function SimuladoFinal({ questions, revisionSlug, revisionTitle }: Simula
       <div className="space-y-2">
         <div className="flex items-center justify-between">
           <h1 className="font-bold text-brand-navy">Simulado final</h1>
-          <span className="text-xs text-brand-gray-mid">
-            {current + 1}/{questions.length}
-          </span>
+          <div className="flex items-center gap-3">
+            <span className="text-xs text-brand-gray-mid">
+              {current + 1}/{questions.length}
+            </span>
+            <Link
+              href={`/revisao/${revisionSlug}`}
+              className="text-xs text-brand-gray-mid hover:text-brand-navy transition-colors"
+            >
+              Sair ✕
+            </Link>
+          </div>
         </div>
         <ProgressBar value={progress} size="sm" color="gold" />
         <p className="text-xs text-brand-gray-mid">

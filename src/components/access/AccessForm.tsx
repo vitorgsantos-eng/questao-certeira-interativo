@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useRef } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { Logo } from '@/components/layout/Logo'
 
@@ -122,6 +123,12 @@ export function AccessForm({ revisionSlug, revisionTitle, revisionGrade }: Acces
             <br />
             Formato: <span className="font-mono font-bold">QC-XX-XXXX</span>
           </p>
+        </div>
+
+        <div className="text-center">
+          <Link href="/" className="text-sm text-white/60 hover:text-white transition-colors">
+            ← Página inicial
+          </Link>
         </div>
       </div>
     </main>

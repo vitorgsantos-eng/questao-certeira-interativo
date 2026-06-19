@@ -1,6 +1,7 @@
 'use client'
 
 import { useState, useCallback } from 'react'
+import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { LessonBlock } from './LessonBlock'
 import { MultipleChoiceQuestion } from '@/components/quiz/MultipleChoiceQuestion'
@@ -102,6 +103,14 @@ export function MissionPlayer({
   if (phase === 'lesson') {
     return (
       <main className="max-w-2xl mx-auto px-4 py-6 space-y-5 pb-24">
+        {/* Back to map */}
+        <Link
+          href={`/revisao/${revisionSlug}`}
+          className="inline-flex items-center gap-1 text-sm text-brand-gray-mid hover:text-brand-navy transition-colors"
+        >
+          ← Voltar ao mapa
+        </Link>
+
         {/* Mission header */}
         <div className="space-y-1">
           <p className="text-xs font-bold text-brand-gold uppercase tracking-widest">
@@ -141,9 +150,17 @@ export function MissionPlayer({
         <div className="space-y-2">
           <div className="flex items-center justify-between">
             <h2 className="font-bold text-brand-navy">{mission.short_title}</h2>
-            <span className="text-xs text-brand-gray-mid">
-              {currentQuestion + 1}/{questions.length}
-            </span>
+            <div className="flex items-center gap-3">
+              <span className="text-xs text-brand-gray-mid">
+                {currentQuestion + 1}/{questions.length}
+              </span>
+              <Link
+                href={`/revisao/${revisionSlug}`}
+                className="text-xs text-brand-gray-mid hover:text-brand-navy transition-colors"
+              >
+                Sair ✕
+              </Link>
+            </div>
           </div>
           <ProgressBar value={progress} size="sm" color="gold" />
         </div>
