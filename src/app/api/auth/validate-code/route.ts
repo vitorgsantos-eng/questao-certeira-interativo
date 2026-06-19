@@ -3,6 +3,12 @@ import { z } from 'zod'
 import { createServiceClient, hasSupabaseServiceConfig } from '@/lib/supabase/server'
 import { verifyCode } from '@/lib/validation/code'
 import { setSession, buildSession } from '@/lib/auth-lite/session'
+import {
+  rateLimitMap,
+  MAX_ATTEMPTS,
+  LOCKOUT_DURATION,
+  getClientIp,
+} from '@/lib/auth-lite/rate-limit'
 
 const bodySchema = z.object({
   code: z.string().min(1),
@@ -15,6 +21,31 @@ export async function POST(request: Request) {
       { message: 'Ambiente ainda não configurado para validar códigos.' },
       { status: 503 }
     )
+  }
+
+  const ip = getClientIp(request)
+  const record = rateLimitMap.get(ip)
+
+  if (record && record.attempts >= MAX_ATTEMPTS && Date.now() < record.blockedUntil) {
+    const retryAfter = Math.ceil((record.blockedUntil - Date.now()) / 1000)
+    return NextResponse.json(
+      { message: 'Muitas tentativas. Tente novamente mais tarde.' },
+      {
+        status: 429,
+        headers: {
+          'Retry-After': String(retryAfter),
+        },
+      }
+    )
+  }
+
+  const registerFailure = () => {
+    const current = rateLimitMap.get(ip) || { attempts: 0, blockedUntil: 0 }
+    current.attempts += 1
+    if (current.attempts >= MAX_ATTEMPTS) {
+      current.blockedUntil = Date.now() + LOCKOUT_DURATION
+    }
+    rateLimitMap.set(ip, current)
   }
 
   let body: unknown
@@ -32,7 +63,6 @@ export async function POST(request: Request) {
   const { code, revisionSlug } = parsed.data
   const supabase = await createServiceClient()
 
-  // Find revision
   const { data: revision } = await supabase
     .from('revisions')
     .select('id, title, grade, status')
@@ -41,10 +71,10 @@ export async function POST(request: Request) {
     .single()
 
   if (!revision) {
+    registerFailure()
     return NextResponse.json({ message: 'Revisão não encontrada.' }, { status: 404 })
   }
 
-  // Find access codes for this revision (active only)
   const { data: codes } = await supabase
     .from('access_codes')
     .select('id, student_id, code_hash, status, expires_at')
@@ -52,13 +82,13 @@ export async function POST(request: Request) {
     .eq('status', 'active')
 
   if (!codes || codes.length === 0) {
+    registerFailure()
     return NextResponse.json(
       { message: 'Código inválido. Verifique e tente novamente.' },
       { status: 401 }
     )
   }
 
-  // Find matching code via hash comparison
   let matchedCode: (typeof codes)[0] | null = null
   for (const c of codes) {
     const match = await verifyCode(code, c.code_hash)
@@ -69,25 +99,25 @@ export async function POST(request: Request) {
   }
 
   if (!matchedCode) {
+    registerFailure()
     return NextResponse.json(
       { message: 'Código inválido. Verifique e tente novamente.' },
       { status: 401 }
     )
   }
 
-  // Check expiration
   if (new Date(matchedCode.expires_at) < new Date()) {
     await supabase
       .from('access_codes')
       .update({ status: 'expired' })
       .eq('id', matchedCode.id)
+    registerFailure()
     return NextResponse.json(
       { message: 'Este código expirou. Solicite um novo ao professor.' },
       { status: 403 }
     )
   }
 
-  // Get student
   const { data: student } = await supabase
     .from('students')
     .select('id, display_name, grade')
@@ -95,16 +125,15 @@ export async function POST(request: Request) {
     .single()
 
   if (!student) {
+    registerFailure()
     return NextResponse.json({ message: 'Estudante não encontrado.' }, { status: 404 })
   }
 
-  // Update last_used_at
   await supabase
     .from('access_codes')
     .update({ last_used_at: new Date().toISOString() })
     .eq('id', matchedCode.id)
 
-  // Set session
   await setSession(
     buildSession({
       studentId: student.id,
@@ -115,6 +144,8 @@ export async function POST(request: Request) {
       codeExpiresAt: matchedCode.expires_at,
     })
   )
+
+  rateLimitMap.delete(ip)
 
   return NextResponse.json({ ok: true })
 }

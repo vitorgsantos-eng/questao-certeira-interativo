@@ -1,6 +1,6 @@
 import { redirect, notFound } from 'next/navigation'
 import { getSession } from '@/lib/auth-lite/session'
-import { createClient } from '@/lib/supabase/server'
+import { createServiceClient } from '@/lib/supabase/server'
 import { Header } from '@/components/layout/Header'
 import { StudentReport } from '@/components/reports/StudentReport'
 
@@ -16,7 +16,7 @@ export default async function RelatorioPage({ params }: Props) {
     redirect(`/acessar/${revisionSlug}`)
   }
 
-  const supabase = await createClient()
+  const supabase = await createServiceClient()
 
   const { data: revision } = await supabase
     .from('revisions')

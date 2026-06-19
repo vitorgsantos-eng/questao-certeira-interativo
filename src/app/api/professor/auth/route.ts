@@ -1,8 +1,13 @@
 import { NextResponse } from 'next/server'
 import { z } from 'zod'
 import { cookies } from 'next/headers'
-
-const TEACHER_SESSION_COOKIE = 'qci_professor'
+import { getSecret } from '@/lib/auth-lite/session'
+import {
+  buildProfessorPayload,
+  serializeProfessorSession,
+  PROFESSOR_COOKIE,
+  PROFESSOR_MAX_AGE,
+} from '@/lib/auth-lite/professor-session'
 
 const bodySchema = z.object({
   code: z.string().min(1),
@@ -33,12 +38,15 @@ export async function POST(request: Request) {
     return NextResponse.json({ message: 'Código incorreto.' }, { status: 401 })
   }
 
+  const payload = buildProfessorPayload()
+  const cookieValue = serializeProfessorSession(payload, getSecret())
+
   const cookieStore = await cookies()
-  cookieStore.set(TEACHER_SESSION_COOKIE, 'authenticated', {
+  cookieStore.set(PROFESSOR_COOKIE, cookieValue, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'lax',
-    maxAge: 60 * 60 * 8, // 8 hours
+    maxAge: PROFESSOR_MAX_AGE,
     path: '/',
   })
 
