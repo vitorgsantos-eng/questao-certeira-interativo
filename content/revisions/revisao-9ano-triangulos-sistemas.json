@@ -25,6 +25,11 @@
           "highlight": "Mesma forma = ângulos iguais + lados proporcionais."
         },
         {
+          "type": "diagram",
+          "diagramId": "similar-triangles",
+          "caption": "Triângulo 1 e Triângulo 2 têm os mesmos ângulos — cada lado do maior é k vezes o lado correspondente do menor."
+        },
+        {
           "type": "visual_explanation",
           "title": "Como reconhecer triângulos semelhantes",
           "text": "Existem três critérios para identificar semelhança:",
@@ -238,6 +243,11 @@
           "type": "intro",
           "title": "Missão",
           "text": "Aqui você vai aprender a calcular medidas de um triângulo retângulo sem precisar dos ângulos — apenas usando a posição dos lados. Isso funciona porque traçar a altura até a hipotenusa cria três triângulos semelhantes, e essa semelhança gera relações métricas exatas entre os lados."
+        },
+        {
+          "type": "diagram",
+          "diagramId": "metric-relations",
+          "caption": "Triângulo retângulo com ângulo reto em A. A altitude h divide a hipotenusa c em m (esquerda) e n (direita)."
         },
         {
           "type": "visual_explanation",
@@ -465,6 +475,11 @@
           "title": "A ideia fundamental",
           "text": "Num triângulo retângulo, para um ângulo α específico, a razão entre dois lados é sempre a mesma — independente do tamanho do triângulo. Por exemplo: em qualquer triângulo retângulo com um ângulo de 30°, a razão cateto-oposto/hipotenusa é sempre 0,5. Triângulo com hipotenusa 10, 20 ou 100 — o oposto será sempre metade da hipotenusa. É isso que o seno, o cosseno e a tangente registram.",
           "highlight": "$\\text{sen}\\,\\alpha = \\dfrac{\\text{cateto oposto}}{\\text{hipotenusa}}$   |   $\\text{cos}\\,\\alpha = \\dfrac{\\text{cateto adjacente}}{\\text{hipotenusa}}$   |   $\\text{tg}\\,\\alpha = \\dfrac{\\text{cateto oposto}}{\\text{cateto adjacente}}$"
+        },
+        {
+          "type": "diagram",
+          "diagramId": "trigonometry",
+          "caption": "Ângulo reto em C. O cateto oposto e o adjacente mudam dependendo de qual ângulo você usa."
         },
         {
           "type": "visual_explanation",
@@ -708,6 +723,11 @@
           "title": "A estratégia",
           "text": "Quando um sistema tem uma equação do 1º grau e uma do 2º grau, o melhor caminho é isolar uma variável na equação do 1º grau e substituir na do 2º grau. Isso transforma dois problemas em um.",
           "highlight": "Isole na equação mais simples → Substitua na mais complexa → Resolva a equação resultante."
+        },
+        {
+          "type": "diagram",
+          "diagramId": "systems-strategy",
+          "caption": "Fluxo das 4 etapas e atalho para quando soma S e produto P são conhecidos."
         },
         {
           "type": "worked_example",

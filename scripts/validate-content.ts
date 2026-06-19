@@ -8,7 +8,7 @@ import path from 'path'
 import type { ContentRevisionJSON, ContentQuestionJSON, ErrorCategory } from '../src/types'
 
 const VALID_BLOCK_TYPES = [
-  'intro', 'concept', 'visual_explanation', 'worked_example', 'hint', 'summary',
+  'intro', 'concept', 'visual_explanation', 'worked_example', 'hint', 'summary', 'diagram',
 ]
 const VALID_QUESTION_TYPES = ['multiple_choice', 'numeric']
 const VALID_DIFFICULTIES = ['basic', 'intermediate', 'challenge']
