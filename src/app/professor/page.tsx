@@ -1,10 +1,18 @@
 import { cookies } from 'next/headers'
+import { redirect } from 'next/navigation'
 import { createServiceClient } from '@/lib/supabase/server'
 import { TeacherDashboard } from '@/components/reports/TeacherDashboard'
 import { TeacherLogin } from '@/components/reports/TeacherLogin'
 import { Logo } from '@/components/layout/Logo'
 import { getSecret } from '@/lib/auth-lite/session'
 import { deserializeProfessorSession, PROFESSOR_COOKIE } from '@/lib/auth-lite/professor-session'
+
+async function logoutProfessor() {
+  'use server'
+  const cookieStore = await cookies()
+  cookieStore.delete(PROFESSOR_COOKIE)
+  redirect('/professor')
+}
 
 export default async function ProfessorPage() {
   const cookieStore = await cookies()
@@ -53,7 +61,17 @@ export default async function ProfessorPage() {
       <header className="bg-brand-navy text-white px-4 py-3 shadow-md">
         <div className="max-w-4xl mx-auto flex items-center justify-between">
           <Logo variant="light" size="sm" />
-          <span className="text-sm text-brand-gold font-semibold">Painel do professor</span>
+          <div className="flex items-center gap-4">
+            <span className="text-sm text-brand-gold font-semibold">Painel do professor</span>
+            <form action={logoutProfessor}>
+              <button
+                type="submit"
+                className="text-sm text-white/60 hover:text-white underline underline-offset-2 transition-colors"
+              >
+                Sair
+              </button>
+            </form>
+          </div>
         </div>
       </header>
       <TeacherDashboard
