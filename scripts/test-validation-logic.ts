@@ -1,53 +1,59 @@
 import { isValidCodeFormat, verifyCode, hashCode, generateRawCode } from '../src/lib/validation/code'
 
-async function runTests() {
-  console.log('--- INICIANDO TESTES DE VALIDAÇÃO DE CÓDIGOS ---')
+async function run() {
+  console.log('=== RUNNING CODE VALIDATION LOGIC TESTS ===\n')
 
-  // Teste 1: Formato inválido vs válido
-  console.log('\n[Teste 1] Validação de Formatos')
-  const validCode = generateRawCode()
-  console.log(`Testando código gerado válido (${validCode}):`, isValidCodeFormat(validCode) ? 'PASSOU' : 'FALHOU')
-  
-  const invalidCodes = ['qc-123', 'QC-AA-123', 'QC-A1-12345', 'Q-AB-1234']
+  let passed = 0
+  let failed = 0
+
+  function assert(condition: boolean, message: string) {
+    if (condition) {
+      console.log(`[PASS] ${message}`)
+      passed++
+    } else {
+      console.error(`[FAIL] ${message}`)
+      failed++
+    }
+  }
+
+  // --- Tier 1: Code Format Validation ---
+  console.log('--- Tier 1: Code Format ---')
+
+  const generated = generateRawCode()
+  assert(isValidCodeFormat(generated), `Generated code "${generated}" matches expected format`)
+
+  const invalidCodes = ['qc-123', 'QC-AA-123', 'QC-A1-12345', 'Q-AB-1234', '', 'QC-AB-12345']
   for (const code of invalidCodes) {
-    console.log(`Testando código inválido (${code}):`, isValidCodeFormat(code) === false ? 'PASSOU' : 'FALHOU')
+    assert(isValidCodeFormat(code) === false, `Invalid code "${code}" is correctly rejected`)
   }
 
-  // Teste 2: Hashing e Verificação
-  console.log('\n[Teste 2] Hashing e Verificação')
-  const codeToHash = 'QC-AB-1234'
-  const hash = await hashCode(codeToHash)
-  console.log(`Hash gerado para ${codeToHash}: ${hash.slice(0, 20)}...`)
-  
-  const isMatch = await verifyCode(codeToHash, hash)
-  console.log(`Verificando o mesmo código:`, isMatch ? 'PASSOU' : 'FALHOU')
+  // --- Tier 2: Hash and Verify ---
+  console.log('\n--- Tier 2: Hash and Verify ---')
 
-  const isMatchLowercase = await verifyCode('qc-ab-1234', hash)
-  console.log(`Verificando o mesmo código em minúsculo:`, isMatchLowercase ? 'PASSOU' : 'FALHOU')
+  const testCode = 'QC-AB-1234'
+  const hash = await hashCode(testCode)
 
-  const isMatchWrong = await verifyCode('QC-AB-1235', hash)
-  console.log(`Verificando código errado contra o hash:`, isMatchWrong === false ? 'PASSOU' : 'FALHOU')
+  assert(typeof hash === 'string' && hash.startsWith('$2'), 'hashCode() returns a bcrypt hash')
+  assert(await verifyCode(testCode, hash), 'verifyCode() accepts the original code against its own hash')
+  assert(await verifyCode(testCode.toLowerCase(), hash), 'verifyCode() is case-insensitive')
+  assert(!(await verifyCode('QC-AB-1235', hash)), 'verifyCode() rejects a different code')
+  assert(!(await verifyCode('', hash)), 'verifyCode() rejects empty string')
 
-  // Teste 3: Lógica de Expiração (Simulação de banco de dados)
-  console.log('\n[Teste 3] Simulação de Expiração no Banco')
-  const simulatedDBEntry = {
-    code_hash: hash,
-    expires_at: new Date(Date.now() - 1000 * 60 * 60 * 24).toISOString() // Expirou ontem
-  }
+  // --- Tier 3: Expiry Logic ---
+  console.log('\n--- Tier 3: Expiry Logic ---')
+
   const now = new Date()
-  const expiresAt = new Date(simulatedDBEntry.expires_at)
-  
-  const isExpired = expiresAt < now
-  console.log(`Verificando se código que expirou ontem consta como expirado:`, isExpired ? 'PASSOU' : 'FALHOU')
+  const expired = new Date(now.getTime() - 1000 * 60 * 60 * 24) // yesterday
+  const valid = new Date(now.getTime() + 1000 * 60 * 60 * 24)   // tomorrow
 
-  const simulatedDBEntryValid = {
-    code_hash: hash,
-    expires_at: new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString() // Expira amanhã
-  }
-  const isExpiredValid = new Date(simulatedDBEntryValid.expires_at) < now
-  console.log(`Verificando se código que expira amanhã consta como válido:`, isExpiredValid === false ? 'PASSOU' : 'FALHOU')
+  assert(expired < now, 'Code expiring yesterday is correctly considered expired')
+  assert(!(valid < now), 'Code expiring tomorrow is correctly considered active')
 
-  console.log('\n--- TESTES CONCLUÍDOS ---')
+  console.log(`\n=== RESULTS: ${passed} Passed, ${failed} Failed ===`)
+  if (failed > 0) process.exit(1)
 }
 
-runTests().catch(console.error)
+run().catch((err) => {
+  console.error('Test execution failed:', err)
+  process.exit(1)
+})
