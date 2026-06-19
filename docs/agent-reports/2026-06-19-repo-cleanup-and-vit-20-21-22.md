@@ -1,6 +1,6 @@
 # Relatório de Execução — VIT-20/21/22
 
-**Data:** 2026-06-19 (rodada 3 — PR readiness)  
+**Data:** 2026-06-19 (rodada 4 — lockfile consistency)  
 **Agente:** Claude Sonnet 4.6  
 **Branch:** `wip/agente-seguranca-supabase`  
 **PR:** [#1 — fix(security): VIT-20/21/22](https://github.com/vitorgsantos-eng/questao-certeira-interativo/pull/1)
@@ -17,7 +17,26 @@
 
 ---
 
-## 2. Limpeza de Escopo (rodada 3)
+## 2. Lockfile Consistency (rodada 4)
+
+### Problema
+
+`package.json` estava com `@supabase/ssr ^0.5.2` e `@supabase/supabase-js ^2.108.2` enquanto `package-lock.json` mantinha `^0.5.1` e `^2.45.4`. O bump foi adicionado em rodada anterior mas o lock não foi regenerado, deixando os dois arquivos divergentes — `npm ci` falharia em CI.
+
+### Decisão
+
+O bump **não é necessário** para VIT-20/21/22: toda a lógica de segurança usa `crypto` nativo (Node.js) e `bcryptjs`. Revertido `package.json` para as versões do lockfile (`^0.5.1` / `^2.45.4`).
+
+### Validação
+
+- `npm ci` executado sem erros
+- `npm run lint` ✅, `npm run type-check` ✅, `npm run build` ✅
+- `test-session-signing.ts` **20/20** ✅
+- `test-rate-limiting.ts` **13/13** ✅
+
+---
+
+## 4. Limpeza de Escopo (rodada 3)
 
 ### Alterações UI removidas do PR de segurança
 
@@ -41,7 +60,7 @@ Script agora foca apenas em assinatura de sessão (aluno e professor).
 
 ---
 
-## 3. VIT-21 — Sessão Assinada
+## 5. VIT-21 — Sessão Assinada
 
 ### Aluno (`qci_session`)
 
@@ -78,7 +97,7 @@ Script agora foca apenas em assinatura de sessão (aluno e professor).
 
 ---
 
-## 4. VIT-20 — RLS/Policies
+## 6. VIT-20 — RLS/Policies
 
 ### O que está protegido (anon key sem acesso)
 
@@ -133,7 +152,7 @@ Page que permanece com `createClient()`: `acessar/[revisionSlug]/page.tsx` — l
 
 ---
 
-## 5. VIT-22 — Rate Limiting
+## 7. VIT-22 — Rate Limiting
 
 `src/lib/auth-lite/rate-limit.ts` — módulo extraído do route.ts:
 - 5 tentativas máximas por IP
@@ -146,10 +165,11 @@ Page que permanece com `createClient()`: `acessar/[revisionSlug]/page.tsx` — l
 
 ---
 
-## 6. Testes
+## 8. Testes
 
-| Teste | Resultado |
+| Teste | Resultado (rodada 4) |
 |---|---|
+| `npm ci` | ✅ PASSOU (lock + manifesto consistentes) |
 | `npm run lint` | ✅ PASSOU (1 warning não-bloqueante) |
 | `npm run type-check` | ✅ PASSOU |
 | `npm run build` | ✅ PASSOU |
@@ -173,7 +193,7 @@ Page que permanece com `createClient()`: `acessar/[revisionSlug]/page.tsx` — l
 
 ---
 
-## 7. Arquivos no PR de Segurança
+## 9. Arquivos no PR de Segurança
 
 | Arquivo | Mudança |
 |---|---|
@@ -194,7 +214,7 @@ Page que permanece com `createClient()`: `acessar/[revisionSlug]/page.tsx` — l
 | `SECURITY.md` | Atualizado |
 | `scripts/test-session-signing.ts` | Tier 0 + 4 adicionados, Tier UI removido |
 | `scripts/test-rate-limiting.ts` | Import atualizado, NODE_ENV fix |
-| `package.json` | Bumps Supabase (`^0.5.2`, `^2.108.2`) |
+| `package.json` | Revertido para `^0.5.1` / `^2.45.4` (consistente com lock) |
 | `docs/agent-reports/...` | Relatório |
 
 **Fora do PR (preservados em `wip/preserved-ui-mobile-polish`):**
@@ -207,7 +227,7 @@ Page que permanece com `createClient()`: `acessar/[revisionSlug]/page.tsx` — l
 
 ---
 
-## 8. Status das Migrations no Supabase
+## 10. Status das Migrations no Supabase
 
 **CLI Supabase:** não configurado nesta rodada (sem `supabase/config.toml`, sem `SUPABASE_ACCESS_TOKEN`). Esta ausência **não bloqueia o PR** — configuração do CLI é melhoria operacional futura.
 
@@ -230,7 +250,7 @@ Ambas as migrations são **idempotentes** (`DROP POLICY IF EXISTS`): podem ser e
 
 ---
 
-## 9. Pendências Humanas
+## 11. Pendências Humanas
 
 1. **Aplicar migrations no Supabase Dashboard > SQL Editor** (ver §8)
 2. **Confirmar `SESSION_SECRET` em produção** com ≥32 caracteres aleatórios — sem isso, o app lança erro ao iniciar em produção (comportamento intencional)
@@ -243,7 +263,7 @@ Ambas as migrations são **idempotentes** (`DROP POLICY IF EXISTS`): podem ser e
 
 ---
 
-## 10. Confirmações de Segurança
+## 12. Confirmações de Segurança
 
 - ✅ `.env.local` não foi commitado
 - ✅ Nenhum secret foi impresso ou versionado
