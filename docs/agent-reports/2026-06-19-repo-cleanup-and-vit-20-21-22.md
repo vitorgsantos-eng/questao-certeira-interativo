@@ -1,194 +1,281 @@
 # Relatório de Execução — Limpeza + VIT-20/21/22
 
-**Data:** 2026-06-19  
+**Data:** 2026-06-19 (atualizado)  
 **Agente:** Claude Sonnet 4.6  
-**Branch inicial:** `wip/agente-seguranca-supabase`  
-**Branch final:** `wip/agente-seguranca-supabase`
+**Branch:** `wip/agente-seguranca-supabase`  
+**PR:** #1 — fix(security): VIT-20/21/22 — RLS, sessão assinada, rate limiting
 
 ---
 
-## 1. Escopo da Rodada
+## 1. Escopo
 
-- Limpeza real do repositório (branches, PRs)
-- VIT-20: RLS/policies — restringir leitura pública de dados de alunos
-- VIT-21: Sessão/cookies assinados com HMAC-SHA256
-- VIT-22: Rate limiting na validação de código
+- Limpeza do repositório (branches, PRs)
+- VIT-20: RLS/policies — restringir leitura pública de dados sensíveis (duas rodadas)
+- VIT-21: Sessão/cookies assinados — aluno e professor (segunda rodada corrigiu professor)
+- VIT-22: Rate limiting na validação de código (validado com script específico)
 
 ---
 
-## 2. Estado Inicial
+## 2. Estado Inicial (rodada 1)
 
 - Branch: `wip/agente-seguranca-supabase` (mesmo commit que `master` e `origin/master`)
 - Alterações não commitadas em 11 arquivos
-- Arquivos não rastreados: `.agents/`, `scripts/test-rate-limiting.ts`, `scripts/test-session-signing.ts`
-- Nenhum PR aberto no GitHub
-- Apenas 2 branches locais: `master`, `wip/agente-seguranca-supabase`
+- Nenhum PR aberto; 2 branches locais no mesmo commit
+- `.env.local` corretamente ignorado pelo `.gitignore`
 
 ---
 
-## 3. Fase 1 — Limpeza do Repositório
+## 3. Limpeza do Repositório
 
-**PRs analisados:** 0 (repositório não tinha PRs abertos)  
-**PRs mergeados:** 0  
-**PRs fechados:** 0  
-**Branches remotas excluídas:** 0  
-**Branches locais excluídas:** 0  
-**Branches preservadas:** `master`, `wip/agente-seguranca-supabase`
+**Resultado:** repositório já estava limpo.
 
-O repositório já estava limpo. Nenhuma ação de limpeza necessária.
-
----
-
-## 4. VIT-21 — Cookies Assinados (estado: pré-existente, confirmado)
-
-**Status:** ✅ Já implementado nas mudanças do working tree.
-
-**Arquivo:** `src/lib/auth-lite/session.ts`
-
-Implementação encontrada:
-- `sign(payload, secret)`: HMAC-SHA256 via `crypto.createHmac`
-- `verify(payload, signature, secret)`: comparação via `timingSafeEqual`
-- `serializeSession(session, secret)`: `base64(JSON) + "." + HMAC`
-- `deserializeSession(cookieValue, secret)`: verifica assinatura antes de parsear
-- Cookie `qci_session` com `httpOnly: true`, `secure: true` em produção, `sameSite: 'lax'`
-- Rejeita cookies expirados, adulterados ou sem assinatura válida
+- PRs analisados: 0 (sem PRs abertos)
+- PRs mergeados: 0
+- PRs fechados: 0
+- Branches excluídas: 0
+- Branches preservadas: `master`, `wip/agente-seguranca-supabase`
 
 ---
 
-## 5. VIT-22 — Rate Limiting (estado: pré-existente, refatorado)
+## 4. VIT-22 — Rate Limiting (validado)
 
-**Status:** ✅ Pré-existente, refatorado para corrigir problema de tipo.
+**Status:** ✅ Implementado e testado.
 
-**Mudança:** Lógica de rate limiting movida de `route.ts` para módulo separado.
+### Módulo
 
-**Arquivos:**
-- `src/lib/auth-lite/rate-limit.ts` ← **CRIADO** (módulo com `rateLimitMap`, `getClientIp`, constantes)
-- `src/app/api/auth/validate-code/route.ts` ← refatorado para importar do módulo
+`src/lib/auth-lite/rate-limit.ts` — criado para extrair helpers do route.ts.
 
-**Motivo da refatoração:** O Next.js gerava erro de tipo porque o `route.ts` exportava funções/variáveis fora do padrão de handlers HTTP (`getClientIp`, `rateLimitMap`, `RateLimitRecord`). Mover para módulo separado resolve o erro e mantém os testes funcionando via import do novo módulo.
+Resolve erro de tipo do Next.js (route files não podem exportar funções que não sejam handlers HTTP).
 
-**Comportamento preservado:**
+### Comportamento
+
 - 5 tentativas máximas por IP
-- Bloqueio por 15 minutos
+- Bloqueio por 15 minutos após exceder limite
 - Cabeçalho `Retry-After` na resposta 429
 - Limpeza do record em sucesso
 - Isolamento por IP
+- Nenhum código bruto é logado
+- Erro de código inválido não revela se o código existe
+
+### Resultado do teste
+
+```
+npx tsx scripts/test-rate-limiting.ts
+=== RESULTS: 13 Passed, 0 Failed ===
+```
+
+Cobertura:
+- Test 1: Lockout após 5 tentativas → 429
+- Test 2: Cabeçalho Retry-After presente
+- Test 3: Isolamento por IP
+- Test 4: Record limpo após sucesso
+
+### Correções durante validação
+
+1. Hash bcrypt de 'VALID-CODE' no mock de teste estava errado (fabricado). Substituído pelo hash real gerado localmente.
+2. Mock de `access_codes` em `server.ts` não tinha `update()`. Adicionado `updateChain` para cobrir `supabase.from('access_codes').update(...).eq(...)`.
+3. `setSession()` em `session.ts` chamava `cookies()` do Next.js fora de contexto de request. Adicionado guard `if (process.env.NODE_ENV === 'test') return` (padrão já existente em `server.ts`).
+
+---
+
+## 5. VIT-21 — Sessão Assinada
+
+**Status:** ✅ Completo (aluno e professor).
+
+### Aluno (`qci_session`) — implementado na rodada 1
+
+`src/lib/auth-lite/session.ts`:
+- `sign(payload, secret)`: HMAC-SHA256 via `crypto.createHmac`
+- `verify(payload, signature, secret)`: comparação via `timingSafeEqual`
+- `serializeSession(session, secret)`: `base64(JSON).HMAC`
+- `deserializeSession(cookieValue, secret)`: verifica assinatura antes de parsear
+- Cookie `qci_session` com `httpOnly: true`, `secure: true` em produção, `sameSite: 'lax'`
+- Rejeita cookies expirados, adulterados ou com assinatura inválida
+
+### Professor (`qci_professor`) — CORRIGIDO na rodada 2
+
+**Problema identificado:** `api/professor/auth/route.ts` setava `qci_professor = 'authenticated'` (literal). `professor/page.tsx` comparava `teacherSession !== 'authenticated'` (literal). Cookie adulterado passaria a verificação simplesmente contendo a string.
+
+**Correção:**
+
+`src/lib/auth-lite/professor-session.ts` — criado:
+- `buildProfessorPayload()`: cria `{ role, issuedAt, expiresAt }` com validade de 8h
+- `serializeProfessorSession(payload, secret)`: `base64(JSON).HMAC`
+- `deserializeProfessorSession(cookieValue, secret)`: verifica assinatura, role e expiração
+
+`src/app/api/professor/auth/route.ts` — atualizado:
+- Usa `serializeProfessorSession()` em vez de literal `'authenticated'`
+
+`src/app/professor/page.tsx` — atualizado:
+- Usa `deserializeProfessorSession()` em vez de `teacherSession !== 'authenticated'`
+
+### Resultado do teste de sessão
+
+```
+npx tsx scripts/test-session-signing.ts
+=== RESULTS: 19 Passed, 0 Failed ===
+```
+
+Cobertura nova (Tier 5):
+- Cookie professor válido é aceito
+- Cookie com assinatura forjada é rejeitado
+- Cookie assinado com secret errado é rejeitado
+- Cookie expirado é rejeitado
+- Valor literal `"authenticated"` é rejeitado
 
 ---
 
 ## 6. VIT-20 — RLS/Policies
 
-**Status:** ✅ Implementado.
+**Status:** ✅ Completo (duas migrações incrementais).
 
-### Migration criada
+### O que a rodada 1 cobriu (migration 002)
 
-**Arquivo:** `supabase/migrations/002_rls_restrict_student_data.sql`
+Removeu policies anon que expunham dados de alunos:
+- `mission_progress` — progresso de todos os alunos estava acessível via anon key
+- `revision_progress` — idem
+- `attempts` — tentativas de todos os alunos expostas
 
-Remove policies anon que expunham dados de alunos sem restrição:
-- `DROP POLICY "Public read mission_progress"` — progresso de todos os alunos era legível por qualquer um com a anon key
-- `DROP POLICY "Public read revision_progress"` — idem
-- `DROP POLICY "Public read attempts"` — idem para tentativas de resposta
+### O que faltava (identificado na rodada 2)
 
-### Pages migradas para `createServiceClient()`
+`SECURITY.md` declara: "Questões, opções e feedbacks só são retornados após validação de sessão."
 
-Pages que consultam dados de alunos autenticados foram migradas do cliente anon para o cliente service role:
+Mas as policies da migration 001 tinham:
+```sql
+CREATE POLICY "Public read questions" ON questions FOR SELECT TO anon USING (TRUE);
+CREATE POLICY "Public read question_options" ON question_options FOR SELECT TO anon USING (TRUE);
+```
 
-| Arquivo | Mudança |
-|---|---|
-| `src/app/revisao/[revisionSlug]/page.tsx` | `createClient()` → `createServiceClient()` |
-| `src/app/revisao/[revisionSlug]/relatorio/page.tsx` | `createClient()` → `createServiceClient()` |
+Isso contradiz a política documentada: `question_options` contém `is_correct`, `feedback` e `error_category`.
 
-**Justificativa:** Ambas as pages já verificam `getSession()` antes de qualquer query. O uso de `createServiceClient()` é correto e seguro — o app controla o acesso pela sessão assinada, e o Supabase não tem como saber o ID do aluno via anon key sem Supabase Auth.
+### Migration 003 (criada nesta rodada)
 
-**Pages não alteradas** (usam apenas content público, OK com anon):
-- `missao/[missionSlug]/page.tsx` — queries apenas `missions`, `content_blocks`, `questions`
-- `diagnostico/page.tsx` — queries apenas `missions`, `questions`
-- `simulado/page.tsx` — queries apenas `missions`, `questions`
-- `acessar/[revisionSlug]/page.tsx` — query apenas `revisions` (policy anon já restringe a status=active)
+`supabase/migrations/003_rls_restrict_questions.sql`:
+```sql
+DROP POLICY IF EXISTS "Public read questions" ON questions;
+DROP POLICY IF EXISTS "Public read question_options" ON question_options;
+```
 
-### Correção de bug descoberta
+### Decisão sobre content_blocks e missions
 
-`src/app/api/auth/validate-code/route.ts` linha 164: `student.displayName` → `student.display_name`  
-A query selecionava `display_name` (snake_case do banco) mas o código acessava `displayName` (camelCase), resultando em `undefined` silencioso na sessão.
+**Mantidos como anon-readable** (decisão de MVP documentada):
+- `content_blocks`: conteúdo pedagógico textual sem respostas ou dados de avaliação
+- `missions`: metadados de missão (título, slug, ordem) — nenhum dado sensível
+
+Justificativa registrada no comentário da migration 003 e em SECURITY.md.
+
+### Pages migradas para createServiceClient()
+
+Todas as pages que acessam dados protegidos agora usam `createServiceClient()` após verificar sessão:
+
+| Arquivo | Antes | Agora |
+|---|---|---|
+| `revisao/[revisionSlug]/page.tsx` | `createClient()` | `createServiceClient()` |
+| `revisao/[revisionSlug]/relatorio/page.tsx` | `createClient()` | `createServiceClient()` |
+| `revisao/[revisionSlug]/missao/[missionSlug]/page.tsx` | `createClient()` | `createServiceClient()` |
+| `revisao/[revisionSlug]/diagnostico/page.tsx` | `createClient()` | `createServiceClient()` |
+| `revisao/[revisionSlug]/simulado/page.tsx` | `createClient()` | `createServiceClient()` |
+
+Pages que continuam com `createClient()` (dados realmente públicos):
+- `acessar/[revisionSlug]/page.tsx` — só lê `revisions` com status=active
+
+### Bug fix descoberto (rodada 1)
+
+`validate-code/route.ts`: `student.displayName` (undefined) → `student.display_name` (coluna real do banco).
 
 ---
 
-## 7. Correções de Tipo em `server.ts`
-
-**Arquivo:** `src/lib/supabase/server.ts`
-
-- Adicionado tipo `AnySupabaseClient = SupabaseClient<any, 'public', any>`
-- Adicionadas anotações explícitas de retorno em `createClient()` e `createServiceClient()`
-- Mock de teste agora castado como `as any as AnySupabaseClient` em vez de apenas `as any`
-- Adicionados comentários `eslint-disable` nos blocos de mock de teste
-- Resolve cascata de erros de tipo implícito nas pages que usam o cliente Supabase
-
----
-
-## 8. Arquivos Alterados
+## 7. Arquivos Alterados
 
 | Arquivo | Tipo |
 |---|---|
-| `supabase/migrations/002_rls_restrict_student_data.sql` | Criado |
+| `supabase/migrations/002_rls_restrict_student_data.sql` | Criado (rodada 1) |
+| `supabase/migrations/003_rls_restrict_questions.sql` | Criado (rodada 2) |
 | `src/lib/auth-lite/rate-limit.ts` | Criado |
-| `src/lib/auth-lite/session.ts` | Pré-existente (VIT-21) |
+| `src/lib/auth-lite/professor-session.ts` | Criado |
+| `src/lib/auth-lite/session.ts` | Modificado (guard teste + signing) |
+| `src/lib/supabase/server.ts` | Modificado (tipos + mock atualizado) |
 | `src/app/api/auth/validate-code/route.ts` | Refatorado + bug fix |
-| `src/lib/supabase/server.ts` | Tipos corrigidos |
-| `src/app/revisao/[revisionSlug]/page.tsx` | createServiceClient |
-| `src/app/revisao/[revisionSlug]/relatorio/page.tsx` | createServiceClient |
-| `scripts/test-rate-limiting.ts` | Import atualizado |
-| Demais arquivos modificados | Pré-existentes (UI/components) |
+| `src/app/api/professor/auth/route.ts` | Corrigido (assinatura professor) |
+| `src/app/professor/page.tsx` | Corrigido (verificação assinatura) |
+| `src/app/revisao/[revisionSlug]/page.tsx` | createServiceClient() |
+| `src/app/revisao/[revisionSlug]/relatorio/page.tsx` | createServiceClient() |
+| `src/app/revisao/[revisionSlug]/missao/[missionSlug]/page.tsx` | createServiceClient() |
+| `src/app/revisao/[revisionSlug]/diagnostico/page.tsx` | createServiceClient() |
+| `src/app/revisao/[revisionSlug]/simulado/page.tsx` | createServiceClient() |
+| `scripts/test-session-signing.ts` | Tier 5 adicionado (professor) |
+| `scripts/test-rate-limiting.ts` | Import atualizado + NODE_ENV fix |
+| `SECURITY.md` | Atualizado para refletir política real |
 
 ---
 
-## 9. Migrations Criadas
-
-- `supabase/migrations/002_rls_restrict_student_data.sql`  
-  Remove 3 policies anon permissivas (`mission_progress`, `revision_progress`, `attempts`)
-
----
-
-## 10. Testes Executados
+## 8. Testes Executados
 
 | Teste | Resultado |
 |---|---|
 | `npm run lint` | ✅ PASSOU (1 warning não-bloqueante) |
 | `npm run type-check` | ✅ PASSOU |
 | `npm run build` | ✅ PASSOU |
+| `npx tsx scripts/test-session-signing.ts` | ✅ 19/19 PASSOU |
+| `npx tsx scripts/test-rate-limiting.ts` | ✅ 13/13 PASSOU |
 
 ---
 
-## 11. Issues Linear Cobertas
+## 9. Migration no Supabase DEV
+
+**Status:** ⏳ PENDENTE — aplicar manualmente.
+
+CLI Supabase não está vinculado ao projeto (sem `SUPABASE_ACCESS_TOKEN` e sem `supabase/config.toml`). Não foi possível aplicar via `supabase db push`.
+
+**SQL a executar no Supabase Dashboard (SQL Editor):**
+
+**Migration 002 — dados de alunos:**
+```sql
+DROP POLICY IF EXISTS "Public read mission_progress" ON mission_progress;
+DROP POLICY IF EXISTS "Public read revision_progress" ON revision_progress;
+DROP POLICY IF EXISTS "Public read attempts" ON attempts;
+```
+
+**Migration 003 — questões:**
+```sql
+DROP POLICY IF EXISTS "Public read questions" ON questions;
+DROP POLICY IF EXISTS "Public read question_options" ON question_options;
+```
+
+---
+
+## 10. Issues Linear Cobertas
 
 | Issue | Status |
 |---|---|
-| VIT-20 — RLS/policies | ✅ Implementado |
-| VIT-21 — Sessão/cookies assinados | ✅ Confirmado (pré-existente) |
-| VIT-22 — Rate limiting validação | ✅ Implementado/refatorado |
+| VIT-20 — RLS/policies | ✅ Completo (migrations 002 + 003) |
+| VIT-21 — Sessão/cookies assinados | ✅ Completo (aluno + professor) |
+| VIT-22 — Rate limiting validação | ✅ Completo + testado (13/13) |
 
 ---
 
-## 12. Pendências Humanas
+## 11. Pendências Humanas
 
-1. **Aplicar migration no Supabase:** Executar `002_rls_restrict_student_data.sql` no painel do Supabase (ou via CLI `supabase db push`).
+1. **Aplicar migrations no Supabase:** Executar SQL das migrations 002 e 003 no painel do Supabase (SQL Editor > seção §9 deste relatório).
 
-2. **Revisar SESSION_SECRET em produção:** Confirmar que `.env.local` (dev) e variáveis de produção têm `SESSION_SECRET` com entropia suficiente (≥32 chars aleatórios).
+2. **Confirmar SESSION_SECRET em produção:** Variável `SESSION_SECRET` deve ter ≥32 chars aleatórios. Sem ela, o fallback `'dev-secret-default-key-for-development'` é usado — inaceitável em produção.
 
-3. **Decidir sobre `scripts/test-session-signing.ts`:** O script testa VIT-21 e alguns invariantes de UI. Revisar e executar manualmente: `npx tsx scripts/test-session-signing.ts`
+3. **Vincular CLI Supabase:** Para próximas rodadas, executar `supabase login` e `supabase link --project-ref vejvgrwdgyknazouviww` para permitir `supabase db push`.
 
-4. **Decidir sobre `scripts/test-rate-limiting.ts`:** Testa VIT-22. Executar manualmente: `npx tsx scripts/test-rate-limiting.ts`
+4. **Decidir sobre `.agents/`:** Diretório não rastreado. Adicionar ao `.gitignore` ou commitar com propósito definido.
 
-5. **Decisão sobre diretório `.agents/`:** Existe um diretório `.agents/` não rastreado. Decidir se adicionar ao `.gitignore` ou commitar.
+5. **Revisar PR #1 antes do merge:** Confirmar que migration foi aplicada, testar fluxo do professor manualmente.
 
 ---
 
-## 13. Confirmações de Segurança
+## 12. Confirmações de Segurança
 
-- ✅ `.env.local` não foi commitado (confirmado: `.gitignore:13` cobre `.env.local`)
+- ✅ `.env.local` não foi commitado
 - ✅ Nenhum secret foi impresso ou versionado
 - ✅ Nenhum dado real de aluno foi usado
 - ✅ Nenhum código real de acesso foi versionado
 - ✅ Nenhum serviço pago foi adicionado
 - ✅ Nenhum deploy foi feito
 - ✅ Nenhum force push foi feito
+- ✅ Nenhum merge foi feito
 - ✅ IA não foi adicionada ao runtime do app
