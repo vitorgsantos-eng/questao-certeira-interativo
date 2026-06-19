@@ -6,6 +6,7 @@ import { LessonBlock } from './LessonBlock'
 import { MultipleChoiceQuestion } from '@/components/quiz/MultipleChoiceQuestion'
 import { NumericQuestion } from '@/components/quiz/NumericQuestion'
 import { ProgressBar } from '@/components/progress/ProgressBar'
+import { MathText } from '@/components/math/MathText'
 import { calculateScore } from '@/lib/scoring/calculator'
 import type {
   ContentBlockData,
@@ -215,11 +216,15 @@ export function MissionPlayer({
                   key={i}
                   className="border border-red-100 rounded-xl p-4 space-y-2 bg-red-50/50"
                 >
-                  <p className="text-sm font-medium text-brand-navy">{q?.statement}</p>
-                  <p className="text-xs text-red-700">{a.feedback}</p>
+                  <p className="text-sm font-medium text-brand-navy">
+                    <MathText text={q?.statement ?? ''} />
+                  </p>
+                  <p className="text-xs text-red-700">
+                    <MathText text={a.feedback} />
+                  </p>
                   {a.correctAnswerText && (
                     <p className="text-xs font-bold text-brand-navy">
-                      Resposta correta: {a.correctAnswerText}
+                      Resposta correta: <MathText text={a.correctAnswerText} />
                     </p>
                   )}
                 </div>

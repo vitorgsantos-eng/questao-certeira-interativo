@@ -1,3 +1,4 @@
+import { MathText } from '@/components/math/MathText'
 import type { ContentBlockData } from '@/types'
 
 interface LessonBlockProps {
@@ -12,7 +13,9 @@ export function LessonBlock({ block }: LessonBlockProps) {
           <span className="text-brand-gold text-xs font-bold uppercase tracking-widest">
             {block.title}
           </span>
-          <p className="text-sm leading-relaxed text-white/90">{block.text}</p>
+          <p className="text-sm leading-relaxed text-white/90">
+            <MathText text={block.text} />
+          </p>
         </div>
       )
 
@@ -22,10 +25,15 @@ export function LessonBlock({ block }: LessonBlockProps) {
           <h3 className="text-sm font-bold text-brand-gold uppercase tracking-wide">
             {block.title}
           </h3>
-          <p className="text-sm text-brand-navy leading-relaxed">{block.text}</p>
+          <p className="text-sm text-brand-navy leading-relaxed">
+            <MathText text={block.text} />
+          </p>
           {block.highlight && (
             <div className="bg-brand-gold/10 rounded-lg p-3 mt-2">
-              <p className="text-sm font-semibold text-brand-navy">{block.highlight}</p>
+              <MathText
+                text={block.highlight}
+                className="text-sm font-semibold text-brand-navy"
+              />
             </div>
           )}
         </div>
@@ -35,13 +43,17 @@ export function LessonBlock({ block }: LessonBlockProps) {
       return (
         <div className="card space-y-3 animate-fade-in">
           <h3 className="section-title">{block.title}</h3>
-          <p className="text-sm text-brand-navy leading-relaxed">{block.text}</p>
+          <p className="text-sm text-brand-navy leading-relaxed">
+            <MathText text={block.text} />
+          </p>
           {block.items && block.items.length > 0 && (
             <ul className="space-y-1.5">
               {block.items.map((item, i) => (
                 <li key={i} className="flex items-start gap-2 text-sm text-brand-navy">
                   <span className="text-brand-gold font-bold mt-0.5">▸</span>
-                  <span>{item}</span>
+                  <span>
+                    <MathText text={item} />
+                  </span>
                 </li>
               ))}
             </ul>
@@ -56,7 +68,9 @@ export function LessonBlock({ block }: LessonBlockProps) {
             Exemplo resolvido
           </h3>
           <div className="bg-brand-bg-light rounded-xl p-4">
-            <p className="text-sm font-medium text-brand-navy">{block.problem}</p>
+            <p className="text-sm font-medium text-brand-navy">
+              <MathText text={block.problem} />
+            </p>
           </div>
           <ol className="space-y-2">
             {block.steps.map((step, i) => (
@@ -64,13 +78,17 @@ export function LessonBlock({ block }: LessonBlockProps) {
                 <span className="flex-shrink-0 w-6 h-6 rounded-full bg-brand-navy text-white flex items-center justify-center text-xs font-bold">
                   {i + 1}
                 </span>
-                <span className="leading-relaxed pt-0.5">{step}</span>
+                <span className="leading-relaxed pt-0.5">
+                  <MathText text={step} />
+                </span>
               </li>
             ))}
           </ol>
           {block.conclusion && (
             <div className="bg-green-50 border border-green-200 rounded-xl p-3">
-              <p className="text-sm font-semibold text-green-800">{block.conclusion}</p>
+              <p className="text-sm font-semibold text-green-800">
+                <MathText text={block.conclusion} />
+              </p>
             </div>
           )}
         </div>
@@ -81,7 +99,9 @@ export function LessonBlock({ block }: LessonBlockProps) {
         <div className="bg-amber-50 border border-amber-200 rounded-xl p-4 animate-fade-in">
           <div className="flex items-start gap-2">
             <span className="text-amber-500 text-lg flex-shrink-0">💡</span>
-            <p className="text-sm text-amber-900 leading-relaxed">{block.text}</p>
+            <p className="text-sm text-amber-900 leading-relaxed">
+              <MathText text={block.text} />
+            </p>
           </div>
         </div>
       )
@@ -94,7 +114,9 @@ export function LessonBlock({ block }: LessonBlockProps) {
             {block.points.map((point, i) => (
               <li key={i} className="flex items-start gap-2 text-sm text-brand-navy">
                 <span className="text-green-600 font-bold mt-0.5">✓</span>
-                <span>{point}</span>
+                <span>
+                  <MathText text={point} />
+                </span>
               </li>
             ))}
           </ul>

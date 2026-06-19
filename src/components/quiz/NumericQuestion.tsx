@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { FeedbackBox } from './FeedbackBox'
+import { MathText } from '@/components/math/MathText'
 import type { QuestionWithOptions, AttemptResult } from '@/types'
 
 interface NumericQuestionProps {
@@ -64,7 +65,7 @@ export function NumericQuestion({
 
       <div className="card py-4">
         <p className="text-brand-navy font-medium leading-relaxed text-sm sm:text-base">
-          {question.statement}
+          <MathText text={question.statement} />
         </p>
       </div>
 

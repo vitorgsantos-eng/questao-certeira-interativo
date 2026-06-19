@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { cn } from '@/lib/utils'
 import { FeedbackBox } from './FeedbackBox'
+import { MathText } from '@/components/math/MathText'
 import type { QuestionWithOptions, AttemptResult } from '@/types'
 
 interface MultipleChoiceQuestionProps {
@@ -60,7 +61,7 @@ export function MultipleChoiceQuestion({
       {/* Statement */}
       <div className="card py-4">
         <p className="text-brand-navy font-medium leading-relaxed text-sm sm:text-base">
-          {question.statement}
+          <MathText text={question.statement} />
         </p>
       </div>
 
@@ -101,7 +102,7 @@ export function MultipleChoiceQuestion({
                 {!showResult ? letter : ''}
               </span>
               <span className="text-sm text-brand-navy leading-relaxed pt-0.5">
-                {option.option_text}
+                <MathText text={option.option_text} />
               </span>
             </button>
           )
