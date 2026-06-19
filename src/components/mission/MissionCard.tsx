@@ -58,14 +58,14 @@ export function MissionCard({ mission, revisionSlug, index }: MissionCardProps) 
 
       {/* Content */}
       <div className="flex-1 min-w-0 space-y-1.5">
-        <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2">
+        <div className="flex items-start justify-between gap-2">
           <div>
             <h3 className="font-bold text-brand-navy text-sm group-hover:text-brand-navy-mid transition-colors">
               {mission.title}
             </h3>
             <p className="text-xs text-brand-gray-mid mt-0.5">{mission.goal}</p>
           </div>
-          <span className={cn('badge flex-shrink-0 self-start sm:self-auto', config.badgeClass)}>
+          <span className={cn('badge flex-shrink-0', config.badgeClass)}>
             {config.badge}
           </span>
         </div>

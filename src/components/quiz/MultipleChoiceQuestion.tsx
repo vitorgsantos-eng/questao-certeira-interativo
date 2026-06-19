@@ -77,7 +77,7 @@ export function MultipleChoiceQuestion({
               onClick={() => handleSelect(option.id)}
               disabled={submitted}
               className={cn(
-                'w-full text-left flex items-start gap-3 p-4 rounded-xl border-2 transition-all duration-200 active:scale-[0.99] focus:scale-[0.99] select-none',
+                'w-full text-left flex items-start gap-3 p-4 rounded-xl border-2 transition-all duration-200',
                 !submitted && !isSelected && 'border-brand-gray-border bg-white hover:border-brand-navy-mid hover:bg-brand-bg-light',
                 !submitted && isSelected && 'border-brand-navy bg-brand-navy/5',
                 submitted && isSelected && option.is_correct && 'border-green-400 bg-green-50',

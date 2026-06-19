@@ -37,12 +37,12 @@ export function MissionMap({
 
           {/* Student + progress */}
           <div className="bg-white/10 rounded-2xl p-4 space-y-3">
-            <div className="flex items-center justify-between min-w-0 gap-3">
-              <div className="min-w-0">
+            <div className="flex items-center justify-between">
+              <div>
                 <p className="text-xs text-white/60">Estudante</p>
-                <p className="font-bold text-brand-gold truncate max-w-[150px] sm:max-w-none">{session.displayName}</p>
+                <p className="font-bold text-brand-gold">{session.displayName}</p>
               </div>
-              <div className="text-right flex-shrink-0">
+              <div className="text-right">
                 <p className="text-xs text-white/60">Progresso geral</p>
                 <p className="text-2xl font-black text-white">{overallProgress}%</p>
               </div>
@@ -66,14 +66,14 @@ export function MissionMap({
                 São 4 questões para o app indicar onde você deve focar. Leva menos de 5 minutos.
               </p>
             </div>
-            <div className="flex flex-col sm:flex-row gap-3">
+            <div className="flex gap-3 flex-wrap">
               <Link
                 href={`/revisao/${revisionSlug}/diagnostico`}
-                className="btn-gold text-sm py-2.5 px-4 text-center"
+                className="btn-gold text-sm py-2.5 px-4"
               >
                 Começar diagnóstico
               </Link>
-              <span className="btn-ghost text-sm py-2.5 px-4 cursor-default text-brand-gray-mid text-center">
+              <span className="btn-ghost text-sm py-2.5 px-4 cursor-default text-brand-gray-mid">
                 Pular e ir para as missões ↓
               </span>
             </div>

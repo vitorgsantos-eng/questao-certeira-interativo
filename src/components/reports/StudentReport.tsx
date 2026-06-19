@@ -46,18 +46,18 @@ export function StudentReport({
           <p className="text-white/70 text-sm">{session.displayName} · {session.grade}</p>
         </div>
 
-        <div className="grid grid-cols-3 gap-1.5 sm:gap-3 text-center">
-          <div className="bg-white/10 rounded-xl p-1.5 sm:p-3 min-w-0">
-            <p className="text-xl sm:text-2xl font-black truncate">{overallScore}%</p>
-            <p className="text-[10px] sm:text-xs text-white/60 mt-0.5 truncate">Média geral</p>
+        <div className="grid grid-cols-3 gap-3 text-center">
+          <div className="bg-white/10 rounded-xl p-3">
+            <p className="text-2xl font-black">{overallScore}%</p>
+            <p className="text-xs text-white/60 mt-0.5">Média geral</p>
           </div>
-          <div className="bg-white/10 rounded-xl p-1.5 sm:p-3 min-w-0">
-            <p className="text-xl sm:text-2xl font-black truncate">{completedCount}</p>
-            <p className="text-[10px] sm:text-xs text-white/60 mt-0.5 truncate">Missões concluídas</p>
+          <div className="bg-white/10 rounded-xl p-3">
+            <p className="text-2xl font-black">{completedCount}</p>
+            <p className="text-xs text-white/60 mt-0.5">Missões concluídas</p>
           </div>
-          <div className="bg-white/10 rounded-xl p-1.5 sm:p-3 min-w-0">
-            <p className="text-sm sm:text-lg font-black truncate">{label}</p>
-            <p className="text-[10px] sm:text-xs text-white/60 mt-0.5 truncate">Resultado</p>
+          <div className="bg-white/10 rounded-xl p-3">
+            <p className="text-lg font-black">{label}</p>
+            <p className="text-xs text-white/60 mt-0.5">Resultado</p>
           </div>
         </div>
       </div>
@@ -84,11 +84,11 @@ export function StudentReport({
         <h2 className="section-title">Por missão</h2>
         {missionResults.map((m) => (
           <div key={m.missionId} className="card space-y-3">
-            <div className="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-2 min-w-0">
-              <h3 className="font-bold text-brand-navy text-sm truncate min-w-0 flex-1">{m.missionTitle}</h3>
+            <div className="flex items-start justify-between gap-2">
+              <h3 className="font-bold text-brand-navy text-sm">{m.missionTitle}</h3>
               <span
                 className={cn(
-                  'badge flex-shrink-0 self-start sm:self-auto',
+                  'badge flex-shrink-0',
                   m.status === 'completed'
                     ? 'badge-success'
                     : m.status === 'in_progress'

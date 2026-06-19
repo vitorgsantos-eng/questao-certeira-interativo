@@ -77,10 +77,7 @@ export function NumericQuestion({
           inputMode="decimal"
           value={value}
           onChange={(e) => {
-            if (!submitted) {
-              const sanitized = e.target.value.replace(/[^\d.,\-]/g, '')
-              setValue(sanitized)
-            }
+            if (!submitted) setValue(e.target.value)
           }}
           placeholder="Digite o valor numérico"
           className="input-field text-center text-xl font-bold"
