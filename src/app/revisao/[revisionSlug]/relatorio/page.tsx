@@ -58,6 +58,7 @@ export default async function RelatorioPage({ params }: Props) {
 
     return {
       missionId: m.id,
+      missionSlug: m.slug,
       missionTitle: m.title,
       score: progress?.score ?? 0,
       totalQuestions: missionAttempts.length,

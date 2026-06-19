@@ -6,6 +6,7 @@ import type { StudentSession } from '@/types'
 
 interface MissionResult {
   missionId: string
+  missionSlug: string
   missionTitle: string
   score: number
   totalQuestions: number
@@ -121,7 +122,7 @@ export function StudentReport({
             )}
 
             <Link
-              href={`/revisao/${revisionSlug}/missao/${m.missionId}`}
+              href={`/revisao/${revisionSlug}/missao/${m.missionSlug}`}
               className="btn-ghost text-xs py-1.5 px-3 w-full text-center"
             >
               {m.status === 'completed' ? 'Refazer missão' : 'Iniciar missão'}

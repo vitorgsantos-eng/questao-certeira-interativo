@@ -147,6 +147,13 @@ export function MissionMap({
             Ver meu relatório de desempenho →
           </Link>
         )}
+
+        {/* Home link */}
+        <div className="text-center pt-2 pb-4">
+          <Link href="/" className="text-xs text-brand-gray-mid hover:text-brand-navy transition-colors">
+            ← Página inicial
+          </Link>
+        </div>
       </div>
     </div>
   )
