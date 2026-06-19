@@ -1,6 +1,6 @@
 # Relatório de Execução — VIT-20/21/22
 
-**Data:** 2026-06-19 (rodada 4 — lockfile consistency)  
+**Data:** 2026-06-19 (rodada 5 — professor logout + validação final)  
 **Agente:** Claude Sonnet 4.6  
 **Branch:** `wip/agente-seguranca-supabase`  
 **PR:** [#1 — fix(security): VIT-20/21/22](https://github.com/vitorgsantos-eng/questao-certeira-interativo/pull/1)
@@ -17,7 +17,40 @@
 
 ---
 
-## 2. Lockfile Consistency (rodada 4)
+## 2. Professor Logout (rodada 5)
+
+### Problema
+
+Não havia como encerrar a sessão do professor: o painel não tinha botão "Sair" e o cookie `qci_professor` ficava ativo até expirar (8h).
+
+### Solução
+
+Server Action `logoutProfessor` em `src/app/professor/page.tsx`:
+- Apaga o cookie `qci_professor` via `cookieStore.delete(PROFESSOR_COOKIE)`
+- Redireciona para `/professor` (que renderiza o `TeacherLogin`)
+- Sem nova rota, sem novo componente, sem dependência adicional
+
+Botão "Sair" adicionado no header do painel (ao lado de "Painel do professor"), como `<form action={logoutProfessor}><button type="submit">Sair</button></form>`.
+
+### Critérios atendidos
+
+- Cookie `qci_professor` removido ao clicar em Sair
+- `/professor` volta a exibir tela de login após logout
+- Recarregar `/professor` após sair não reabre painel
+- Nenhum secret exposto
+
+### Smoke test
+
+| Ação | Resultado |
+|---|---|
+| Fazer login como professor com código correto | ✅ Painel abre |
+| Clicar em "Sair" | ✅ Redireciona para tela de login |
+| Recarregar `/professor` após sair | ✅ Exige login (cookie ausente) |
+| Acessar `/professor` sem cookie | ✅ Renderiza `TeacherLogin` |
+
+---
+
+## 3. Lockfile Consistency (rodada 4)
 
 ### Problema
 
@@ -215,6 +248,7 @@ Page que permanece com `createClient()`: `acessar/[revisionSlug]/page.tsx` — l
 | `scripts/test-session-signing.ts` | Tier 0 + 4 adicionados, Tier UI removido |
 | `scripts/test-rate-limiting.ts` | Import atualizado, NODE_ENV fix |
 | `package.json` | Revertido para `^0.5.1` / `^2.45.4` (consistente com lock) |
+| `src/app/professor/page.tsx` | Server Action `logoutProfessor` + botão "Sair" |
 | `docs/agent-reports/...` | Relatório |
 
 **Fora do PR (preservados em `wip/preserved-ui-mobile-polish`):**
@@ -229,44 +263,45 @@ Page que permanece com `createClient()`: `acessar/[revisionSlug]/page.tsx` — l
 
 ## 10. Status das Migrations no Supabase
 
-**CLI Supabase:** não configurado nesta rodada (sem `supabase/config.toml`, sem `SUPABASE_ACCESS_TOKEN`). Esta ausência **não bloqueia o PR** — configuração do CLI é melhoria operacional futura.
+**Aplicadas com sucesso em DEV** via Supabase Dashboard > SQL Editor:
+- Migration 002: `"Success. No rows returned"` ✅ (resultado esperado para `DROP POLICY`)
+- Migration 003: `"Success. No rows returned"` ✅
 
-**Caminho aceito para MVP/DEV:** aplicação manual via Supabase Dashboard > SQL Editor.
+**CLI Supabase:** não configurado (sem `supabase/config.toml`, sem `SUPABASE_ACCESS_TOKEN`). Não é bloqueio — aplicação manual foi suficiente para DEV.
 
-**SQL para executar (copiar e colar no SQL Editor):**
-
-```sql
--- Migration 002
-DROP POLICY IF EXISTS "Public read mission_progress" ON mission_progress;
-DROP POLICY IF EXISTS "Public read revision_progress" ON revision_progress;
-DROP POLICY IF EXISTS "Public read attempts" ON attempts;
-
--- Migration 003
-DROP POLICY IF EXISTS "Public read questions" ON questions;
-DROP POLICY IF EXISTS "Public read question_options" ON question_options;
-```
-
-Ambas as migrations são **idempotentes** (`DROP POLICY IF EXISTS`): podem ser executadas mais de uma vez sem erro.
+**Ambas as migrations são idempotentes** (`DROP POLICY IF EXISTS`): podem ser reexecutadas sem erro.
 
 ---
 
-## 11. Pendências Humanas
+## 11. Smoke Test
 
-1. **Aplicar migrations no Supabase Dashboard > SQL Editor** (ver §8)
-2. **Confirmar `SESSION_SECRET` em produção** com ≥32 caracteres aleatórios — sem isso, o app lança erro ao iniciar em produção (comportamento intencional)
-3. **Revisar PR #1 e fazer merge** após:
-   - migrations aplicadas,
-   - fluxo do professor testado manualmente,
-   - `SESSION_SECRET` configurado em produção
-4. **Branch `wip/preserved-ui-mobile-polish`** aguarda PR separado para as melhorias de UI/mobile
+| Cenário | Status | Observação |
+|---|---|---|
+| Professor: login com código correto | ✅ Passou | Painel abre |
+| Professor: painel exibe dashboard | ✅ Passou | Sem erros |
+| Professor: clicar em "Sair" | ✅ Passou | Redireciona para login |
+| Professor: recarregar `/professor` após logout | ✅ Passou | Exige login |
+| Aluno: smoke test completo | ⏳ Pendente | Sem revisão cadastrada no banco DEV |
+
+**Nota sobre aluno:** o smoke test do fluxo aluno (login com código → revisão → missão) não pôde ser executado pois não há revisão cadastrada no banco DEV. Isso não bloqueia o PR — nenhum dado real foi inventado ou versionado.
+
+---
+
+## 12. Pendências Humanas
+
+1. **Smoke test do aluno** quando houver revisão e código cadastrados no banco DEV
+2. **Configurar `SESSION_SECRET` em produção** (≥32 chars) — app não inicia sem ele (comportamento intencional)
+3. **Revisar PR #1 e fazer merge** quando pronto
+4. **Branch `wip/preserved-ui-mobile-polish`** aguarda PR separado para melhorias de UI/mobile
 5. **Diretório `.agents/`** não rastreado — adicionar ao `.gitignore` ou commitar
 
 ---
 
-## 12. Confirmações de Segurança
+## 13. Confirmações de Segurança
 
 - ✅ `.env.local` não foi commitado
 - ✅ Nenhum secret foi impresso ou versionado
+- ✅ `SESSION_SECRET` presente no `.env.local` local (valor não revelado)
 - ✅ Nenhum dado real de aluno foi usado
 - ✅ Nenhum código real de acesso foi versionado
 - ✅ Nenhum serviço pago foi adicionado
@@ -275,3 +310,4 @@ Ambas as migrations são **idempotentes** (`DROP POLICY IF EXISTS`): podem ser e
 - ✅ Nenhum merge foi feito
 - ✅ Nenhum force push foi feito
 - ✅ Supabase CLI não foi configurado (decisão operacional, não bloqueio)
+- ✅ Migrations 002 e 003 aplicadas no banco DEV via SQL Editor
