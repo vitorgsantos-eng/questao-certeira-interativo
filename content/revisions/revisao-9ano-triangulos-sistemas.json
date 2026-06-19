@@ -152,13 +152,13 @@
             {
               "text": "x = 12",
               "isCorrect": true,
-              "feedback": "Correto. AB/DE = BC/EF → 6/9 = 8/x → x = 8 × 9 ÷ 6 = 12.",
+              "feedback": "Correto. $\\frac{AB}{DE} = \\frac{BC}{EF} \\Rightarrow \\frac{6}{9} = \\frac{8}{x} \\Rightarrow x = 8 \\times 9 \\div 6 = 12$.",
               "errorCategory": null
             },
             {
               "text": "x = 11",
               "isCorrect": false,
-              "feedback": "Cuidado no cálculo. A proporção é AB/DE = BC/EF. Substitua: 6/9 = 8/x → 6x = 72 → x = 12.",
+              "feedback": "Cuidado no cálculo. A proporção é $\\frac{AB}{DE} = \\frac{BC}{EF}$. Substitua: $\\frac{6}{9} = \\frac{8}{x} \\Rightarrow 6x = 72 \\Rightarrow x = 12$.",
               "errorCategory": "cálculo numérico"
             },
             {
@@ -168,9 +168,9 @@
               "errorCategory": "identificação de elementos"
             },
             {
-              "text": "x = 16/3 ≈ 5,3",
+              "text": "$x = \\frac{16}{3} \\approx 5{,}3$",
               "isCorrect": false,
-              "feedback": "Parece que você inverteu a razão: usou 6/9 = 2/3 em vez de 9/6 = 3/2. Isso levaria a x = 8 × (2/3) = 16/3 ≈ 5,3. Como o segundo triângulo é maior, a razão correta é 9/6 = 3/2, então x = 8 × (3/2) = 12.",
+              "feedback": "Parece que você inverteu a razão: usou $\\frac{6}{9} = \\frac{2}{3}$ em vez de $\\frac{9}{6} = \\frac{3}{2}$. Isso levaria a $x = 8 \\times \\frac{2}{3} = \\frac{16}{3} \\approx 5{,}3$. Como o segundo triângulo é maior, a razão correta é $\\frac{9}{6} = \\frac{3}{2}$, então $x = 8 \\times \\frac{3}{2} = 12$.",
               "errorCategory": "proporção"
             }
           ]
@@ -184,25 +184,25 @@
             {
               "text": "6 m",
               "isCorrect": true,
-              "feedback": "Correto. Os triângulos formados pela luz do sol são semelhantes. Árvore/sombra-árvore = Poste/sombra-poste → h/8 = 3/4 → h = 6 m.",
+              "feedback": "Correto. Os triângulos formados pela luz do sol são semelhantes. $\\dfrac{\\text{Árvore}}{\\text{sombra}} = \\dfrac{\\text{Poste}}{\\text{sombra}} \\Rightarrow \\dfrac{h}{8} = \\dfrac{3}{4} \\Rightarrow h = 6$ m.",
               "errorCategory": null
             },
             {
               "text": "24 m",
               "isCorrect": false,
-              "feedback": "Você pode ter multiplicado em vez de dividir. A proporção é h/8 = 3/4. Resolvendo: h = 3 × 8 ÷ 4 = 6 m.",
+              "feedback": "Você pode ter multiplicado em vez de dividir. A proporção é $\\frac{h}{8} = \\frac{3}{4}$. Resolvendo: $h = 3 \\times 8 \\div 4 = 6$ m.",
               "errorCategory": "operação algébrica"
             },
             {
               "text": "1,5 m",
               "isCorrect": false,
-              "feedback": "Verifique se você inverteu sombra e altura. A proporção correta é objeto/sombra = objeto/sombra. h/8 = 3/4 → h = 6 m.",
+              "feedback": "Verifique se você inverteu sombra e altura. A proporção correta é objeto/sombra = objeto/sombra. $\\frac{h}{8} = \\frac{3}{4} \\Rightarrow h = 6$ m.",
               "errorCategory": "proporção"
             },
             {
               "text": "5 m",
               "isCorrect": false,
-              "feedback": "Talvez tenha sombreado 8-3 = 5. Mas o método correto é proporção: h/8 = 3/4 → h = 6 m.",
+              "feedback": "Talvez tenha sombreado 8−3 = 5. Mas o método correto é proporção: $\\frac{h}{8} = \\frac{3}{4} \\Rightarrow h = 6$ m.",
               "errorCategory": "fórmula inadequada"
             }
           ]
@@ -216,7 +216,9 @@
       "goal": "Aplicar as relações entre altura, catetos e projeções no triângulo retângulo.",
       "estimatedMinutes": 8,
       "isOptional": false,
-      "prerequisites": ["semelhanca-triangulos"],
+      "prerequisites": [
+        "semelhanca-triangulos"
+      ],
       "blocks": [
         {
           "type": "intro",
@@ -227,7 +229,7 @@
           "type": "concept",
           "title": "O ponto-chave desta missão",
           "text": "Num triângulo retângulo, ao traçar a altura h do vértice reto até a hipotenusa, criamos dois triângulos menores — ambos semelhantes entre si e ao triângulo original. Essas semelhanças geram relações métricas poderosas.",
-          "highlight": "h² = m · n   |   a² = m · c   |   b² = n · c"
+          "highlight": "$h^2 = m \\cdot n$   |   $a^2 = m \\cdot c$   |   $b^2 = n \\cdot c$"
         },
         {
           "type": "visual_explanation",
@@ -293,7 +295,7 @@
             {
               "text": "h = 6,5",
               "isCorrect": false,
-              "feedback": "Você pode ter usado h = (m+n)/2 = 13/2 = 6,5. Mas a relação correta é h² = m · n, não a média aritmética.",
+              "feedback": "Você pode ter usado $h = \\frac{m+n}{2} = \\frac{13}{2} = 6{,}5$. Mas a relação correta é $h^2 = m \\cdot n$, não a média aritmética.",
               "errorCategory": "fórmula inadequada"
             },
             {
@@ -357,7 +359,7 @@
             {
               "text": "n = 2",
               "isCorrect": false,
-              "feedback": "Você pode ter subtraído h - m = 6 - 4 = 2. A relação é h² = m · n. Portanto n = h²/m = 36/4 = 9.",
+              "feedback": "Você pode ter subtraído h − m = 6 − 4 = 2. A relação é $h^2 = m \\cdot n$. Portanto $n = \\frac{h^2}{m} = \\frac{36}{4} = 9$.",
               "errorCategory": "fórmula inadequada"
             },
             {
@@ -369,7 +371,7 @@
             {
               "text": "n = 1,5",
               "isCorrect": false,
-              "feedback": "Você dividiu h por m em vez de h² por m. n = h²/m = 36/4 = 9, não h/m = 6/4 = 1,5.",
+              "feedback": "Você dividiu h por m em vez de $h^2$ por m. $n = \\frac{h^2}{m} = \\frac{36}{4} = 9$, não $\\frac{h}{m} = \\frac{6}{4} = 1{,}5$.",
               "errorCategory": "proporção"
             }
           ]
@@ -381,8 +383,8 @@
           "statement": "Num triângulo retângulo, os catetos são a = 6 e b = 8. Calcule a altura h relativa à hipotenusa.",
           "correctNumericAnswer": 4.8,
           "tolerance": 0.1,
-          "numericFeedbackCorrect": "Correto! c = √(36+64) = 10. h = (a·b)/c = (6×8)/10 = 4,8.",
-          "numericFeedbackWrong": "Primeiro calcule c = √(6²+8²) = √100 = 10. Depois use h = (a·b)/c = 48/10 = 4,8."
+          "numericFeedbackCorrect": "Correto! $c = \\sqrt{36+64} = 10$. $h = \\dfrac{a \\cdot b}{c} = \\dfrac{6 \\times 8}{10} = 4{,}8$.",
+          "numericFeedbackWrong": "Primeiro calcule $c = \\sqrt{6^2+8^2} = \\sqrt{100} = 10$. Depois use $h = \\dfrac{a \\cdot b}{c} = \\dfrac{48}{10} = 4{,}8$."
         },
         {
           "type": "multiple_choice",
@@ -391,27 +393,27 @@
           "statement": "Num triângulo retângulo, a hipotenusa c = 13 e um cateto a = 5. Calcule a altura h relativa à hipotenusa. (Resultado em fração simplificada ou decimal)",
           "options": [
             {
-              "text": "h = 60/13 ≈ 4,6",
+              "text": "$h = \\dfrac{60}{13} \\approx 4{,}6$",
               "isCorrect": true,
-              "feedback": "Correto. b = √(13²−5²) = √(169−25) = √144 = 12. h = (a·b)/c = (5×12)/13 = 60/13 ≈ 4,62.",
+              "feedback": "Correto. $b = \\sqrt{13^2-5^2} = \\sqrt{169-25} = \\sqrt{144} = 12$. $h = \\dfrac{a \\cdot b}{c} = \\dfrac{5 \\times 12}{13} = \\dfrac{60}{13} \\approx 4{,}62$.",
               "errorCategory": null
             },
             {
               "text": "h = 5",
               "isCorrect": false,
-              "feedback": "h não é igual ao cateto a. Calcule b = 12 primeiro, depois h = (5×12)/13 = 60/13.",
+              "feedback": "h não é igual ao cateto a. Calcule $b = 12$ primeiro, depois $h = \\dfrac{5 \\times 12}{13} = \\dfrac{60}{13}$.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "h = 6",
               "isCorrect": false,
-              "feedback": "Verifique o cálculo. b = √(169−25) = 12. h = a·b/c = 60/13 ≈ 4,6, não 6.",
+              "feedback": "Verifique o cálculo. $b = \\sqrt{169-25} = 12$. $h = \\dfrac{a \\cdot b}{c} = \\dfrac{60}{13} \\approx 4{,}6$, não 6.",
               "errorCategory": "cálculo numérico"
             },
             {
               "text": "h = 2,5",
               "isCorrect": false,
-              "feedback": "Talvez tenha calculado h = a/2 = 5/2 = 2,5. A fórmula correta é h = (a·b)/c. Calcule b = √(13²−5²) = 12 e use h = 60/13 ≈ 4,6.",
+              "feedback": "Talvez tenha calculado $h = \\frac{a}{2} = \\frac{5}{2} = 2{,}5$. A fórmula correta é $h = \\dfrac{a \\cdot b}{c}$. Calcule $b = \\sqrt{13^2-5^2} = 12$ e use $h = \\dfrac{60}{13} \\approx 4{,}6$.",
               "errorCategory": "fórmula inadequada"
             }
           ]
@@ -436,7 +438,7 @@
           "type": "concept",
           "title": "A ideia fundamental",
           "text": "Num triângulo retângulo, para um ângulo α específico, a razão entre dois lados é sempre a mesma — independente do tamanho do triângulo. Isso é o que permite calcular lados a partir de ângulos.",
-          "highlight": "sen α = cateto oposto / hipotenusa   |   cos α = cateto adjacente / hipotenusa   |   tg α = cateto oposto / cateto adjacente"
+          "highlight": "$\\text{sen}\\,\\alpha = \\dfrac{\\text{cateto oposto}}{\\text{hipotenusa}}$   |   $\\text{cos}\\,\\alpha = \\dfrac{\\text{cateto adjacente}}{\\text{hipotenusa}}$   |   $\\text{tg}\\,\\alpha = \\dfrac{\\text{cateto oposto}}{\\text{cateto adjacente}}$"
         },
         {
           "type": "visual_explanation",
@@ -453,7 +455,7 @@
           "problem": "Num triângulo retângulo, o ângulo α = 30° e a hipotenusa = 20 cm. Calcule o cateto oposto a α.",
           "steps": [
             "Queremos o cateto oposto → usamos seno.",
-            "sen 30° = cateto oposto / hipotenusa",
+            "$\\text{sen}\\, 30° = \\dfrac{\\text{cateto oposto}}{\\text{hipotenusa}}$",
             "0,5 = cateto oposto / 20",
             "cateto oposto = 0,5 × 20 = 10 cm"
           ],
@@ -464,9 +466,9 @@
           "title": "Valores que você precisa saber",
           "text": "Valores trigonométricos dos ângulos mais comuns:",
           "items": [
-            "30°: sen = 0,5 | cos = √3/2 ≈ 0,866 | tg = 1/√3 ≈ 0,577",
-            "45°: sen = √2/2 ≈ 0,707 | cos = √2/2 ≈ 0,707 | tg = 1",
-            "60°: sen = √3/2 ≈ 0,866 | cos = 0,5 | tg = √3 ≈ 1,732"
+            "30°: sen = 0,5,  cos = $\\dfrac{\\sqrt{3}}{2} \\approx 0{,}866$,  tg = $\\dfrac{1}{\\sqrt{3}} \\approx 0{,}577$",
+            "45°: sen = $\\dfrac{\\sqrt{2}}{2} \\approx 0{,}707$,  cos = $\\dfrac{\\sqrt{2}}{2} \\approx 0{,}707$,  tg = 1",
+            "60°: sen = $\\dfrac{\\sqrt{3}}{2} \\approx 0{,}866$,  cos = 0,5,  tg = $\\sqrt{3} \\approx 1{,}732$"
           ]
         },
         {
@@ -477,9 +479,9 @@
           "type": "summary",
           "title": "Resumo",
           "points": [
-            "sen α = oposto/hipotenusa → use quando envolver oposto e hipotenusa.",
-            "cos α = adjacente/hipotenusa → use quando envolver adjacente e hipotenusa.",
-            "tg α = oposto/adjacente → use quando não envolve a hipotenusa.",
+            "$\\text{sen}\\,\\alpha = \\dfrac{\\text{oposto}}{\\text{hipotenusa}}$ → use quando envolver oposto e hipotenusa.",
+            "$\\text{cos}\\,\\alpha = \\dfrac{\\text{adjacente}}{\\text{hipotenusa}}$ → use quando envolver adjacente e hipotenusa.",
+            "$\\text{tg}\\,\\alpha = \\dfrac{\\text{oposto}}{\\text{adjacente}}$ → use quando não envolve a hipotenusa.",
             "Para encontrar o ângulo: use a função inversa (arcsen, arccos, arctg)."
           ]
         }
@@ -492,19 +494,19 @@
           "statement": "Num triângulo retângulo, você conhece o ângulo α e a hipotenusa. Quer calcular o cateto adjacente a α. Qual razão trigonométrica usar?",
           "options": [
             {
-              "text": "Cosseno: cos α = adjacente/hipotenusa",
+              "text": "Cosseno: $\\text{cos}\\,\\alpha = \\dfrac{\\text{adjacente}}{\\text{hipotenusa}}$",
               "isCorrect": true,
               "feedback": "Correto. O cosseno relaciona o cateto adjacente com a hipotenusa.",
               "errorCategory": null
             },
             {
-              "text": "Seno: sen α = oposto/hipotenusa",
+              "text": "Seno: $\\text{sen}\\,\\alpha = \\dfrac{\\text{oposto}}{\\text{hipotenusa}}$",
               "isCorrect": false,
               "feedback": "O seno relaciona o cateto oposto com a hipotenusa. Como você quer o adjacente, use cosseno.",
               "errorCategory": "identificação de elementos"
             },
             {
-              "text": "Tangente: tg α = oposto/adjacente",
+              "text": "Tangente: $\\text{tg}\\,\\alpha = \\dfrac{\\text{oposto}}{\\text{adjacente}}$",
               "isCorrect": false,
               "feedback": "A tangente não envolve a hipotenusa. Como você tem a hipotenusa, use cosseno.",
               "errorCategory": "fórmula inadequada"
@@ -590,25 +592,25 @@
             {
               "text": "α = 30°",
               "isCorrect": true,
-              "feedback": "Correto. tg α = 5/(5√3) = 1/√3 ≈ 0,577. Portanto α = arctg(1/√3) = 30°.",
+              "feedback": "Correto. $\\text{tg}\\,\\alpha = \\dfrac{5}{5\\sqrt{3}} = \\dfrac{1}{\\sqrt{3}} \\approx 0{,}577$. Portanto $\\alpha = \\text{arctg}\\left(\\dfrac{1}{\\sqrt{3}}\\right) = 30°$.",
               "errorCategory": null
             },
             {
               "text": "α = 60°",
               "isCorrect": false,
-              "feedback": "tg 60° = √3 ≈ 1,73. Mas tg α = 5/(5√3) = 1/√3, que corresponde a 30°.",
+              "feedback": "$\\text{tg}\\, 60° = \\sqrt{3} \\approx 1{,}73$. Mas $\\text{tg}\\,\\alpha = \\dfrac{5}{5\\sqrt{3}} = \\dfrac{1}{\\sqrt{3}}$, que corresponde a 30°.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "α = 45°",
               "isCorrect": false,
-              "feedback": "tg 45° = 1, o que exigiria oposto = adjacente. Aqui o adjacente é √3 vezes maior, então α = 30°.",
+              "feedback": "$\\text{tg}\\, 45° = 1$, o que exigiria oposto = adjacente. Aqui o adjacente é $\\sqrt{3}$ vezes maior, então α = 30°.",
               "errorCategory": "cálculo numérico"
             },
             {
               "text": "α = 90°",
               "isCorrect": false,
-              "feedback": "α não pode ser 90° em um ângulo de triângulo retângulo que não seja o ângulo reto. Calcule tg α = 1/√3 → α = 30°.",
+              "feedback": "α não pode ser 90° em um ângulo de triângulo retângulo que não seja o ângulo reto. Calcule $\\text{tg}\\,\\alpha = \\dfrac{1}{\\sqrt{3}} \\Rightarrow \\alpha = 30°$.",
               "errorCategory": "conceito base"
             }
           ]
@@ -622,25 +624,25 @@
             {
               "text": "3√3 m ≈ 5,2 m",
               "isCorrect": true,
-              "feedback": "Correto. A escada é a hipotenusa (6 m). Queremos o cateto oposto ao ângulo de 60°. sen 60° = oposto/6 → oposto = 6 × (√3/2) = 3√3 ≈ 5,2 m.",
+              "feedback": "Correto. A escada é a hipotenusa (6 m). Queremos o cateto oposto ao ângulo de 60°. $\\text{sen}\\, 60° = \\dfrac{\\text{oposto}}{6} \\Rightarrow \\text{oposto} = 6 \\times \\dfrac{\\sqrt{3}}{2} = 3\\sqrt{3} \\approx 5{,}2$ m.",
               "errorCategory": null
             },
             {
               "text": "3 m",
               "isCorrect": false,
-              "feedback": "3 m seria o cateto adjacente (cos 60° × 6 = 0,5 × 6 = 3). Para a altura (cateto oposto), use seno: 6 × sen 60° = 3√3.",
+              "feedback": "3 m seria o cateto adjacente ($\\text{cos}\\, 60° \\times 6 = 0{,}5 \\times 6 = 3$). Para a altura (cateto oposto), use seno: $6 \\times \\text{sen}\\, 60° = 3\\sqrt{3}$.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "6 m",
               "isCorrect": false,
-              "feedback": "6 m é o comprimento total da escada (hipotenusa). A altura na parede é menor: 6 × sen 60° = 3√3 ≈ 5,2 m.",
+              "feedback": "6 m é o comprimento total da escada (hipotenusa). A altura na parede é menor: $6 \\times \\text{sen}\\, 60° = 3\\sqrt{3} \\approx 5{,}2$ m.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "6√3 m",
               "isCorrect": false,
-              "feedback": "Você multiplicou 6 × √3. Mas sen 60° = √3/2, portanto altura = 6 × (√3/2) = 3√3, não 6√3.",
+              "feedback": "Você multiplicou $6 \\times \\sqrt{3}$. Mas $\\text{sen}\\, 60° = \\dfrac{\\sqrt{3}}{2}$, portanto altura $= 6 \\times \\dfrac{\\sqrt{3}}{2} = 3\\sqrt{3}$, não $6\\sqrt{3}$.",
               "errorCategory": "cálculo numérico"
             }
           ]
