@@ -13,7 +13,7 @@
 |---|---|---|
 | VIT-48 | Renderizar fórmulas matemáticas de forma elegante | ✅ Completo |
 
-VIT-48 bloqueia VIT-32. A revisão piloto ainda **não foi importada** no Supabase.
+VIT-48 bloqueia VIT-32. A revisão piloto foi importada no Supabase **DEV** para o smoke test visual (veja seção 9).
 
 ---
 
@@ -183,13 +183,38 @@ Para um PR futuro: se o conteúdo evoluir para expressões mais complexas (integ
 
 ---
 
-## 9. Smoke test visual
+## 9. Smoke test visual real (2026-06-19)
 
-**Dev server iniciado na porta 3001.**  
-- Servidor respondeu HTTP 200 em `/` e `/acessar/revisao-9ano-triangulos-sistemas` ✅  
-- Build compilou sem erros com todos os componentes atualizados ✅  
-- Inspeção lógica da detecção de cláusulas math verificada via Node.js: 5/5 casos corretos ✅  
-- Inspeção visual no browser (abertura de missão + quiz + feedback): **pendente — requer ação manual do usuário**
+**Setup:**
+- Revisão `revisao-9ano-triangulos-sistemas` importada no Supabase DEV via `npm run import-revision`
+- 1 código fictício de aluno gerado localmente e não publicado
+- Dev server iniciado na porta 3000
+
+**Bugs descobertos e corrigidos durante o setup:**
+
+| Bug | Causa | Arquivo | Fix |
+|---|---|---|---|
+| `hasSupabaseConfig()` retornava false | `.env.local` usa `NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`; código checava só `NEXT_PUBLIC_SUPABASE_ANON_KEY` | `src/lib/supabase/server.ts`, `src/lib/supabase/client.ts` | Fallback com `??` |
+| Cache `.next` stale após edição | HMR com chunks de vendor corrompidos | — | `rm -rf .next` + restart |
+| `AccessForm` truncando código em 9 chars | Formato `QC-XX-XXXX` tem 10 chars; `maxLength`, slice e `disabled` usavam 9 | `src/components/access/AccessForm.tsx` | Todos os 3 valores → 10 |
+
+**Resultados por superfície:**
+
+| Superfície | O que foi visto | MathText | Resultado |
+|---|---|---|---|
+| Login (`/acessar/...`) | Card navy gradient, campo de código com máscara `QC-XX-XXXX` | — | ✅ |
+| Mapa de missões | 4 missões listadas, nome "Aluno Teste Visual" no header | — | ✅ |
+| LessonBlock concept `highlight` | `h² = m · n \| a² = m · c \| b² = n · c` → 3 chips empilhadas com borda | Pipe mode | ✅ |
+| LessonBlock worked_example steps | Passos com `²`, `·`, `×`, `√`, `→` com `bg-brand-navy/5` | Sentence mode | ✅ |
+| MultipleChoiceQuestion statement | Enunciados legíveis sem math espúrio | — | ✅ |
+| FeedbackBox errado | "Você calculou h² = 36, mas não extraiu a raiz. h = √36 = 6." — `²`, `√` destacados | Sentence mode | ✅ |
+| FeedbackBox correto | "Correto. a² = m · c = 5 × 20 = 100. a = √100 = 10." — math destacado | Sentence mode | ✅ |
+| NumericQuestion + FeedbackBox | "Primeiro calcule c = √(6²+8²) = √100 = 10. Depois use h = (a·b)/c = 48/10 = 4,8." | Sentence mode | ✅ |
+| Opção múltipla com `≈` | "h = 60/13 ≈ 4,6" na opção A | Inline char | ✅ |
+| FeedbackBox com `≈` e `²` | "A fórmula correta é h = (a·b)/c. Calcule b = √(13²−5²) = 12 e use h = 60/13 ≈ 4,6." | Sentence mode | ✅ |
+| Result phase — "Revisão dos erros" | 3 questões erradas exibidas com statement, feedback e resposta correta com MathText | Sentence mode | ✅ |
+
+**Avaliação visual:** **APROVADO.** Todos os campos com fórmulas matemáticas exibem destaque visual correto. Texto puro não é afetado. Sem falsos positivos.
 
 ---
 
@@ -200,8 +225,10 @@ Para um PR futuro: se o conteúdo evoluir para expressões mais complexas (integ
 - ✅ Nenhuma dependência adicionada ao `package.json`
 - ✅ Bundle First Load JS mantido em ~102 KB
 - ✅ Nenhum gabarito ou conteúdo pedagógico alterado
-- ✅ Nenhuma revisão importada no Supabase
-- ✅ Nenhum código de acesso de aluno gerado
+- ✅ Revisão importada no Supabase **DEV** apenas para smoke test — não é produção
+- ✅ 1 código fictício de aluno gerado localmente e não publicado
+- ✅ `data/students.local.json` não commitado (coberto por `.gitignore`)
+- ✅ Código de aluno não incluído em relatório, PR, chat ou GitHub
 - ✅ Nenhum dado real de aluno usado
 - ✅ Nenhum secret commitado
 - ✅ `.env.local` não commitado
