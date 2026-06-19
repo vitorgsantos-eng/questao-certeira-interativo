@@ -7,8 +7,23 @@ import { createServiceClient, hasSupabaseServiceConfig } from '@/lib/supabase/se
 const SESSION_COOKIE = 'qci_session'
 const COOKIE_MAX_AGE = 60 * 60 * 24 * 15 // 15 days
 
+const DEV_FALLBACK_SECRET = 'dev-secret-default-key-for-development-only'
+
 export function getSecret(): string {
-  return process.env.SESSION_SECRET || 'dev-secret-default-key-for-development'
+  const secret = process.env.SESSION_SECRET
+
+  if (process.env.NODE_ENV === 'production') {
+    if (!secret) {
+      throw new Error('[auth] SESSION_SECRET is required in production but was not set.')
+    }
+    if (secret.length < 32) {
+      throw new Error('[auth] SESSION_SECRET must be at least 32 characters in production.')
+    }
+    return secret
+  }
+
+  // development / test: use provided secret or fallback
+  return secret && secret.length >= 32 ? secret : DEV_FALLBACK_SECRET
 }
 
 export function sign(payload: string, secret: string): string {

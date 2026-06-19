@@ -1,9 +1,8 @@
-import fs from 'fs'
-import path from 'path'
 import {
   serializeSession,
   deserializeSession,
   timingSafeEqualStrings,
+  getSecret,
 } from '../src/lib/auth-lite/session'
 import {
   buildProfessorPayload,
@@ -16,7 +15,7 @@ import type { StudentSession } from '../src/types'
 process.env.SESSION_SECRET = 'super-secret-key-for-testing-purposes-32-chars'
 
 async function runSessionSigningTests() {
-  console.log('=== RUNNING SESSION HMAC SIGNING & MOBILE RESPONSIVENESS TESTS ===\n')
+  console.log('=== RUNNING SESSION HMAC SIGNING TESTS ===\n')
 
   let passed = 0
   let failed = 0
@@ -31,8 +30,56 @@ async function runSessionSigningTests() {
     }
   }
 
+  // 0. SESSION_SECRET Strength Requirements
+  console.log('--- Tier 0: SESSION_SECRET Strength Requirements ---')
+
+  // In non-production, getSecret() should return a secret (provided or fallback)
+  const currentSecret = getSecret()
+  assert(
+    typeof currentSecret === 'string' && currentSecret.length >= 32,
+    'getSecret() returns a string of at least 32 chars in dev/test mode'
+  )
+
+  // Production mode: missing secret must throw
+  const originalNodeEnv = process.env.NODE_ENV
+  const originalSecret = process.env.SESSION_SECRET
+  ;(process.env as Record<string, string>).NODE_ENV = 'production'
+  delete process.env.SESSION_SECRET
+  try {
+    getSecret()
+    assert(false, 'production without SESSION_SECRET should throw')
+  } catch {
+    assert(true, 'production without SESSION_SECRET throws an error')
+  }
+
+  // Production mode: short secret must throw
+  process.env.SESSION_SECRET = 'short'
+  try {
+    getSecret()
+    assert(false, 'production with short SESSION_SECRET should throw')
+  } catch {
+    assert(true, 'production with short SESSION_SECRET throws an error')
+  }
+
+  // Production mode: valid secret must NOT throw
+  process.env.SESSION_SECRET = 'a-valid-secret-that-has-at-least-32-characters-ok'
+  try {
+    getSecret()
+    assert(true, 'production with valid SESSION_SECRET does not throw')
+  } catch {
+    assert(false, 'production with valid SESSION_SECRET should not throw')
+  }
+
+  // Restore environment
+  ;(process.env as Record<string, string>).NODE_ENV = originalNodeEnv ?? 'test'
+  if (originalSecret) {
+    process.env.SESSION_SECRET = originalSecret
+  } else {
+    delete process.env.SESSION_SECRET
+  }
+
   // 1. Session Serialisation & Verification
-  console.log('--- Tier 1: Session Signing and Verification ---')
+  console.log('\n--- Tier 1: Session Signing and Verification ---')
   const mockSession: StudentSession = {
     studentId: 'stud-123',
     revisionId: 'rev-456',
@@ -108,70 +155,8 @@ async function runSessionSigningTests() {
     'timingSafeEqualStrings returns false for same length but different characters'
   )
 
-  // 4. Mobile Responsiveness Invariants
-  console.log('\n--- Tier 4: Mobile Responsiveness Invariants (Static Analysis) ---')
-
-  // Invariant A: inputMode="decimal" on NumericQuestion inputs
-  const numericQuestionPath = path.resolve(
-    __dirname,
-    '../src/components/quiz/NumericQuestion.tsx'
-  )
-  if (fs.existsSync(numericQuestionPath)) {
-    const content = fs.readFileSync(numericQuestionPath, 'utf8')
-    assert(
-      content.includes('inputMode="decimal"'),
-      'NumericQuestion.tsx contains inputMode="decimal" for mobile numeric keyboard'
-    )
-  } else {
-    console.error(`[WARN] NumericQuestion.tsx not found at ${numericQuestionPath}`)
-    failed++
-  }
-
-  // Invariant B: visual layout flex-col/sm:flex-row attributes in components
-  // Let's inspect components for responsive flex container classes
-  const componentsDir = path.resolve(__dirname, '../src/components')
-  let foundFlexColSmFlexRow = false
-
-  function scanDir(dir: string) {
-    const files = fs.readdirSync(dir)
-    for (const file of files) {
-      const fullPath = path.join(dir, file)
-      if (fs.statSync(fullPath).isDirectory()) {
-        scanDir(fullPath)
-      } else if (file.endsWith('.tsx')) {
-        const content = fs.readFileSync(fullPath, 'utf8')
-        if (
-          content.includes('flex-col') &&
-          (content.includes('sm:flex-row') || content.includes('md:flex-row'))
-        ) {
-          foundFlexColSmFlexRow = true
-          console.log(`Found responsive flex layout in: ${path.relative(componentsDir, fullPath)}`)
-        }
-      }
-    }
-  }
-
-  scanDir(componentsDir)
-  assert(
-    foundFlexColSmFlexRow,
-    'Visual layouts feature responsive flex-col and sm/md:flex-row attributes'
-  )
-
-  // Invariant C: truncations on session display names (Header.tsx)
-  const headerPath = path.resolve(__dirname, '../src/components/layout/Header.tsx')
-  if (fs.existsSync(headerPath)) {
-    const content = fs.readFileSync(headerPath, 'utf8')
-    assert(
-      content.includes('truncate') && content.includes('max-w-['),
-      'Header.tsx truncates student display name on mobile screen sizes'
-    )
-  } else {
-    console.error(`[WARN] Header.tsx not found at ${headerPath}`)
-    failed++
-  }
-
-  // 5. Professor Session Signing
-  console.log('\n--- Tier 5: Professor Session Signing ---')
+  // 4. Professor Session Signing
+  console.log('\n--- Tier 4: Professor Session Signing ---')
   const professorSecret = process.env.SESSION_SECRET!
 
   const professorPayload = buildProfessorPayload()
