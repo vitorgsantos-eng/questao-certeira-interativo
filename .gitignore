@@ -22,6 +22,10 @@ build/
 *.tsbuildinfo
 next-env.d.ts
 
+# Local data files (not for version control — use data/*.sample.* as reference)
+data/*.local.*
+data/*.local/
+
 # OS
 .DS_Store
 Thumbs.db

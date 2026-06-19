@@ -1,0 +1,9 @@
+{
+  "revisionSlug": "revisao-9ano-triangulos-sistemas",
+  "daysValid": 15,
+  "students": [
+    { "displayName": "Aluno Exemplo A", "grade": "9º ano", "groupLabel": "Turma A" },
+    { "displayName": "Aluno Exemplo B", "grade": "9º ano", "groupLabel": "Turma A" },
+    { "displayName": "Aluno Exemplo C", "grade": "9º ano", "groupLabel": "Turma B" }
+  ]
+}
