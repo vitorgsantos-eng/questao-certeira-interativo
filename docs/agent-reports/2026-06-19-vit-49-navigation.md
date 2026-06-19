@@ -65,25 +65,22 @@ Adicionado acima do header da missão:
 </Link>
 ```
 
-### `MissionPlayer` — fase quiz
+### `MissionPlayer`, `DiagnosticPlayer`, `SimuladoFinal` — confirmação de saída durante o quiz
 
-Adicionado "Sair ✕" ao lado do contador de questões:
+**v1 (anterior):** link direto `Sair ✕` navegava imediatamente sem aviso.  
+**v2 (ajuste pós-inspeção):** botão `Sair ✕` abre um overlay de confirmação antes de navegar.
 
-```tsx
-<Link href={`/revisao/${revisionSlug}`} className="text-xs text-brand-gray-mid hover:text-brand-navy transition-colors">
-  Sair ✕
-</Link>
-```
+Comportamento:
 
-**Efeito de sair durante o quiz:** as tentativas já respondidas já estão salvas no banco (cada resposta é salva imediatamente via `POST /api/attempts` quando confirmada). O `POST /api/progress` (status `completed`) só é chamado ao fim — portanto, sair no meio deixa as tentativas salvas mas a missão não marcada como concluída. O aluno pode reiniciar a missão a qualquer momento; as tentativas anteriores ficam no histórico mas não afetam o placar da próxima tentativa completa.
+1. Aluno clica "Sair ✕" → estado `showExitConfirm = true`
+2. Overlay aparece com a mensagem:
+   > "As respostas já enviadas ficam salvas, mas a atividade não será concluída."
+3. "Cancelar" → `showExitConfirm = false`, permanece na atividade
+4. "Sair" → `router.push(`/revisao/${revisionSlug}`)`
 
-### `DiagnosticPlayer` — fase quiz
+O título do overlay varia por contexto: "Sair da missão?", "Sair do diagnóstico?", "Sair do simulado?".
 
-Adicionado "Sair ✕" ao lado do contador, com mesmo padrão do MissionPlayer.
-
-### `SimuladoFinal` — fase quiz (em andamento)
-
-Adicionado "Sair ✕" ao lado do contador, com mesmo padrão.
+**Efeito de confirmar saída:** as tentativas já respondidas estão salvas no banco (`POST /api/attempts` é chamado imediatamente ao confirmar cada resposta). O `POST /api/progress` (status `completed`) só é chamado ao fim de todas as questões — portanto, sair deixa tentativas salvas mas missão não marcada como concluída. O aluno pode reiniciar a qualquer momento.
 
 ### `StudentReport` + `relatorio/page.tsx` — bug: links de missão
 
@@ -130,6 +127,8 @@ Nenhum breakpoint adicional foi necessário.
 
 ## 7. Resultados dos testes
 
+### Pós-commit inicial
+
 | Comando | Resultado |
 |---|---|
 | `npm run lint` | ✅ 1 warning pré-existente em `server.ts` (não relacionado) |
@@ -137,6 +136,16 @@ Nenhum breakpoint adicional foi necessário.
 | `npm run build` | ✅ Compiled successfully — 9 páginas geradas |
 | `npm run validate-content:ci` | ✅ 0 erros, 0 warnings |
 | `npm test` | ✅ 13 passed, 0 failed |
+
+### Pós-ajuste de confirmação de saída (v2)
+
+| Comando | Resultado |
+|---|---|
+| `npm run lint` | ✅ 1 warning pré-existente (mesmo de antes) |
+| `npm run type-check` | ✅ |
+| `npm run build` | ✅ Compiled successfully — 9 páginas geradas |
+| `npm run validate-content:ci` | ✅ 0 erros, 0 warnings |
+| `npm test` | ✅ 47 passed, 0 failed |
 
 ---
 

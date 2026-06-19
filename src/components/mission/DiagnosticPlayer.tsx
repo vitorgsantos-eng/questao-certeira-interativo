@@ -1,7 +1,6 @@
 'use client'
 
 import { useState } from 'react'
-import Link from 'next/link'
 import { useRouter } from 'next/navigation'
 import { MultipleChoiceQuestion } from '@/components/quiz/MultipleChoiceQuestion'
 import { ProgressBar } from '@/components/progress/ProgressBar'
@@ -22,6 +21,7 @@ export function DiagnosticPlayer({
   const [current, setCurrent] = useState(0)
   const [attempts, setAttempts] = useState<AttemptResult[]>([])
   const [done, setDone] = useState(false)
+  const [showExitConfirm, setShowExitConfirm] = useState(false)
 
   const progress = Math.round((current / questions.length) * 100)
 
@@ -109,12 +109,12 @@ export function DiagnosticPlayer({
             <span className="text-xs text-brand-gray-mid">
               {current + 1}/{questions.length}
             </span>
-            <Link
-              href={`/revisao/${revisionSlug}`}
+            <button
+              onClick={() => setShowExitConfirm(true)}
               className="text-xs text-brand-gray-mid hover:text-brand-navy transition-colors"
             >
               Sair ✕
-            </Link>
+            </button>
           </div>
         </div>
         <ProgressBar value={progress} size="sm" color="gold" />
@@ -122,6 +122,31 @@ export function DiagnosticPlayer({
           Assunto: <span className="font-medium">{missions[current]?.title}</span>
         </p>
       </div>
+
+      {showExitConfirm && (
+        <div className="fixed inset-0 bg-black/50 z-50 flex items-center justify-center px-4">
+          <div className="bg-white rounded-2xl p-6 max-w-sm w-full space-y-4 shadow-xl">
+            <h2 className="font-bold text-brand-navy text-lg">Sair do diagnóstico?</h2>
+            <p className="text-sm text-brand-gray-mid">
+              As respostas já enviadas ficam salvas, mas a atividade não será concluída.
+            </p>
+            <div className="flex gap-3">
+              <button
+                onClick={() => setShowExitConfirm(false)}
+                className="btn-outline flex-1"
+              >
+                Cancelar
+              </button>
+              <button
+                onClick={() => router.push(`/revisao/${revisionSlug}`)}
+                className="btn-primary flex-1"
+              >
+                Sair
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
 
       <MultipleChoiceQuestion
         key={questions[current].id}
