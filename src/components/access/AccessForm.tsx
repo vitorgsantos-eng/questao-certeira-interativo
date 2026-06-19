@@ -53,7 +53,7 @@ export function AccessForm({ revisionSlug, revisionTitle, revisionGrade }: Acces
     let v = e.target.value.toUpperCase().replace(/[^A-Z0-9]/g, '')
     if (v.length > 2) v = v.slice(0, 2) + '-' + v.slice(2)
     if (v.length > 5) v = v.slice(0, 5) + '-' + v.slice(5)
-    if (v.length > 9) v = v.slice(0, 9)
+    if (v.length > 10) v = v.slice(0, 10)
     setCode(v)
     setError('')
   }
@@ -98,7 +98,7 @@ export function AccessForm({ revisionSlug, revisionTitle, revisionGrade }: Acces
                 className="input-field text-center text-xl font-bold tracking-widest uppercase"
                 autoComplete="off"
                 autoFocus
-                maxLength={9}
+                maxLength={10}
               />
               {error && (
                 <p className="mt-2 text-sm text-red-600 font-medium animate-fade-in">
@@ -109,7 +109,7 @@ export function AccessForm({ revisionSlug, revisionTitle, revisionGrade }: Acces
 
             <button
               type="submit"
-              disabled={loading || code.length < 9}
+              disabled={loading || code.length < 10}
               className="btn-primary w-full text-base py-4"
             >
               {loading ? 'Verificando...' : 'Entrar na revisão'}

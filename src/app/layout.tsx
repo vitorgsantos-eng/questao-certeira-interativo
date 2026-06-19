@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Lora, Playfair_Display, Montserrat, Inter, Open_Sans } from 'next/font/google'
 import './globals.css'
+import 'katex/dist/katex.min.css'
 
 const lora = Lora({ subsets: ['latin'], variable: '--font-lora' })
 const playfair = Playfair_Display({ subsets: ['latin'], variable: '--font-playfair' })

@@ -48,7 +48,7 @@
           "type": "worked_example",
           "problem": "Um triângulo tem lados 3, 4 e 5. Outro tem lados 6, 8 e 10. São semelhantes?",
           "steps": [
-            "Compare os lados na mesma ordem: 6÷3 = 2, 8÷4 = 2, 10÷5 = 2.",
+            "Compare os lados na mesma ordem: $6 \\div 3 = 2$, $8 \\div 4 = 2$, $10 \\div 5 = 2$.",
             "A razão entre lados correspondentes é sempre 2.",
             "Critério LLL confirmado: os triângulos são semelhantes com razão de semelhança 2."
           ]
@@ -78,7 +78,7 @@
             {
               "text": "São semelhantes com razão de semelhança 3.",
               "isCorrect": true,
-              "feedback": "Correto. 6÷2 = 3, 12÷4 = 3, 18÷6 = 3. Razão constante → semelhança pelo critério LLL.",
+              "feedback": "Correto. $6 \\div 2 = 3$, $12 \\div 4 = 3$, $18 \\div 6 = 3$. Razão constante → semelhança pelo critério LLL.",
               "errorCategory": null
             },
             {
@@ -140,8 +140,8 @@
           "statement": "Dois triângulos semelhantes têm lados correspondentes de 5 cm e 15 cm. Se o perímetro do menor é 18 cm, qual é o perímetro do maior?",
           "correctNumericAnswer": 54,
           "tolerance": 0.5,
-          "numericFeedbackCorrect": "Correto! Razão de semelhança = 15÷5 = 3. Perímetro do maior = 18 × 3 = 54 cm.",
-          "numericFeedbackWrong": "A razão de semelhança é 15÷5 = 3. O perímetro do maior é 18 × 3 = 54 cm. Os perímetros aumentam na mesma razão que os lados."
+          "numericFeedbackCorrect": "Correto! Razão de semelhança $= 15 \\div 5 = 3$. Perímetro do maior $= 18 \\times 3 = 54$ cm.",
+          "numericFeedbackWrong": "A razão de semelhança é $15 \\div 5 = 3$. O perímetro do maior é $18 \\times 3 = 54$ cm. Os perímetros aumentam na mesma razão que os lados."
         },
         {
           "type": "multiple_choice",
@@ -152,13 +152,13 @@
             {
               "text": "x = 12",
               "isCorrect": true,
-              "feedback": "Correto. AB/DE = BC/EF → 6/9 = 8/x → x = 8 × 9 ÷ 6 = 12.",
+              "feedback": "Correto. $\\frac{AB}{DE} = \\frac{BC}{EF} \\Rightarrow \\frac{6}{9} = \\frac{8}{x} \\Rightarrow x = 8 \\times 9 \\div 6 = 12$.",
               "errorCategory": null
             },
             {
               "text": "x = 11",
               "isCorrect": false,
-              "feedback": "Cuidado no cálculo. A proporção é AB/DE = BC/EF. Substitua: 6/9 = 8/x → 6x = 72 → x = 12.",
+              "feedback": "Cuidado no cálculo. A proporção é $\\frac{AB}{DE} = \\frac{BC}{EF}$. Substitua: $\\frac{6}{9} = \\frac{8}{x} \\Rightarrow 6x = 72 \\Rightarrow x = 12$.",
               "errorCategory": "cálculo numérico"
             },
             {
@@ -168,9 +168,9 @@
               "errorCategory": "identificação de elementos"
             },
             {
-              "text": "x = 16/3 ≈ 5,3",
+              "text": "$x = \\frac{16}{3} \\approx 5{,}3$",
               "isCorrect": false,
-              "feedback": "Parece que você inverteu a razão: usou 6/9 = 2/3 em vez de 9/6 = 3/2. Isso levaria a x = 8 × (2/3) = 16/3 ≈ 5,3. Como o segundo triângulo é maior, a razão correta é 9/6 = 3/2, então x = 8 × (3/2) = 12.",
+              "feedback": "Parece que você inverteu a razão: usou $\\frac{6}{9} = \\frac{2}{3}$ em vez de $\\frac{9}{6} = \\frac{3}{2}$. Isso levaria a $x = 8 \\times \\frac{2}{3} = \\frac{16}{3} \\approx 5{,}3$. Como o segundo triângulo é maior, a razão correta é $\\frac{9}{6} = \\frac{3}{2}$, então $x = 8 \\times \\frac{3}{2} = 12$.",
               "errorCategory": "proporção"
             }
           ]
@@ -184,25 +184,25 @@
             {
               "text": "6 m",
               "isCorrect": true,
-              "feedback": "Correto. Os triângulos formados pela luz do sol são semelhantes. Árvore/sombra-árvore = Poste/sombra-poste → h/8 = 3/4 → h = 6 m.",
+              "feedback": "Correto. Os triângulos formados pela luz do sol são semelhantes. $\\dfrac{\\text{Árvore}}{\\text{sombra}} = \\dfrac{\\text{Poste}}{\\text{sombra}} \\Rightarrow \\dfrac{h}{8} = \\dfrac{3}{4} \\Rightarrow h = 6$ m.",
               "errorCategory": null
             },
             {
               "text": "24 m",
               "isCorrect": false,
-              "feedback": "Você pode ter multiplicado em vez de dividir. A proporção é h/8 = 3/4. Resolvendo: h = 3 × 8 ÷ 4 = 6 m.",
+              "feedback": "Você pode ter multiplicado em vez de dividir. A proporção é $\\frac{h}{8} = \\frac{3}{4}$. Resolvendo: $h = 3 \\times 8 \\div 4 = 6$ m.",
               "errorCategory": "operação algébrica"
             },
             {
               "text": "1,5 m",
               "isCorrect": false,
-              "feedback": "Verifique se você inverteu sombra e altura. A proporção correta é objeto/sombra = objeto/sombra. h/8 = 3/4 → h = 6 m.",
+              "feedback": "Verifique se você inverteu sombra e altura. A proporção correta é objeto/sombra = objeto/sombra. $\\frac{h}{8} = \\frac{3}{4} \\Rightarrow h = 6$ m.",
               "errorCategory": "proporção"
             },
             {
               "text": "5 m",
               "isCorrect": false,
-              "feedback": "Talvez tenha sombreado 8-3 = 5. Mas o método correto é proporção: h/8 = 3/4 → h = 6 m.",
+              "feedback": "Talvez tenha sombreado 8−3 = 5. Mas o método correto é proporção: $\\frac{h}{8} = \\frac{3}{4} \\Rightarrow h = 6$ m.",
               "errorCategory": "fórmula inadequada"
             }
           ]
@@ -216,7 +216,9 @@
       "goal": "Aplicar as relações entre altura, catetos e projeções no triângulo retângulo.",
       "estimatedMinutes": 8,
       "isOptional": false,
-      "prerequisites": ["semelhanca-triangulos"],
+      "prerequisites": [
+        "semelhanca-triangulos"
+      ],
       "blocks": [
         {
           "type": "intro",
@@ -227,7 +229,7 @@
           "type": "concept",
           "title": "O ponto-chave desta missão",
           "text": "Num triângulo retângulo, ao traçar a altura h do vértice reto até a hipotenusa, criamos dois triângulos menores — ambos semelhantes entre si e ao triângulo original. Essas semelhanças geram relações métricas poderosas.",
-          "highlight": "h² = m · n   |   a² = m · c   |   b² = n · c"
+          "highlight": "$h^2 = m \\cdot n$   |   $a^2 = m \\cdot c$   |   $b^2 = n \\cdot c$"
         },
         {
           "type": "visual_explanation",
@@ -247,9 +249,9 @@
           "problem": "Um triângulo retângulo tem hipotenusa c = 25 cm. As projeções dos catetos são m = 9 cm e n = 16 cm. Calcule a altura h.",
           "steps": [
             "Verifique: m + n = 9 + 16 = 25 = c. ✓",
-            "Use a relação: h² = m · n",
-            "h² = 9 × 16 = 144",
-            "h = √144 = 12 cm"
+            "Use a relação: $h^2 = m \\cdot n$",
+            "$h^2 = 9 \\times 16 = 144$",
+            "$h = \\sqrt{144} = 12$ cm"
           ],
           "conclusion": "h = 12 cm"
         },
@@ -257,23 +259,23 @@
           "type": "worked_example",
           "problem": "Com os mesmos dados (m = 9, n = 16, c = 25), calcule os catetos a e b.",
           "steps": [
-            "Para o cateto a: a² = m · c = 9 × 25 = 225 → a = 15 cm",
-            "Para o cateto b: b² = n · c = 16 × 25 = 400 → b = 20 cm",
-            "Confira com Pitágoras: 15² + 20² = 225 + 400 = 625 = 25². ✓"
+            "Para o cateto a: $a^2 = m \\cdot c = 9 \\times 25 = 225 \\Rightarrow a = 15$ cm",
+            "Para o cateto b: $b^2 = n \\cdot c = 16 \\times 25 = 400 \\Rightarrow b = 20$ cm",
+            "Confira com Pitágoras: $15^2 + 20^2 = 225 + 400 = 625 = 25^2$. ✓"
           ]
         },
         {
           "type": "hint",
-          "text": "Atenção: h² = m · n usa as duas projeções. Já a² = m · c usa a projeção DO PRÓPRIO cateto a, não do outro cateto."
+          "text": "Atenção: $h^2 = m \\cdot n$ usa as duas projeções. Já $a^2 = m \\cdot c$ usa a projeção DO PRÓPRIO cateto a, não do outro cateto."
         },
         {
           "type": "summary",
           "title": "Resumo das relações",
           "points": [
-            "h² = m · n (altura = raiz do produto das projeções)",
-            "a² = m · c (cateto a = raiz da projeção de a × hipotenusa)",
-            "b² = n · c (cateto b = raiz da projeção de b × hipotenusa)",
-            "m + n = c (projeções somam a hipotenusa)"
+            "$h^2 = m \\cdot n$ (altura = raiz do produto das projeções)",
+            "$a^2 = m \\cdot c$ (cateto a = raiz da projeção de a × hipotenusa)",
+            "$b^2 = n \\cdot c$ (cateto b = raiz da projeção de b × hipotenusa)",
+            "$m + n = c$ (projeções somam a hipotenusa)"
           ]
         }
       ],
@@ -287,25 +289,25 @@
             {
               "text": "h = 6",
               "isCorrect": true,
-              "feedback": "Correto. h² = m · n = 4 × 9 = 36. h = √36 = 6.",
+              "feedback": "Correto. $h^2 = m \\cdot n = 4 \\times 9 = 36$. $h = \\sqrt{36} = 6$.",
               "errorCategory": null
             },
             {
               "text": "h = 6,5",
               "isCorrect": false,
-              "feedback": "Você pode ter usado h = (m+n)/2 = 13/2 = 6,5. Mas a relação correta é h² = m · n, não a média aritmética.",
+              "feedback": "Você pode ter usado $h = \\frac{m+n}{2} = \\frac{13}{2} = 6{,}5$. Mas a relação correta é $h^2 = m \\cdot n$, não a média aritmética.",
               "errorCategory": "fórmula inadequada"
             },
             {
               "text": "h = 36",
               "isCorrect": false,
-              "feedback": "Você calculou h² = 36, mas não extraiu a raiz. h = √36 = 6.",
+              "feedback": "Você calculou $h^2 = 36$, mas não extraiu a raiz. $h = \\sqrt{36} = 6$.",
               "errorCategory": "operação algébrica"
             },
             {
               "text": "h = 13",
               "isCorrect": false,
-              "feedback": "h ≠ m + n. A relação é h² = m · n (produto, não soma). h = √(4 × 9) = 6.",
+              "feedback": "$h \\neq m + n$. A relação é $h^2 = m \\cdot n$ (produto, não soma). $h = \\sqrt{4 \\times 9} = 6$.",
               "errorCategory": "fórmula inadequada"
             }
           ]
@@ -319,25 +321,25 @@
             {
               "text": "a = 10",
               "isCorrect": true,
-              "feedback": "Correto. a² = m · c = 5 × 20 = 100. a = √100 = 10.",
+              "feedback": "Correto. $a^2 = m \\cdot c = 5 \\times 20 = 100$. $a = \\sqrt{100} = 10$.",
               "errorCategory": null
             },
             {
               "text": "a = 4",
               "isCorrect": false,
-              "feedback": "a² = m · c = 5 × 20 = 100, portanto a = 10. Verifique o produto antes de extrair a raiz.",
+              "feedback": "$a^2 = m \\cdot c = 5 \\times 20 = 100$, portanto $a = 10$. Verifique o produto antes de extrair a raiz.",
               "errorCategory": "cálculo numérico"
             },
             {
               "text": "a = 25",
               "isCorrect": false,
-              "feedback": "Você pode ter somado m + c. A relação é a² = m · c (produto). a = √(5 × 20) = √100 = 10.",
+              "feedback": "Você pode ter somado $m + c$. A relação é $a^2 = m \\cdot c$ (produto). $a = \\sqrt{5 \\times 20} = \\sqrt{100} = 10$.",
               "errorCategory": "fórmula inadequada"
             },
             {
               "text": "a = 100",
               "isCorrect": false,
-              "feedback": "Você calculou a² = 100 corretamente, mas não extraiu a raiz. a = √100 = 10.",
+              "feedback": "Você calculou $a^2 = 100$ corretamente, mas não extraiu a raiz. $a = \\sqrt{100} = 10$.",
               "errorCategory": "operação algébrica"
             }
           ]
@@ -351,25 +353,25 @@
             {
               "text": "n = 9",
               "isCorrect": true,
-              "feedback": "Correto. h² = m · n → 36 = 4 · n → n = 9.",
+              "feedback": "Correto. $h^2 = m \\cdot n \\Rightarrow 36 = 4 \\cdot n \\Rightarrow n = 9$.",
               "errorCategory": null
             },
             {
               "text": "n = 2",
               "isCorrect": false,
-              "feedback": "Você pode ter subtraído h - m = 6 - 4 = 2. A relação é h² = m · n. Portanto n = h²/m = 36/4 = 9.",
+              "feedback": "Você pode ter subtraído h − m = 6 − 4 = 2. A relação é $h^2 = m \\cdot n$. Portanto $n = \\frac{h^2}{m} = \\frac{36}{4} = 9$.",
               "errorCategory": "fórmula inadequada"
             },
             {
               "text": "n = 24",
               "isCorrect": false,
-              "feedback": "Verifique o isolamento de n. h² = m · n → 36 = 4n → n = 9, não 24.",
+              "feedback": "Verifique o isolamento de $n$. $h^2 = m \\cdot n \\Rightarrow 36 = 4n \\Rightarrow n = 9$, não 24.",
               "errorCategory": "operação algébrica"
             },
             {
               "text": "n = 1,5",
               "isCorrect": false,
-              "feedback": "Você dividiu h por m em vez de h² por m. n = h²/m = 36/4 = 9, não h/m = 6/4 = 1,5.",
+              "feedback": "Você dividiu h por m em vez de $h^2$ por m. $n = \\frac{h^2}{m} = \\frac{36}{4} = 9$, não $\\frac{h}{m} = \\frac{6}{4} = 1{,}5$.",
               "errorCategory": "proporção"
             }
           ]
@@ -381,8 +383,8 @@
           "statement": "Num triângulo retângulo, os catetos são a = 6 e b = 8. Calcule a altura h relativa à hipotenusa.",
           "correctNumericAnswer": 4.8,
           "tolerance": 0.1,
-          "numericFeedbackCorrect": "Correto! c = √(36+64) = 10. h = (a·b)/c = (6×8)/10 = 4,8.",
-          "numericFeedbackWrong": "Primeiro calcule c = √(6²+8²) = √100 = 10. Depois use h = (a·b)/c = 48/10 = 4,8."
+          "numericFeedbackCorrect": "Correto! $c = \\sqrt{36+64} = 10$. $h = \\dfrac{a \\cdot b}{c} = \\dfrac{6 \\times 8}{10} = 4{,}8$.",
+          "numericFeedbackWrong": "Primeiro calcule $c = \\sqrt{6^2+8^2} = \\sqrt{100} = 10$. Depois use $h = \\dfrac{a \\cdot b}{c} = \\dfrac{48}{10} = 4{,}8$."
         },
         {
           "type": "multiple_choice",
@@ -391,27 +393,27 @@
           "statement": "Num triângulo retângulo, a hipotenusa c = 13 e um cateto a = 5. Calcule a altura h relativa à hipotenusa. (Resultado em fração simplificada ou decimal)",
           "options": [
             {
-              "text": "h = 60/13 ≈ 4,6",
+              "text": "$h = \\dfrac{60}{13} \\approx 4{,}6$",
               "isCorrect": true,
-              "feedback": "Correto. b = √(13²−5²) = √(169−25) = √144 = 12. h = (a·b)/c = (5×12)/13 = 60/13 ≈ 4,62.",
+              "feedback": "Correto. $b = \\sqrt{13^2-5^2} = \\sqrt{169-25} = \\sqrt{144} = 12$. $h = \\dfrac{a \\cdot b}{c} = \\dfrac{5 \\times 12}{13} = \\dfrac{60}{13} \\approx 4{,}62$.",
               "errorCategory": null
             },
             {
               "text": "h = 5",
               "isCorrect": false,
-              "feedback": "h não é igual ao cateto a. Calcule b = 12 primeiro, depois h = (5×12)/13 = 60/13.",
+              "feedback": "h não é igual ao cateto a. Calcule $b = 12$ primeiro, depois $h = \\dfrac{5 \\times 12}{13} = \\dfrac{60}{13}$.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "h = 6",
               "isCorrect": false,
-              "feedback": "Verifique o cálculo. b = √(169−25) = 12. h = a·b/c = 60/13 ≈ 4,6, não 6.",
+              "feedback": "Verifique o cálculo. $b = \\sqrt{169-25} = 12$. $h = \\dfrac{a \\cdot b}{c} = \\dfrac{60}{13} \\approx 4{,}6$, não 6.",
               "errorCategory": "cálculo numérico"
             },
             {
               "text": "h = 2,5",
               "isCorrect": false,
-              "feedback": "Talvez tenha calculado h = a/2 = 5/2 = 2,5. A fórmula correta é h = (a·b)/c. Calcule b = √(13²−5²) = 12 e use h = 60/13 ≈ 4,6.",
+              "feedback": "Talvez tenha calculado $h = \\frac{a}{2} = \\frac{5}{2} = 2{,}5$. A fórmula correta é $h = \\dfrac{a \\cdot b}{c}$. Calcule $b = \\sqrt{13^2-5^2} = 12$ e use $h = \\dfrac{60}{13} \\approx 4{,}6$.",
               "errorCategory": "fórmula inadequada"
             }
           ]
@@ -436,7 +438,7 @@
           "type": "concept",
           "title": "A ideia fundamental",
           "text": "Num triângulo retângulo, para um ângulo α específico, a razão entre dois lados é sempre a mesma — independente do tamanho do triângulo. Isso é o que permite calcular lados a partir de ângulos.",
-          "highlight": "sen α = cateto oposto / hipotenusa   |   cos α = cateto adjacente / hipotenusa   |   tg α = cateto oposto / cateto adjacente"
+          "highlight": "$\\text{sen}\\,\\alpha = \\dfrac{\\text{cateto oposto}}{\\text{hipotenusa}}$   |   $\\text{cos}\\,\\alpha = \\dfrac{\\text{cateto adjacente}}{\\text{hipotenusa}}$   |   $\\text{tg}\\,\\alpha = \\dfrac{\\text{cateto oposto}}{\\text{cateto adjacente}}$"
         },
         {
           "type": "visual_explanation",
@@ -453,9 +455,9 @@
           "problem": "Num triângulo retângulo, o ângulo α = 30° e a hipotenusa = 20 cm. Calcule o cateto oposto a α.",
           "steps": [
             "Queremos o cateto oposto → usamos seno.",
-            "sen 30° = cateto oposto / hipotenusa",
-            "0,5 = cateto oposto / 20",
-            "cateto oposto = 0,5 × 20 = 10 cm"
+            "$\\text{sen}\\, 30° = \\dfrac{\\text{cateto oposto}}{\\text{hipotenusa}}$",
+            "$0{,}5 = \\dfrac{\\text{cateto oposto}}{20}$",
+            "$\\text{cateto oposto} = 0{,}5 \\times 20 = 10$ cm"
           ],
           "conclusion": "Cateto oposto = 10 cm"
         },
@@ -464,9 +466,9 @@
           "title": "Valores que você precisa saber",
           "text": "Valores trigonométricos dos ângulos mais comuns:",
           "items": [
-            "30°: sen = 0,5 | cos = √3/2 ≈ 0,866 | tg = 1/√3 ≈ 0,577",
-            "45°: sen = √2/2 ≈ 0,707 | cos = √2/2 ≈ 0,707 | tg = 1",
-            "60°: sen = √3/2 ≈ 0,866 | cos = 0,5 | tg = √3 ≈ 1,732"
+            "30°: sen = 0,5,  cos = $\\dfrac{\\sqrt{3}}{2} \\approx 0{,}866$,  tg = $\\dfrac{1}{\\sqrt{3}} \\approx 0{,}577$",
+            "45°: sen = $\\dfrac{\\sqrt{2}}{2} \\approx 0{,}707$,  cos = $\\dfrac{\\sqrt{2}}{2} \\approx 0{,}707$,  tg = 1",
+            "60°: sen = $\\dfrac{\\sqrt{3}}{2} \\approx 0{,}866$,  cos = 0,5,  tg = $\\sqrt{3} \\approx 1{,}732$"
           ]
         },
         {
@@ -477,9 +479,9 @@
           "type": "summary",
           "title": "Resumo",
           "points": [
-            "sen α = oposto/hipotenusa → use quando envolver oposto e hipotenusa.",
-            "cos α = adjacente/hipotenusa → use quando envolver adjacente e hipotenusa.",
-            "tg α = oposto/adjacente → use quando não envolve a hipotenusa.",
+            "$\\text{sen}\\,\\alpha = \\dfrac{\\text{oposto}}{\\text{hipotenusa}}$ → use quando envolver oposto e hipotenusa.",
+            "$\\text{cos}\\,\\alpha = \\dfrac{\\text{adjacente}}{\\text{hipotenusa}}$ → use quando envolver adjacente e hipotenusa.",
+            "$\\text{tg}\\,\\alpha = \\dfrac{\\text{oposto}}{\\text{adjacente}}$ → use quando não envolve a hipotenusa.",
             "Para encontrar o ângulo: use a função inversa (arcsen, arccos, arctg)."
           ]
         }
@@ -492,19 +494,19 @@
           "statement": "Num triângulo retângulo, você conhece o ângulo α e a hipotenusa. Quer calcular o cateto adjacente a α. Qual razão trigonométrica usar?",
           "options": [
             {
-              "text": "Cosseno: cos α = adjacente/hipotenusa",
+              "text": "Cosseno: $\\text{cos}\\,\\alpha = \\dfrac{\\text{adjacente}}{\\text{hipotenusa}}$",
               "isCorrect": true,
               "feedback": "Correto. O cosseno relaciona o cateto adjacente com a hipotenusa.",
               "errorCategory": null
             },
             {
-              "text": "Seno: sen α = oposto/hipotenusa",
+              "text": "Seno: $\\text{sen}\\,\\alpha = \\dfrac{\\text{oposto}}{\\text{hipotenusa}}$",
               "isCorrect": false,
               "feedback": "O seno relaciona o cateto oposto com a hipotenusa. Como você quer o adjacente, use cosseno.",
               "errorCategory": "identificação de elementos"
             },
             {
-              "text": "Tangente: tg α = oposto/adjacente",
+              "text": "Tangente: $\\text{tg}\\,\\alpha = \\dfrac{\\text{oposto}}{\\text{adjacente}}$",
               "isCorrect": false,
               "feedback": "A tangente não envolve a hipotenusa. Como você tem a hipotenusa, use cosseno.",
               "errorCategory": "fórmula inadequada"
@@ -526,25 +528,25 @@
             {
               "text": "5 cm",
               "isCorrect": true,
-              "feedback": "Correto. sen 30° = oposto/10 → 0,5 = oposto/10 → oposto = 5 cm.",
+              "feedback": "Correto. $\\text{sen}\\,30^\\circ = \\dfrac{\\text{oposto}}{10} \\Rightarrow 0{,}5 = \\dfrac{\\text{oposto}}{10} \\Rightarrow \\text{oposto} = 5$ cm.",
               "errorCategory": null
             },
             {
               "text": "8,66 cm",
               "isCorrect": false,
-              "feedback": "8,66 cm seria o cateto adjacente (cos 30° × 10). Para o oposto, use seno: 0,5 × 10 = 5 cm.",
+              "feedback": "$8{,}66$ cm seria o cateto adjacente ($\\text{cos}\\,30^\\circ \\times 10$). Para o oposto, use seno: $0{,}5 \\times 10 = 5$ cm.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "20 cm",
               "isCorrect": false,
-              "feedback": "Você dividiu em vez de multiplicar. sen 30° = oposto/hipotenusa → oposto = 0,5 × 10 = 5, não 10/0,5.",
+              "feedback": "Você dividiu em vez de multiplicar. $\\text{sen}\\,30^\\circ = \\dfrac{\\text{oposto}}{\\text{hipotenusa}} \\Rightarrow \\text{oposto} = 0{,}5 \\times 10 = 5$, não $\\dfrac{10}{0{,}5}$.",
               "errorCategory": "operação algébrica"
             },
             {
               "text": "3 cm",
               "isCorrect": false,
-              "feedback": "Verifique o valor de sen 30° = 0,5. Oposto = 0,5 × 10 = 5 cm.",
+              "feedback": "Verifique o valor de $\\text{sen}\\,30^\\circ = 0{,}5$. $\\text{Oposto} = 0{,}5 \\times 10 = 5$ cm.",
               "errorCategory": "cálculo numérico"
             }
           ]
@@ -558,25 +560,25 @@
             {
               "text": "8 cm",
               "isCorrect": true,
-              "feedback": "Correto. tg 45° = 1 → oposto/8 = 1 → oposto = 8 cm. Com 45°, os dois catetos são iguais.",
+              "feedback": "Correto. $\\text{tg}\\,45^\\circ = 1 \\Rightarrow \\dfrac{\\text{oposto}}{8} = 1 \\Rightarrow \\text{oposto} = 8$ cm. Com 45°, os dois catetos são iguais.",
               "errorCategory": null
             },
             {
               "text": "4 cm",
               "isCorrect": false,
-              "feedback": "tg 45° = 1, portanto oposto = tg 45° × adjacente = 1 × 8 = 8, não 4.",
+              "feedback": "$\\text{tg}\\,45^\\circ = 1$, portanto $\\text{oposto} = \\text{tg}\\,45^\\circ \\times \\text{adjacente} = 1 \\times 8 = 8$, não 4.",
               "errorCategory": "cálculo numérico"
             },
             {
               "text": "11,3 cm",
               "isCorrect": false,
-              "feedback": "11,3 cm seria a hipotenusa (8√2). O cateto oposto usa tangente: tg 45° × 8 = 1 × 8 = 8 cm.",
+              "feedback": "$11{,}3$ cm seria a hipotenusa ($8\\sqrt{2}$). O cateto oposto usa tangente: $\\text{tg}\\,45^\\circ \\times 8 = 1 \\times 8 = 8$ cm.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "5,66 cm",
               "isCorrect": false,
-              "feedback": "Você pode ter calculado 8/√2. Mas tg 45° = 1, portanto oposto = 8 cm.",
+              "feedback": "Você pode ter calculado $\\dfrac{8}{\\sqrt{2}}$. Mas $\\text{tg}\\,45^\\circ = 1$, portanto oposto $= 8$ cm.",
               "errorCategory": "fórmula inadequada"
             }
           ]
@@ -590,25 +592,25 @@
             {
               "text": "α = 30°",
               "isCorrect": true,
-              "feedback": "Correto. tg α = 5/(5√3) = 1/√3 ≈ 0,577. Portanto α = arctg(1/√3) = 30°.",
+              "feedback": "Correto. $\\text{tg}\\,\\alpha = \\dfrac{5}{5\\sqrt{3}} = \\dfrac{1}{\\sqrt{3}} \\approx 0{,}577$. Portanto $\\alpha = \\text{arctg}\\left(\\dfrac{1}{\\sqrt{3}}\\right) = 30°$.",
               "errorCategory": null
             },
             {
               "text": "α = 60°",
               "isCorrect": false,
-              "feedback": "tg 60° = √3 ≈ 1,73. Mas tg α = 5/(5√3) = 1/√3, que corresponde a 30°.",
+              "feedback": "$\\text{tg}\\, 60° = \\sqrt{3} \\approx 1{,}73$. Mas $\\text{tg}\\,\\alpha = \\dfrac{5}{5\\sqrt{3}} = \\dfrac{1}{\\sqrt{3}}$, que corresponde a 30°.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "α = 45°",
               "isCorrect": false,
-              "feedback": "tg 45° = 1, o que exigiria oposto = adjacente. Aqui o adjacente é √3 vezes maior, então α = 30°.",
+              "feedback": "$\\text{tg}\\, 45° = 1$, o que exigiria oposto = adjacente. Aqui o adjacente é $\\sqrt{3}$ vezes maior, então α = 30°.",
               "errorCategory": "cálculo numérico"
             },
             {
               "text": "α = 90°",
               "isCorrect": false,
-              "feedback": "α não pode ser 90° em um ângulo de triângulo retângulo que não seja o ângulo reto. Calcule tg α = 1/√3 → α = 30°.",
+              "feedback": "α não pode ser 90° em um ângulo de triângulo retângulo que não seja o ângulo reto. Calcule $\\text{tg}\\,\\alpha = \\dfrac{1}{\\sqrt{3}} \\Rightarrow \\alpha = 30°$.",
               "errorCategory": "conceito base"
             }
           ]
@@ -622,25 +624,25 @@
             {
               "text": "3√3 m ≈ 5,2 m",
               "isCorrect": true,
-              "feedback": "Correto. A escada é a hipotenusa (6 m). Queremos o cateto oposto ao ângulo de 60°. sen 60° = oposto/6 → oposto = 6 × (√3/2) = 3√3 ≈ 5,2 m.",
+              "feedback": "Correto. A escada é a hipotenusa (6 m). Queremos o cateto oposto ao ângulo de 60°. $\\text{sen}\\, 60° = \\dfrac{\\text{oposto}}{6} \\Rightarrow \\text{oposto} = 6 \\times \\dfrac{\\sqrt{3}}{2} = 3\\sqrt{3} \\approx 5{,}2$ m.",
               "errorCategory": null
             },
             {
               "text": "3 m",
               "isCorrect": false,
-              "feedback": "3 m seria o cateto adjacente (cos 60° × 6 = 0,5 × 6 = 3). Para a altura (cateto oposto), use seno: 6 × sen 60° = 3√3.",
+              "feedback": "3 m seria o cateto adjacente ($\\text{cos}\\, 60° \\times 6 = 0{,}5 \\times 6 = 3$). Para a altura (cateto oposto), use seno: $6 \\times \\text{sen}\\, 60° = 3\\sqrt{3}$.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "6 m",
               "isCorrect": false,
-              "feedback": "6 m é o comprimento total da escada (hipotenusa). A altura na parede é menor: 6 × sen 60° = 3√3 ≈ 5,2 m.",
+              "feedback": "6 m é o comprimento total da escada (hipotenusa). A altura na parede é menor: $6 \\times \\text{sen}\\, 60° = 3\\sqrt{3} \\approx 5{,}2$ m.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "6√3 m",
               "isCorrect": false,
-              "feedback": "Você multiplicou 6 × √3. Mas sen 60° = √3/2, portanto altura = 6 × (√3/2) = 3√3, não 6√3.",
+              "feedback": "Você multiplicou $6 \\times \\sqrt{3}$. Mas $\\text{sen}\\, 60° = \\dfrac{\\sqrt{3}}{2}$, portanto altura $= 6 \\times \\dfrac{\\sqrt{3}}{2} = 3\\sqrt{3}$, não $6\\sqrt{3}$.",
               "errorCategory": "cálculo numérico"
             }
           ]
@@ -669,15 +671,15 @@
         },
         {
           "type": "worked_example",
-          "problem": "Resolva o sistema: { x + y = 5 | x² + y² = 13 }",
+          "problem": "Resolva o sistema: { $x + y = 5$ | $x^2 + y^2 = 13$ }",
           "steps": [
-            "Da primeira equação: y = 5 − x.",
-            "Substitua em x² + y² = 13: x² + (5 − x)² = 13",
-            "Expanda: x² + 25 − 10x + x² = 13",
-            "Simplifique: 2x² − 10x + 25 − 13 = 0 → 2x² − 10x + 12 = 0",
-            "Divida por 2: x² − 5x + 6 = 0",
-            "Fatore: (x − 2)(x − 3) = 0 → x = 2 ou x = 3",
-            "Para x = 2: y = 5 − 2 = 3. Para x = 3: y = 5 − 3 = 2.",
+            "Da primeira equação: $y = 5 - x$.",
+            "Substitua em $x^2 + y^2 = 13$: $x^2 + (5-x)^2 = 13$",
+            "Expanda: $x^2 + 25 - 10x + x^2 = 13$",
+            "Simplifique: $2x^2 - 10x + 25 - 13 = 0 \\Rightarrow 2x^2 - 10x + 12 = 0$",
+            "Divida por 2: $x^2 - 5x + 6 = 0$",
+            "Fatore: $(x-2)(x-3) = 0 \\Rightarrow x = 2$ ou $x = 3$",
+            "Para $x = 2$: $y = 5 - 2 = 3$. Para $x = 3$: $y = 5 - 3 = 2$.",
             "Soluções: (2, 3) e (3, 2)."
           ],
           "conclusion": "Este sistema tem duas soluções: (2, 3) e (3, 2)."
@@ -703,30 +705,30 @@
           "type": "multiple_choice",
           "difficulty": "basic",
           "skillTag": "identify_strategy",
-          "statement": "No sistema { x − y = 2 | x² − y² = 8 }, qual é o primeiro passo mais eficiente?",
+          "statement": "No sistema { $x - y = 2$ | $x^2 - y^2 = 8$ }, qual é o primeiro passo mais eficiente?",
           "options": [
             {
-              "text": "Fatorar x² − y² como (x − y)(x + y).",
+              "text": "Fatorar $x^2 - y^2$ como $(x-y)(x+y)$.",
               "isCorrect": true,
-              "feedback": "Correto. x² − y² = (x − y)(x + y). Como x − y = 2, temos 2(x + y) = 8 → x + y = 4. Resolve-se então o sistema linear x − y = 2 e x + y = 4. Esse é o caminho mais direto.",
+              "feedback": "Correto. $x^2 - y^2 = (x-y)(x+y)$. Como $x - y = 2$, temos $2(x+y) = 8 \\Rightarrow x + y = 4$. Resolve-se então o sistema linear $x - y = 2$ e $x + y = 4$. Esse é o caminho mais direto.",
               "errorCategory": null
             },
             {
               "text": "Isolar x na primeira equação: x = y + 2.",
               "isCorrect": false,
-              "feedback": "Isolar x funciona e leva ao resultado correto. Porém há um caminho mais eficiente: fatorar x² − y² = (x − y)(x + y) e usar x − y = 2 diretamente, evitando substituição e expansão.",
+              "feedback": "Isolar $x$ funciona e leva ao resultado correto. Porém há um caminho mais eficiente: fatorar $x^2 - y^2 = (x-y)(x+y)$ e usar $x - y = 2$ diretamente, evitando substituição e expansão.",
               "errorCategory": "fórmula inadequada"
             },
             {
               "text": "Aplicar Bhaskara imediatamente.",
               "isCorrect": false,
-              "feedback": "Bhaskara resolve equações do 2º grau individuais. Primeiro reduza o sistema: x² − y² = (x − y)(x + y) = 2(x + y) = 8 → x + y = 4.",
+              "feedback": "Bhaskara resolve equações do 2° grau individuais. Primeiro reduza o sistema: $x^2 - y^2 = (x-y)(x+y) = 2(x+y) = 8 \\Rightarrow x + y = 4$.",
               "errorCategory": "fórmula inadequada"
             },
             {
               "text": "Substituir y = 0 para testar.",
               "isCorrect": false,
-              "feedback": "Testar y = 0 não resolve o sistema — apenas verifica se (x, 0) é solução. O caminho correto é fatorar x² − y² = (x − y)(x + y) e usar a primeira equação.",
+              "feedback": "Testar $y = 0$ não resolve o sistema — apenas verifica se $(x, 0)$ é solução. O caminho correto é fatorar $x^2 - y^2 = (x-y)(x+y)$ e usar a primeira equação.",
               "errorCategory": "conceito base"
             }
           ]
@@ -735,30 +737,30 @@
           "type": "multiple_choice",
           "difficulty": "basic",
           "skillTag": "solve_linear_quadratic_system",
-          "statement": "Resolva o sistema: { x + y = 7 | xy = 12 }. Quais são os valores de x e y?",
+          "statement": "Resolva o sistema: { $x + y = 7$ | $xy = 12$ }. Quais são os valores de $x$ e $y$?",
           "options": [
             {
               "text": "x = 3, y = 4 (ou x = 4, y = 3)",
               "isCorrect": true,
-              "feedback": "Correto. Da primeira: y = 7 − x. Substitua na segunda: x(7 − x) = 12 → 7x − x² = 12 → x² − 7x + 12 = 0 → (x−3)(x−4) = 0.",
+              "feedback": "Correto. Da primeira: $y = 7 - x$. Substitua na segunda: $x(7-x) = 12 \\Rightarrow 7x - x^2 = 12 \\Rightarrow x^2 - 7x + 12 = 0 \\Rightarrow (x-3)(x-4) = 0$.",
               "errorCategory": null
             },
             {
               "text": "x = 5, y = 2",
               "isCorrect": false,
-              "feedback": "Verifique: 5 + 2 = 7 ✓, mas 5 × 2 = 10 ≠ 12. Resolva x² − 7x + 12 = 0 → x = 3 ou x = 4.",
+              "feedback": "Verifique: $5 + 2 = 7$ ✓, mas $5 \\times 2 = 10 \\neq 12$. Resolva $x^2 - 7x + 12 = 0 \\Rightarrow x = 3$ ou $x = 4$.",
               "errorCategory": "cálculo numérico"
             },
             {
               "text": "x = 6, y = 1",
               "isCorrect": false,
-              "feedback": "Verifique: 6 + 1 = 7 ✓, mas 6 × 1 = 6 ≠ 12. A resposta é x = 3, y = 4.",
+              "feedback": "Verifique: $6 + 1 = 7$ ✓, mas $6 \\times 1 = 6 \\neq 12$. A resposta é $x = 3$, $y = 4$.",
               "errorCategory": "cálculo numérico"
             },
             {
               "text": "O sistema não tem solução.",
               "isCorrect": false,
-              "feedback": "O sistema tem duas soluções: (3, 4) e (4, 3). Resolva x² − 7x + 12 = 0.",
+              "feedback": "O sistema tem duas soluções: $(3, 4)$ e $(4, 3)$. Resolva $x^2 - 7x + 12 = 0$.",
               "errorCategory": "conceito base"
             }
           ]
@@ -767,24 +769,24 @@
           "type": "multiple_choice",
           "difficulty": "intermediate",
           "skillTag": "solve_system_substitution",
-          "statement": "Resolva: { 2x − y = 1 | x² + y = 7 }. Qual é a solução com x > 0?",
+          "statement": "Resolva: { $2x - y = 1$ | $x^2 + y = 7$ }. Qual é a solução com $x > 0$?",
           "options": [
             {
               "text": "x = 2, y = 3",
               "isCorrect": true,
-              "feedback": "Correto. Da primeira: y = 2x − 1. Substitua: x² + 2x − 1 = 7 → x² + 2x − 8 = 0 → (x+4)(x−2) = 0. x = 2 → y = 3. x = −4 → y = −9 (x = −4 é rejeitado pois a questão pede x > 0).",
+              "feedback": "Correto. Da primeira: $y = 2x - 1$. Substitua: $x^2 + 2x - 1 = 7 \\Rightarrow x^2 + 2x - 8 = 0 \\Rightarrow (x+4)(x-2) = 0$. $x = 2 \\Rightarrow y = 3$. $x = -4 \\Rightarrow y = -9$ ($x = -4$ é rejeitado pois a questão pede $x > 0$).",
               "errorCategory": null
             },
             {
               "text": "x = −4, y = −9",
               "isCorrect": false,
-              "feedback": "x = −4 e y = −9 também é uma solução válida do sistema! Verifique: 2(−4) − (−9) = 1 ✓ e (−4)² + (−9) = 16 − 9 = 7 ✓. Se a questão pediu a solução com x positivo, então x = 2, y = 3.",
+              "feedback": "$x = -4$ e $y = -9$ também é uma solução válida do sistema! Verifique: $2(-4) - (-9) = 1$ ✓ e $(-4)^2 + (-9) = 16 - 9 = 7$ ✓. Se a questão pediu a solução com $x$ positivo, então $x = 2$, $y = 3$.",
               "errorCategory": "interpretação"
             },
             {
               "text": "x = 1, y = 1",
               "isCorrect": false,
-              "feedback": "Verifique: 2(1) − 1 = 1 ✓, mas 1² + 1 = 2 ≠ 7. Resolva corretamente: y = 2x − 1, substitua e use Bhaskara.",
+              "feedback": "Verifique: $2(1) - 1 = 1$ ✓, mas $1^2 + 1 = 2 \\neq 7$. Resolva corretamente: $y = 2x - 1$, substitua e use Bhaskara.",
               "errorCategory": "cálculo numérico"
             },
             {
@@ -799,11 +801,11 @@
           "type": "numeric",
           "difficulty": "intermediate",
           "skillTag": "find_sum_of_solutions",
-          "statement": "Num sistema { x + y = 10 | x · y = 24 }, qual é o valor de x² + y²?",
+          "statement": "Num sistema { $x + y = 10$ | $x \\cdot y = 24$ }, qual é o valor de $x^2 + y^2$?",
           "correctNumericAnswer": 52,
           "tolerance": 0.5,
-          "numericFeedbackCorrect": "Correto! Use a identidade: x² + y² = (x+y)² − 2xy = 100 − 48 = 52.",
-          "numericFeedbackWrong": "Use a identidade: x² + y² = (x+y)² − 2xy = 10² − 2(24) = 100 − 48 = 52."
+          "numericFeedbackCorrect": "Correto! Use a identidade: $x^2 + y^2 = (x+y)^2 - 2xy = 100 - 48 = 52$.",
+          "numericFeedbackWrong": "Use a identidade: $x^2 + y^2 = (x+y)^2 - 2xy = 10^2 - 2(24) = 100 - 48 = 52$."
         },
         {
           "type": "multiple_choice",
@@ -814,19 +816,19 @@
             {
               "text": "3 e 6",
               "isCorrect": true,
-              "feedback": "Correto. x + y = 9 e x² + y² = 45. Use x² + y² = (x+y)² − 2xy → 45 = 81 − 2xy → xy = 18. Então x e y são raízes de t² − 9t + 18 = 0 → (t−3)(t−6) = 0.",
+              "feedback": "Correto. $x + y = 9$ e $x^2 + y^2 = 45$. Use $x^2 + y^2 = (x+y)^2 - 2xy \\Rightarrow 45 = 81 - 2xy \\Rightarrow xy = 18$. Então $x$ e $y$ são raízes de $t^2 - 9t + 18 = 0 \\Rightarrow (t-3)(t-6) = 0$.",
               "errorCategory": null
             },
             {
               "text": "4 e 5",
               "isCorrect": false,
-              "feedback": "Verifique: 4+5 = 9 ✓, mas 4²+5² = 16+25 = 41 ≠ 45. Resolva o sistema formalmente.",
+              "feedback": "Verifique: $4+5 = 9$ ✓, mas $4^2+5^2 = 16+25 = 41 \\neq 45$. Resolva o sistema formalmente.",
               "errorCategory": "pressa/chute"
             },
             {
               "text": "2 e 7",
               "isCorrect": false,
-              "feedback": "Verifique: 2+7 = 9 ✓, mas 2²+7² = 4+49 = 53 ≠ 45. A resposta correta é 3 e 6.",
+              "feedback": "Verifique: $2+7 = 9$ ✓, mas $2^2+7^2 = 4+49 = 53 \\neq 45$. A resposta correta é 3 e 6.",
               "errorCategory": "pressa/chute"
             },
             {

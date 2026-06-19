@@ -1,4 +1,5 @@
 import { cn } from '@/lib/utils'
+import { MathText } from '@/components/math/MathText'
 
 interface FeedbackBoxProps {
   isCorrect: boolean
@@ -53,14 +54,16 @@ export function FeedbackBox({
           isCorrect ? 'text-green-800' : 'text-red-800'
         )}
       >
-        {feedback}
+        <MathText text={feedback} />
       </p>
 
       {/* Correct answer hint */}
       {!isCorrect && correctAnswerText && (
         <div className="bg-white rounded-lg p-3 border border-red-200">
           <p className="text-xs font-semibold text-brand-navy mb-1">Resposta correta:</p>
-          <p className="text-sm font-medium text-brand-navy">{correctAnswerText}</p>
+          <p className="text-sm font-medium text-brand-navy">
+            <MathText text={correctAnswerText} />
+          </p>
         </div>
       )}
 
