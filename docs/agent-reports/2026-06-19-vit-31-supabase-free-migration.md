@@ -68,7 +68,7 @@ Nenhum valor sensível foi impresso, registrado ou transmitido.
 
 ## 3. Estado do banco remoto
 
-Executado `npx tsx scripts/check-db-tables.ts` — conecta via service role, não expõe dados sensíveis:
+Executado `npx tsx scripts/check-db-tables.ts` (verificação de tabelas + constraint):
 
 | Tabela | Resultado |
 |--------|-----------|
@@ -82,42 +82,32 @@ Executado `npx tsx scripts/check-db-tables.ts` — conecta via service role, nã
 | attempts | ✓ Existe |
 | mission_progress | ✓ Existe |
 | revision_progress | ✓ Existe |
+| **content_blocks.type constraint** | ✓ Aceita `'diagram'` |
 
-**Conclusão:** Migrations 001–003 já foram aplicadas no projeto Supabase Free. Todas as 10 tabelas respondem corretamente via service role.
+**Conclusão:** Migrations 001–004 aplicadas. Todas as 10 tabelas respondem e o constraint `content_blocks_type_check` inclui `'diagram'`.
 
 ---
 
-## 4. Migration 004 — ação necessária pelo proprietário
+## 4. Migration 004 — aplicada e verificada ✓
 
-A migration 004 está pronta no repositório mas ainda **não foi aplicada ao banco remoto** (o banco foi criado antes da VIT-51). O proprietário deve executá-la manualmente:
+A migration 004 foi aplicada pelo proprietário no Supabase SQL Editor em 2026-06-19.
 
-### Passos
+### Verificação programática
 
-1. Acesse [supabase.com](https://supabase.com) → seu projeto → **SQL Editor**
-2. Cole e execute o conteúdo de `supabase/migrations/004_add_diagram_block_type.sql`:
+Técnica usada: INSERT com `type='diagram'` e `mission_id` inválido (UUID zero).
+- Se o banco devolveu `23503` (foreign key violation) → constraint CHECK aceitou `'diagram'` antes de falhar na FK ✓
+- Se tivesse devolvido `23514` (check violation) → migration não aplicada ✗
 
-```sql
-ALTER TABLE content_blocks
-  DROP CONSTRAINT IF EXISTS content_blocks_type_check;
+**Resultado:** código `23503` recebido → `'diagram'` aceito pelo constraint ✓
 
-ALTER TABLE content_blocks
-  ADD CONSTRAINT content_blocks_type_check
-  CHECK (type IN (
-    'intro', 'concept', 'visual_explanation', 'worked_example',
-    'hint', 'summary', 'diagram'
-  ));
+Executado via `npx tsx scripts/check-db-tables.ts` (constraint check integrado ao script):
+
+```
+Constraint content_blocks.type:
+  ✓ 'diagram' aceito  (FK violation — constraint CHECK passou, 'diagram' aceito)
 ```
 
-3. Para confirmar, execute no SQL Editor:
-
-```sql
-SELECT pg_get_constraintdef(oid) AS def
-FROM   pg_constraint
-WHERE  conrelid = 'content_blocks'::regclass
-  AND  contype  = 'c';
-```
-
-O resultado deve conter `'diagram'` na lista.
+Nenhum dado foi persistido — o INSERT falhou na FK antes de qualquer commit.
 
 ---
 
@@ -138,7 +128,7 @@ O resultado deve conter `'diagram'` na lista.
 
 ---
 
-## 6. Checks locais
+## 6. Checks locais (pós-verificação de constraint)
 
 | Teste | Resultado |
 |-------|-----------|
@@ -165,7 +155,7 @@ O resultado deve conter `'diagram'` na lista.
 
 ## 8. Próximos passos (fora do escopo desta VIT)
 
-1. Executar migration 004 no Supabase SQL Editor (ação do proprietário)
-2. Confirmar o resultado com `pg_get_constraintdef` (acima)
+1. ~~Executar migration 004~~ — ✓ Concluído
+2. ~~Confirmar constraint~~ — ✓ Verificado via script (código 23503)
 3. Executar VIT-32: `npm run import-revision content/revisions/revisao-9ano-triangulos-sistemas.json`
-4. Verificar revisão importada com `npm run check-db-tables`
+4. Verificar revisão importada com `npx tsx scripts/check-db-tables.ts`
