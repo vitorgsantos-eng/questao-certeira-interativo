@@ -226,19 +226,109 @@ Observação: 4 registros "Aluno Teste Visual" no banco são resultado das múlt
 |---------|---------|
 | Cache `.next/` obsoleto (`vendor-chunks/tailwind-merge.js` not found) nos servidores da sessão anterior | Deletado `.next/`, servidor reiniciado na porta 3010 |
 | Screenshots em branco no Chrome MCP (tab em background) | Problema de renderização — resolvido ao verificar estado via `read_console_messages` e `logs do servidor` |
+| Bug no script de teste (código expirado retornando 401 em vez de 403) | `verifyCode()` aplica `.toUpperCase()` antes do `bcrypt.compare`; script gerava hex lowercase — hash não batia. Corrigido com `.toUpperCase()` no script |
 
 ---
 
-## 12. Resultado geral
+## 13. Teste de código expirado e revogado (complementação)
+
+**Método:** Script TypeScript isolado `scripts/test-expired-revoked-code.ts` que:
+1. Gera dois códigos brutos fictícios descartáveis (hex aleatório, nunca logado)
+2. Insere dois registros temporários em `access_codes` via service client:
+   - **Expirado:** `status = 'active'`, `expires_at = ontem`
+   - **Revogado:** `status = 'revoked'`, `expires_at = próximo ano`
+3. Chama `POST http://localhost:3010/api/auth/validate-code` para cada código
+4. Verifica resposta HTTP e mensagem de erro
+5. Deleta os dois registros ao final (confirmado: "2 registro(s) temporário(s) removido(s) do banco")
+
+| Teste | Esperado | Resultado |
+|-------|----------|-----------|
+| Código expirado → HTTP status | 403 | ✓ 403 |
+| Código expirado → mensagem | contém "expirou" | ✓ "Este código expirou. Solicite um novo ao professor." |
+| Código expirado → sessão criada? | não | ✓ ok !== true |
+| Código revogado → HTTP status | 401 | ✓ 401 |
+| Código revogado → mensagem | contém "inválido" | ✓ "Código inválido. Verifique e tente novamente." |
+| Código revogado → sessão criada? | não | ✓ ok !== true |
+| Status HTTP expirado ≠ revogado | diferentes | ✓ 403 ≠ 401 |
+| Mensagens expirado ≠ revogado | diferentes | ✓ mensagens distintas |
+
+**Resultado: 8/8 PASS.** Comportamentos diferenciados confirmados: código expirado retorna 403 com mensagem pedagógica; código revogado é filtrado antes do bcrypt e retorna 401 genérico.
+
+**Segurança:** nenhum código bruto registrado. Registros temporários removidos do banco. Nenhum aluno real utilizado.
+
+---
+
+## 14. Quick visual check M3 — Trigonometria no Triângulo Retângulo
+
+URL: `/revisao/.../missao/trigonometria-triangulo-retangulo`
+
+| Elemento | Resultado |
+|----------|-----------|
+| Página carrega sem 500/404 | ✓ |
+| Sessão ativa no header | ✓ "Aluno Teste Visual / 9º ano" |
+| Bloco `concept` com conceito central da trigonometria | ✓ |
+| KaTeX — três fórmulas como frações | ✓ `sen α = cateto oposto / hipotenusa`, `cos α = cateto adjacente / hipotenusa`, `tg α = cateto oposto / cateto adjacente` |
+| TrigonometryDiagram SVG | ✓ |
+| Triângulo com hipotenusa (diagonal azul) | ✓ |
+| Cateto oposto (lado direito, vermelho) | ✓ |
+| Cateto adjacente (base, laranja) | ✓ |
+| Ângulo α no canto inferior esquerdo | ✓ |
+| Marcador de ângulo reto em C | ✓ (quadrado no canto inferior direito) |
+| Badges seno/cosseno/tangente no diagrama | ✓ |
+| Caption pedagógico | ✓ "Oposto e adjacente mudam conforme o ângulo escolhido" |
+| Bloco "Como identificar oposto e adjacente" | ✓ |
+| Botão "Iniciar questões (5 questões)" | ✓ |
+
+---
+
+## 15. Quick visual check M4 — Sistemas com Equações do 2º Grau
+
+URL: `/revisao/.../missao/sistemas-equacoes-2-grau`
+
+| Elemento | Resultado |
+|----------|-----------|
+| Página carrega sem 500/404 | ✓ |
+| Sessão ativa no header | ✓ |
+| Bloco `intro` com conceito do sistema | ✓ |
+| Bloco `concept` — estratégia de substituição | ✓ "Isole na equação mais simples → Substitua na mais complexa → Resolva" |
+| SystemsStrategyCard | ✓ |
+| Fluxo Isole → Substitua → Simplifique → Verifique | ✓ (ícones ①②③④, setas, descrição em cada passo) |
+| Bloco "ATALHO — SOMA E PRODUTO CONHECIDOS" | ✓ |
+| Fórmula `x + y = S`, `x · y = P` → `t² – St + P = 0` | ✓ |
+| Caption "x e y são as raízes dessa equação" | ✓ |
+| KaTeX no "EXEMPLO RESOLVIDO" | ✓ sistema `{ x + y = 5 | x² + y² = 13 }`, passos com expoentes e identidade `(a-b)² = a² - 2ab + b²` |
+| Botão "Iniciar questões (5 questões)" | ✓ |
+
+---
+
+## 16. Checks finais (complementação)
+
+| Teste | Resultado |
+|-------|-----------|
+| `npm run lint` | ✓ (1 warning pré-existente em `server.ts`) |
+| `npm run type-check` | ✓ |
+| `npm run validate-content:ci` | ✓ 0 erros |
+| `npm test` | ✓ 47/47 (14 validation + 20 session + 13 rate-limiting) |
+
+`npm run build` não foi reexecutado nesta complementação — estava passando antes do início da VIT-33 e não houve alteração de código de produção.
+
+---
+
+## 17. Resultado geral
 
 | Fluxo | Status |
 |-------|--------|
 | Acesso com código inválido | ✓ PASS |
 | Acesso com código válido + sessão + redirect | ✓ PASS |
+| Código expirado → 403 + mensagem pedagógica | ✓ PASS |
+| Código revogado → 401 + mensagem genérica | ✓ PASS |
 | Mapa de revisão | ✓ PASS |
-| Conteúdo da missão (todos os tipos de bloco) | ✓ PASS |
-| Diagramas SVG (SimilarTriangles + RightTriangleMetrics) | ✓ PASS |
-| KaTeX em enunciados, exemplos e feedbacks | ✓ PASS |
+| Conteúdo da missão M1 (todos os tipos de bloco) | ✓ PASS |
+| Diagramas SVG — SimilarTriangles (M1) | ✓ PASS |
+| Diagramas SVG — RightTriangleMetrics (M2) | ✓ PASS |
+| Diagramas SVG — Trigonometry (M3) | ✓ PASS |
+| Sistemas M4 — SystemsStrategyCard + soma/produto | ✓ PASS |
+| KaTeX em enunciados, exemplos, feedbacks, diagramas | ✓ PASS |
 | Questões múltipla escolha (feedback correto/errado) | ✓ PASS |
 | Questões numéricas | ✓ PASS |
 | Tela de resultado com categoria de erro | ✓ PASS |
@@ -246,4 +336,4 @@ Observação: 4 registros "Aluno Teste Visual" no banco são resultado das múlt
 | Proteção de rotas (redirect 307 sem sessão) | ✓ PASS |
 | Relatório do professor (dados reais, progresso) | ✓ PASS |
 
-**Conclusão:** Fluxo principal validado end-to-end. Nenhum bloqueador crítico encontrado.
+**Conclusão:** Todos os fluxos principais validados end-to-end, incluindo código expirado/revogado (VIT-33 complementação). Nenhum bloqueador crítico encontrado. 17/17 PASS.
