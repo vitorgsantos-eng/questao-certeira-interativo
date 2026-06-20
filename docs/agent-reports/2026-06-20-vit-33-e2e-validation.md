@@ -1,7 +1,7 @@
 # VIT-33 — Validação E2E dos Fluxos Principais
 
 **Data:** 2026-06-19 (executado em 22h, horário de Brasília)
-**Branch:** `wip/agente-seguranca-supabase`
+**Branch:** `test/vit-33-e2e-validation`
 **Servidor testado:** `http://localhost:3010` (cache `.next/` limpo antes do início)
 
 ---
@@ -70,7 +70,7 @@ Código controlado gerado na VIT-32 (aluno fictício — não registrado neste d
 
 ### 3.4 Código expirado/revogado
 
-Não testado — não há código expirado ou revogado disponível no ambiente de teste. Comportamento de rejeição (401) foi verificado com código inexistente; a lógica de expiração/revogação está coberta pelos testes unitários em `npm test`.
+Testado via script isolado com registros temporários descartáveis — ver detalhes na seção 13. Resultado: **8/8 PASS**. Código expirado retorna 403 com mensagem pedagógica; código revogado retorna 401 genérico. Ambos bloqueiam criação de sessão.
 
 ---
 
@@ -170,7 +170,7 @@ URL: `/revisao/.../missao/relacoes-metricas-triangulo-retangulo`
 | Legenda com 6 itens coloridos | ✓ |
 | Caption pedagógico | ✓ |
 
-M3 e M4 não visitadas visualmente — fora do escopo desta VIT (missões de conteúdo semelhante).
+M3 e M4 verificadas visualmente na complementação — ver seções 14 e 15.
 
 ---
 
