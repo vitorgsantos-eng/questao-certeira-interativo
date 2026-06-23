@@ -1,10 +1,21 @@
 import React from 'react'
 import { MathText } from '@/components/math/MathText'
+import { MathFormulaBlock } from '@/components/math/MathFormulaBlock'
 import { SimilarTrianglesDiagram } from '@/components/visuals/SimilarTrianglesDiagram'
 import { RightTriangleMetricsDiagram } from '@/components/visuals/RightTriangleMetricsDiagram'
 import { TrigonometryDiagram } from '@/components/visuals/TrigonometryDiagram'
 import { SystemsStrategyCard } from '@/components/visuals/SystemsStrategyCard'
 import type { ContentBlockData } from '@/types'
+
+const PIPE_SEP = '   |   '
+
+/** True when the highlight string is a single $...$ formula (no chips, use display mode). */
+function isSingleFormula(text: string): boolean {
+  const trimmed = text.trim()
+  if (trimmed.includes(PIPE_SEP)) return false
+  const dollarCount = (trimmed.match(/\$/g) ?? []).length
+  return dollarCount === 2 && trimmed.startsWith('$') && trimmed.endsWith('$')
+}
 
 interface LessonBlockProps {
   block: ContentBlockData
@@ -35,10 +46,17 @@ export function LessonBlock({ block }: LessonBlockProps) {
           </p>
           {block.highlight && (
             <div className="bg-brand-gold/10 rounded-lg p-3 mt-2">
-              <MathText
-                text={block.highlight}
-                className="text-sm font-semibold text-brand-navy"
-              />
+              {isSingleFormula(block.highlight) ? (
+                <MathFormulaBlock
+                  latex={block.highlight.slice(1, -1)}
+                  className="text-brand-navy"
+                />
+              ) : (
+                <MathText
+                  text={block.highlight}
+                  className="text-sm font-semibold text-brand-navy"
+                />
+              )}
             </div>
           )}
         </div>
