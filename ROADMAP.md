@@ -86,6 +86,77 @@
 
 Observação: testes de código válido/inválido/expirado, importação de conteúdo e painel com dados reais dependem da configuração manual do Supabase Free e execução das migrations no projeto remoto.
 
+## Fase 10b — Bloco 5: Motor Reutilizável ✅ (2026-06-23)
+
+### Parte A — PR #12 resolvido
+- [x] PR #12 inspecionado: diff seguro, sem secrets, dry-run preservado
+- [x] Testes validados: lint ✓, type-check ✓, build ✓, validate-content:ci ✓, npm test ✓
+- [x] PR #12 integrado ao master (squash merge)
+
+### Parte B — Baseline limpo
+- [x] Branch `feat/motor-reutilizavel` criada a partir do master pós-merge
+- [x] Todos os testes de baseline passando
+
+### Parte C — Fronteira motor/conteúdo
+- [x] Inventário de acoplamentos mapeado
+- [x] Homepage desacoplada da revisão piloto (busca dinâmica do banco)
+- [x] Fallback de `acessar/[slug]` sem grade hardcoded
+- [x] Documentação em `docs/architecture/motor-content-boundary.md`
+
+### Parte D — Schema formal
+- [x] `schemaVersion` adicionado a `ContentRevisionJSON` (tipos TypeScript)
+- [x] `visualConfig` adicionado como campo opcional no tipo
+- [x] `content/schemas/revision.schema.json` atualizado com `schemaVersion` e `visualConfig`
+- [x] `validate-content.ts` valida `schemaVersion`
+- [x] Revisão piloto atualizada com `schemaVersion: "1.0"` e `visualConfig`
+
+### Parte E — Configuração visual por revisão
+- [x] `visualConfig` definido no schema (subtitle, subject, tone, missionMapBadge)
+- [x] Revisão piloto tem `visualConfig` próprio
+
+### Parte F — Suporte a múltiplas revisões
+- [x] Rotas já usam `[revisionSlug]` dinâmico (nenhuma alteração necessária)
+- [x] Homepage lista revisões ativas dinamicamente quando banco conectado
+- [x] Acesso, missão, simulado, relatório: todos parametrizados por slug
+
+### Parte G — Segunda revisão mínima
+- [x] `content/revisions/revisao-smoke-motor.json` criada
+- [x] Conteúdo sintético e autoral; 1 missão com 5 questões
+- [x] Validação: 0 erros, 0 warnings
+
+### Parte H — Guia de criação de nova revisão
+- [x] `docs/content/creating-new-revision.md` criado
+
+### Parte I — Testes finais
+- [x] `npm run lint` — passa (warning pré-existente, sem erro novo)
+- [x] `npm run type-check` — passa
+- [x] `npm run build` — passa
+- [x] `npm run validate-content:ci` — passa (revisão piloto)
+- [x] `npm test` — 13/13 passed
+- [x] Validação da revisão smoke — 0 erros
+
+### Parte J — Documentação
+- [x] `ROADMAP.md` atualizado
+- [x] `CHECKLISTS.md` atualizado
+- [x] `DECISIONS.md` atualizado (decisões 10-13)
+- [x] `docs/architecture/motor-content-boundary.md` criado
+- [x] `docs/content/creating-new-revision.md` criado
+- [x] Relatório do agente em `docs/agent-reports/`
+
+## Fase 10c — Persistência completa de metadados (2026-06-23)
+
+### Correções pós-auditoria do PR #13
+- [x] Migration 005: `schema_version`, `subject`, `visual_config` adicionados à tabela `revisions`
+- [x] Tipo `Revision` em `src/types/index.ts` reflete os novos campos
+- [x] `import-revision.ts` valida `schemaVersion === "1.0"` antes de importar
+- [x] `import-revision.ts` persiste `schema_version`, `subject` e `visual_config`
+- [x] Homepage seleciona e exibe `subject`/`visual_config.missionMapBadge` com fallback seguro
+- [x] `validate-content:all` valida todos os JSONs em `content/revisions/`
+- [x] CI atualizada para usar `validate-content:all` (cobre revisão piloto + smoke)
+- [x] `visualConfig`, `subject` e `schemaVersion` deixaram de ser apenas campos de JSON — têm persistência real no banco
+
+Backlog futuro restante: registro dinâmico de componentes visuais (sem alterar motor por novo diagrama).
+
 ## Fase 11 — Piloto controlado
 - [ ] Distribuição de códigos para grupo piloto
 - [ ] Acompanhamento por painel do professor
@@ -93,8 +164,10 @@ Observação: testes de código válido/inválido/expirado, importação de cont
 - [ ] Ajustes baseados no piloto
 
 ## Backlog futuro (pós-MVP)
-- Mais turmas e revisões
+- Mais turmas e revisões (motor já suporta)
+- Smoke test com segunda revisão em banco real
 - Script de geração de PDF com relatório
 - Notificações por WhatsApp (sem API paga — via link)
 - ENEM e Ensino Médio
 - Outros componentes curriculares
+- Registro dinâmico de componentes visuais (sem alterar motor por novo diagrama)

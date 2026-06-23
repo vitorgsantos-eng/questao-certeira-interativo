@@ -1,8 +1,16 @@
 {
+  "schemaVersion": "1.0",
   "revisionSlug": "revisao-9ano-triangulos-sistemas",
   "title": "Revisão Interativa — Triângulos e Sistemas",
   "grade": "9º ano",
+  "subject": "Matemática",
   "description": "Revisão para prova com semelhança de triângulos, relações métricas, trigonometria no triângulo retângulo e sistemas com equações do 2º grau.",
+  "visualConfig": {
+    "subtitle": "Triângulos e Sistemas — 9º ano",
+    "subject": "Matemática",
+    "tone": "performance",
+    "missionMapBadge": "4 missões"
+  },
   "missions": [
     {
       "slug": "semelhanca-triangulos",
