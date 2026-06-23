@@ -13,8 +13,8 @@ export default async function AcessarPage({ params }: Props) {
     return (
       <AccessForm
         revisionSlug={revisionSlug}
-        revisionTitle="Revisão Interativa — Triângulos e Sistemas"
-        revisionGrade="9º ano"
+        revisionTitle="Revisão Interativa"
+        revisionGrade=""
       />
     )
   }

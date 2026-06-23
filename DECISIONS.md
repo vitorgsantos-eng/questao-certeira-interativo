@@ -73,3 +73,39 @@
 **Decisão:** o app não exibe ranking entre alunos.
 
 **Motivo:** ranking público entre alunos pode gerar constrangimento, comparação negativa e desmotivação — especialmente em público com baixa autoestima em Matemática. O feedback é sempre individual.
+
+---
+
+## 10. (Bloco 5) Por que separar motor fixo de pacote de revisão
+
+**Decisão:** motor e conteúdo são camadas independentes. O motor nunca hardcoda slug, título, grade ou assunto de uma revisão específica. O pacote de revisão vive em JSON versionado e no banco.
+
+**Motivo:** permitir múltiplas revisões sem alterar o código do motor. Uma nova revisão é adicionada por configuração (novo JSON + importação), não por programação.
+
+**Fronteira documentada em:** `docs/architecture/motor-content-boundary.md`
+
+---
+
+## 11. (Bloco 5) Por que adicionar schemaVersion ao pacote de revisão
+
+**Decisão:** todo pacote de revisão deve declarar `schemaVersion: "1.0"`.
+
+**Motivo:** permite ao validador e ao motor detectar incompatibilidade entre a versão do schema esperada e a versão do pacote importado, facilitando migração futura sem quebrar pacotes antigos abruptamente.
+
+---
+
+## 12. (Bloco 5) Por que a homepage é dinâmica e não hardcoded
+
+**Decisão:** a homepage busca revisões ativas do banco (se configurado) e as exibe dinamicamente. Se não configurado, mostra landing genérica sem slug hardcoded.
+
+**Motivo:** homepage hardcoded à revisão piloto impedia o motor de funcionar com múltiplas revisões. O aluno sempre chega pela URL `/acessar/[slug]` enviada pelo professor; a homepage é só referência genérica.
+
+---
+
+## 13. (Bloco 5) Por que componentes visuais específicos ficam em src/components/visuals/
+
+**Decisão:** diagramas didáticos específicos de uma revisão (`TrigonometryDiagram`, `SimilarTrianglesDiagram`, etc.) ficam em `src/components/visuals/` e são referenciados por `diagramId` no JSON.
+
+**Motivo:** o motor precisa renderizar visuais específicos sem saber antecipadamente quais existem. O `diagramId` no JSON permite que novos diagramas sejam adicionados registrando-se apenas um ID no switch do motor e criando o componente — sem alterar o motor em outros pontos.
+
+**Trade-off:** o motor ainda precisa conhecer os IDs dos diagramas para renderizá-los. Para uma segunda revisão com novos diagramas, o motor precisará ser atualizado com os novos IDs. Isso é aceitável no MVP; uma solução mais genérica (registro dinâmico) pode ser feita em bloco futuro.

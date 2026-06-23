@@ -108,11 +108,23 @@ function validateQuestion(q: ContentQuestionJSON, idx: number) {
   }
 }
 
+const SUPPORTED_SCHEMA_VERSIONS = ['1.0']
+
 function validateRevision(content: ContentRevisionJSON) {
   console.log(`\nValidating: ${content.title}`)
   console.log('─'.repeat(50))
 
+  if (!content.schemaVersion) {
+    error('Missing schemaVersion (expected: "1.0")')
+  } else if (!SUPPORTED_SCHEMA_VERSIONS.includes(content.schemaVersion)) {
+    error(`Unknown schemaVersion '${content.schemaVersion}' — supported: ${SUPPORTED_SCHEMA_VERSIONS.join(', ')}`)
+  } else {
+    ok(`schemaVersion: ${content.schemaVersion}`)
+  }
+
   if (!content.revisionSlug) error('Missing revisionSlug')
+  else ok(`revisionSlug: ${content.revisionSlug}`)
+
   if (!content.title) error('Missing title')
   if (!content.grade) error('Missing grade')
   if (!content.missions || content.missions.length === 0) {

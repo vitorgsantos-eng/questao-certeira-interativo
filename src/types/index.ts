@@ -265,11 +265,21 @@ export interface TeacherStudentRow {
 
 // ─── JSON content schema types (for importing) ─────────────────────────────────
 
+export interface RevisionVisualConfig {
+  subtitle?: string
+  subject?: string
+  tone?: string
+  missionMapBadge?: string
+}
+
 export interface ContentRevisionJSON {
+  schemaVersion: string
   revisionSlug: string
   title: string
   grade: string
+  subject?: string
   description: string
+  visualConfig?: RevisionVisualConfig
   missions: ContentMissionJSON[]
 }
 

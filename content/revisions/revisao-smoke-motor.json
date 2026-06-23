@@ -1,0 +1,191 @@
+{
+  "schemaVersion": "1.0",
+  "revisionSlug": "revisao-smoke-motor",
+  "title": "Revisão Smoke — Motor Reutilizável",
+  "grade": "Teste",
+  "subject": "Smoke",
+  "description": "Revisão sintética mínima usada como prova técnica de que o motor Questão Certeira é reutilizável e não está acoplado ao conteúdo piloto de Matemática.",
+  "visualConfig": {
+    "subtitle": "Validação do motor — conteúdo sintético",
+    "subject": "Smoke Test",
+    "tone": "performance",
+    "missionMapBadge": "1 missão"
+  },
+  "missions": [
+    {
+      "slug": "missao-smoke-01",
+      "title": "Missão Smoke — Lógica Básica",
+      "shortTitle": "Smoke",
+      "goal": "Verificar que o motor renderiza uma missão completa independente do conteúdo específico.",
+      "estimatedMinutes": 5,
+      "isOptional": false,
+      "prerequisites": [],
+      "blocks": [
+        {
+          "type": "intro",
+          "title": "Missão",
+          "text": "Esta missão é sintética. Ela existe para provar que o motor funciona com qualquer pacote de revisão."
+        },
+        {
+          "type": "concept",
+          "title": "Conceito central",
+          "text": "Um motor reutilizável processa qualquer conteúdo que respeite o schema. O conteúdo muda; o motor permanece.",
+          "highlight": "Motor fixo + pacote de conteúdo = revisão funcional."
+        },
+        {
+          "type": "worked_example",
+          "problem": "Se um motor aceita dois pacotes de revisão distintos sem alterar seu código, ele é reutilizável?",
+          "steps": [
+            "Verifique: o motor usa slugs dinâmicos? Sim.",
+            "Verifique: o motor lê metadados do pacote? Sim.",
+            "Verifique: nenhum texto da revisão piloto está hardcoded no motor? Confirmado.",
+            "Conclusão: o motor é reutilizável."
+          ],
+          "conclusion": "Motor e conteúdo são camadas independentes."
+        },
+        {
+          "type": "summary",
+          "title": "Resumo",
+          "points": [
+            "O motor lê revisionSlug da rota.",
+            "O motor busca dados do banco pelo slug.",
+            "O motor renderiza o conteúdo do pacote.",
+            "O motor nunca pressupõe um assunto específico."
+          ]
+        }
+      ],
+      "questions": [
+        {
+          "type": "multiple_choice",
+          "difficulty": "basic",
+          "skillTag": "motor-reuse",
+          "statement": "O que torna um motor reutilizável?",
+          "options": [
+            {
+              "text": "Separar lógica central do conteúdo específico.",
+              "isCorrect": true,
+              "feedback": "Correto. Motor fixo + pacote de conteúdo = sistema reutilizável.",
+              "errorCategory": null
+            },
+            {
+              "text": "Hardcodar o slug da revisão no código.",
+              "isCorrect": false,
+              "feedback": "Hardcode de slug acopla o motor a uma revisão específica — o oposto do objetivo.",
+              "errorCategory": "conceito base"
+            },
+            {
+              "text": "Usar uma única revisão por sempre.",
+              "isCorrect": false,
+              "feedback": "Uma única revisão não exige reutilização. O motor precisa suportar múltiplas revisões.",
+              "errorCategory": "interpretação"
+            }
+          ]
+        },
+        {
+          "type": "multiple_choice",
+          "difficulty": "basic",
+          "skillTag": "schema-version",
+          "statement": "Para que serve o campo schemaVersion em um pacote de revisão?",
+          "options": [
+            {
+              "text": "Permite ao motor detectar se o pacote é compatível antes de processar.",
+              "isCorrect": true,
+              "feedback": "Correto. O schemaVersion garante compatibilidade entre motor e conteúdo.",
+              "errorCategory": null
+            },
+            {
+              "text": "Indica a versão do Next.js usada no projeto.",
+              "isCorrect": false,
+              "feedback": "schemaVersion refere-se ao schema do pacote de revisão, não ao framework.",
+              "errorCategory": "interpretação"
+            },
+            {
+              "text": "É um campo decorativo sem função técnica.",
+              "isCorrect": false,
+              "feedback": "schemaVersion tem função técnica: detectar incompatibilidades entre versões do schema.",
+              "errorCategory": "conceito base"
+            }
+          ]
+        },
+        {
+          "type": "multiple_choice",
+          "difficulty": "intermediate",
+          "skillTag": "multi-revision",
+          "statement": "Em uma arquitetura multi-revisão, o acesso por código deve validar:",
+          "options": [
+            {
+              "text": "Que o código pertence à revisão acessada, não a outra revisão.",
+              "isCorrect": true,
+              "feedback": "Correto. Cada código é vinculado a uma revisão específica. Um código da revisão A não deve liberar a revisão B.",
+              "errorCategory": null
+            },
+            {
+              "text": "Apenas que o código existe no banco, sem verificar a revisão.",
+              "isCorrect": false,
+              "feedback": "Verificar só a existência permitiria que um código de outra revisão desbloqueasse acesso indevido.",
+              "errorCategory": "conceito base"
+            },
+            {
+              "text": "Que o código é numérico.",
+              "isCorrect": false,
+              "feedback": "O formato do código não é suficiente. O vínculo código-revisão é o que importa.",
+              "errorCategory": "interpretação"
+            }
+          ]
+        },
+        {
+          "type": "multiple_choice",
+          "difficulty": "intermediate",
+          "skillTag": "visual-config",
+          "statement": "Onde deve estar a configuração visual específica de uma revisão (título, subtítulo, badge)?",
+          "options": [
+            {
+              "text": "No pacote de revisão (content JSON), não no motor.",
+              "isCorrect": true,
+              "feedback": "Correto. O motor lê visualConfig do pacote. Cada revisão tem sua configuração visual própria.",
+              "errorCategory": null
+            },
+            {
+              "text": "Hardcoded em componentes do motor.",
+              "isCorrect": false,
+              "feedback": "Hardcode no motor acopla o visual a uma revisão específica e impede reutilização.",
+              "errorCategory": "conceito base"
+            },
+            {
+              "text": "Em variáveis de ambiente do servidor.",
+              "isCorrect": false,
+              "feedback": "Variáveis de ambiente são para configuração do servidor, não para dados pedagógicos de revisão.",
+              "errorCategory": "fórmula inadequada"
+            }
+          ]
+        },
+        {
+          "type": "multiple_choice",
+          "difficulty": "challenge",
+          "skillTag": "boundary-motor-content",
+          "statement": "Qual item NÃO deve estar no motor fixo?",
+          "options": [
+            {
+              "text": "Texto 'Semelhança de Triângulos' como label hardcoded numa rota.",
+              "isCorrect": true,
+              "feedback": "Correto. Títulos de missões pertencem ao pacote de conteúdo. O motor usa o slug e busca o título do banco.",
+              "errorCategory": null
+            },
+            {
+              "text": "Lógica de validação de código de acesso.",
+              "isCorrect": false,
+              "feedback": "Validação de código é lógica central do motor — deve estar no motor, não no conteúdo.",
+              "errorCategory": "interpretação"
+            },
+            {
+              "text": "Cálculo de pontuação e identificação de pontos fracos.",
+              "isCorrect": false,
+              "feedback": "Scoring é lógica central do motor. O conteúdo fornece as questões; o motor calcula os resultados.",
+              "errorCategory": "interpretação"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
