@@ -143,6 +143,20 @@ Observação: testes de código válido/inválido/expirado, importação de cont
 - [x] `docs/content/creating-new-revision.md` criado
 - [x] Relatório do agente em `docs/agent-reports/`
 
+## Fase 10c — Persistência completa de metadados (2026-06-23)
+
+### Correções pós-auditoria do PR #13
+- [x] Migration 005: `schema_version`, `subject`, `visual_config` adicionados à tabela `revisions`
+- [x] Tipo `Revision` em `src/types/index.ts` reflete os novos campos
+- [x] `import-revision.ts` valida `schemaVersion === "1.0"` antes de importar
+- [x] `import-revision.ts` persiste `schema_version`, `subject` e `visual_config`
+- [x] Homepage seleciona e exibe `subject`/`visual_config.missionMapBadge` com fallback seguro
+- [x] `validate-content:all` valida todos os JSONs em `content/revisions/`
+- [x] CI atualizada para usar `validate-content:all` (cobre revisão piloto + smoke)
+- [x] `visualConfig`, `subject` e `schemaVersion` deixaram de ser apenas campos de JSON — têm persistência real no banco
+
+Backlog futuro restante: registro dinâmico de componentes visuais (sem alterar motor por novo diagrama).
+
 ## Fase 11 — Piloto controlado
 - [ ] Distribuição de códigos para grupo piloto
 - [ ] Acompanhamento por painel do professor

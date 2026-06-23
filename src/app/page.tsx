@@ -9,7 +9,7 @@ async function getActiveRevisions(): Promise<Revision[]> {
     const supabase = await createServiceClient()
     const { data } = await supabase
       .from('revisions')
-      .select('id, slug, title, grade, description, status, valid_from, valid_until, created_at')
+      .select('id, slug, title, grade, description, status, valid_from, valid_until, created_at, schema_version, subject, visual_config')
       .eq('status', 'active')
       .order('created_at')
     return data ?? []
@@ -84,7 +84,10 @@ export default async function HomePage() {
                         >
                           <span className="flex-1">
                             <span className="block text-sm font-bold text-brand-navy">{rev.title}</span>
-                            <span className="text-xs text-brand-graphite">{rev.grade}</span>
+                            <span className="text-xs text-brand-graphite">
+                              {rev.subject ? `${rev.subject} · ` : ''}{rev.grade}
+                              {rev.visual_config?.missionMapBadge ? ` · ${rev.visual_config.missionMapBadge}` : ''}
+                            </span>
                           </span>
                           <span className="badge-gold">Acessar</span>
                         </Link>

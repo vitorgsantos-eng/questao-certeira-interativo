@@ -59,6 +59,9 @@ export interface Revision {
   valid_from: string | null
   valid_until: string | null
   created_at: string
+  schema_version: string
+  subject: string | null
+  visual_config: RevisionVisualConfig
 }
 
 export interface Mission {

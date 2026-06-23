@@ -31,6 +31,12 @@ async function importRevision(filePath: string) {
   }
 
   const content: ContentRevisionJSON = JSON.parse(fs.readFileSync(fullPath, 'utf-8'))
+
+  if (content.schemaVersion !== '1.0') {
+    console.error(`Unsupported schemaVersion: '${content.schemaVersion}'. Only '1.0' is supported.`)
+    process.exit(1)
+  }
+
   console.log(`Importing: ${content.title}`)
 
   // Upsert revision
@@ -43,6 +49,9 @@ async function importRevision(filePath: string) {
         grade: content.grade,
         description: content.description,
         status: 'active',
+        schema_version: content.schemaVersion,
+        subject: content.subject ?? content.visualConfig?.subject ?? null,
+        visual_config: content.visualConfig ?? {},
       },
       { onConflict: 'slug' }
     )

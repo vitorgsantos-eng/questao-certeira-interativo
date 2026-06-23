@@ -9,6 +9,7 @@
     "lint": "next lint",
     "type-check": "tsc --noEmit",
     "validate-content": "tsx scripts/validate-content.ts",
+    "validate-content:all": "tsx scripts/validate-content.ts content/revisions/",
     "validate-content:ci": "tsx scripts/validate-content.ts content/revisions/revisao-9ano-triangulos-sistemas.json",
     "test": "npx tsx scripts/test-validation-logic.ts && npx tsx scripts/test-session-signing.ts && npx tsx scripts/test-rate-limiting.ts && npx tsx scripts/generate-access-codes.ts data/students.sample.json --dry-run",
     "test:generate-codes": "tsx scripts/generate-access-codes.ts data/students.sample.json --dry-run",

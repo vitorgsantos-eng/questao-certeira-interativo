@@ -200,26 +200,61 @@ function validateRevision(content: ContentRevisionJSON) {
   }
 }
 
+function validateFile(filePath: string): boolean {
+  if (!fs.existsSync(filePath)) {
+    console.error(`File not found: ${filePath}`)
+    return false
+  }
+  errors = 0
+  warnings = 0
+  const content: ContentRevisionJSON = JSON.parse(fs.readFileSync(filePath, 'utf-8'))
+  validateRevision(content)
+  console.log('\n' + '─'.repeat(50))
+  console.log(`Result: ${errors} error(s), ${warnings} warning(s)`)
+  return errors === 0
+}
+
 const arg = process.argv[2]
 if (!arg) {
-  console.error('Usage: tsx scripts/validate-content.ts <path-to-json>')
+  console.error('Usage: tsx scripts/validate-content.ts <path-to-json-or-directory>')
   process.exit(1)
 }
 
 const fullPath = path.resolve(arg)
 if (!fs.existsSync(fullPath)) {
-  console.error(`File not found: ${fullPath}`)
+  console.error(`Not found: ${fullPath}`)
   process.exit(1)
 }
 
-const content: ContentRevisionJSON = JSON.parse(fs.readFileSync(fullPath, 'utf-8'))
-validateRevision(content)
+let filePaths: string[]
+if (fs.statSync(fullPath).isDirectory()) {
+  filePaths = fs.readdirSync(fullPath)
+    .filter((f) => f.endsWith('.json'))
+    .sort()
+    .map((f) => path.join(fullPath, f))
+  if (filePaths.length === 0) {
+    console.error(`No .json files found in ${fullPath}`)
+    process.exit(1)
+  }
+  console.log(`Validating ${filePaths.length} revision(s) in ${fullPath}\n`)
+} else {
+  filePaths = [fullPath]
+}
 
-console.log('\n─'.repeat(50))
-console.log(`\nResult: ${errors} error(s), ${warnings} warning(s)`)
-if (errors > 0) {
+let filesWithErrors = 0
+for (const fp of filePaths) {
+  const valid = validateFile(fp)
+  if (!valid) filesWithErrors++
+}
+
+if (filePaths.length > 1) {
+  console.log(`\n${'═'.repeat(50)}`)
+  console.log(`Summary: ${filesWithErrors} file(s) with errors out of ${filePaths.length}`)
+}
+
+if (filesWithErrors > 0) {
   console.error('\nFix errors before importing.')
   process.exit(1)
 } else {
-  console.log('\n✓ Content is valid. Ready to import.')
+  console.log('\n✓ All content is valid. Ready to import.')
 }

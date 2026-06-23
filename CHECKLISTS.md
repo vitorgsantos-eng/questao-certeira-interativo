@@ -7,8 +7,8 @@
 - [x] `npm run build` sem erros
 - [x] Nenhuma chave sensível em código ou `.env.local` versionado
 - [x] `npm test` — 13/13 passed
-- [x] `npm run validate-content:ci` — revisão piloto válida (0 erros)
-- [x] `npm run validate-content revisao-smoke-motor.json` — smoke válida (0 erros)
+- [x] `npm run validate-content:all` — todas as revisões válidas (0 erros)
+- [x] `npm run validate-content:ci` — revisão piloto válida (0 erros, mantido por compatibilidade)
 - [ ] Migrations rodadas no Supabase (manual — requer conta)
 - [ ] Conteúdo importado via `import-revision.ts`
 - [ ] Códigos de acesso gerados via `generate-access-codes.ts`
@@ -19,7 +19,11 @@
 - [x] Motor não hardcoda slug, título ou grade da revisão piloto em lógica central
 - [x] Homepage busca revisões do banco dinamicamente (ou mostra landing genérica)
 - [x] `schemaVersion` presente e validado no schema
-- [x] `visualConfig` documentado e adicionado ao tipo TypeScript
+- [x] `visualConfig`, `subject` e `schemaVersion` persistidos no banco (migration 005)
+- [x] Tipo `Revision` reflete `schema_version`, `subject`, `visual_config`
+- [x] `import-revision.ts` valida schema e persiste metadados
+- [x] Homepage exibe `subject`/`missionMapBadge` com fallback seguro
+- [x] CI valida todas as revisões em `content/revisions/` (`validate-content:all`)
 - [x] Segunda revisão mínima (`revisao-smoke-motor`) valida e pronta para teste
 - [x] Fronteira motor/conteúdo documentada em `docs/architecture/`
 - [x] Guia de criação de nova revisão em `docs/content/`

@@ -41,7 +41,7 @@ jobs:
           SESSION_SECRET: ci-placeholder-secret-at-least-32-characters
 
       - name: Validate content files
-        run: npm run validate-content:ci
+        run: npm run validate-content:all
 
       - name: Run tests
         run: npm test
