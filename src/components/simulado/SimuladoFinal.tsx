@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { MultipleChoiceQuestion } from '@/components/quiz/MultipleChoiceQuestion'
+import { NumericQuestion } from '@/components/quiz/NumericQuestion'
 import { ProgressBar } from '@/components/progress/ProgressBar'
 import { getScoreLabel } from '@/lib/scoring/calculator'
 import type { QuestionWithOptions, AttemptResult } from '@/types'
@@ -214,13 +215,23 @@ export function SimuladoFinal({ questions, revisionSlug, revisionTitle }: Simula
         </div>
       )}
 
-      <MultipleChoiceQuestion
-        key={questions[current].id}
-        question={questions[current]}
-        questionNumber={current + 1}
-        totalQuestions={questions.length}
-        onAnswer={handleAnswer}
-      />
+      {questions[current].type === 'multiple_choice' ? (
+        <MultipleChoiceQuestion
+          key={questions[current].id}
+          question={questions[current]}
+          questionNumber={current + 1}
+          totalQuestions={questions.length}
+          onAnswer={handleAnswer}
+        />
+      ) : (
+        <NumericQuestion
+          key={questions[current].id}
+          question={questions[current] as unknown as Parameters<typeof NumericQuestion>[0]['question']}
+          questionNumber={current + 1}
+          totalQuestions={questions.length}
+          onAnswer={handleAnswer}
+        />
+      )}
     </main>
   )
 }
