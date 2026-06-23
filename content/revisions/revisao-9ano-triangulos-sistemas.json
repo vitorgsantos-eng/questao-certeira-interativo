@@ -17,14 +17,27 @@
       "title": "Semelhança de Triângulos",
       "shortTitle": "Semelhança",
       "goal": "Reconhecer triângulos semelhantes e usar proporção entre lados correspondentes.",
-      "estimatedMinutes": 10,
+      "estimatedMinutes": 12,
       "isOptional": false,
       "prerequisites": [],
       "blocks": [
         {
           "type": "intro",
           "title": "Missão",
-          "text": "Nesta missão, você vai aprender a identificar triângulos semelhantes sem depender de chute — e a usar isso para calcular medidas desconhecidas de figuras que você nem consegue medir diretamente."
+          "text": "Nesta missão você vai aprender a identificar triângulos semelhantes do zero — sem depender de chute — e a usar proporção para calcular medidas que você não consegue medir diretamente. Esse conceito aparece em mapas, arquitetura, sombras e praticamente toda questão de geometria do 9º ano."
+        },
+        {
+          "type": "visual_explanation",
+          "title": "Vocabulário essencial",
+          "text": "Antes de avançar, confirme que você conhece esses termos — são a base de tudo nesta missão:",
+          "items": [
+            "Triângulo: figura com 3 lados e 3 ângulos. A soma dos ângulos internos é SEMPRE 180°.",
+            "Ângulos correspondentes: ângulos que ficam na mesma posição relativa em dois triângulos (ex.: ambos opostos ao maior lado).",
+            "Lados correspondentes: lados que ficam opostos aos ângulos correspondentes.",
+            "Proporção: igualdade entre duas razões, como a/b = c/d. Na semelhança, ela liga lados dos dois triângulos.",
+            "Razão de semelhança k: número que multiplica todos os lados de um triângulo para obter os lados do outro.",
+            "Pré-requisito: saber calcular proporções simples (regra de três). Sem isso, revise proporção antes de continuar."
+          ]
         },
         {
           "type": "concept",
@@ -40,30 +53,30 @@
         {
           "type": "visual_explanation",
           "title": "Como reconhecer triângulos semelhantes",
-          "text": "Existem três critérios para identificar semelhança:",
+          "text": "Existem três critérios para identificar semelhança (basta confirmar um deles):",
           "items": [
-            "AA (Ângulo-Ângulo): dois ângulos iguais → os triângulos são semelhantes.",
+            "AA (Ângulo-Ângulo): dois ângulos iguais → os triângulos são semelhantes. O terceiro ângulo fica automaticamente igual (180° − os dois conhecidos).",
             "LAL (Lado-Ângulo-Lado): dois lados proporcionais com o ângulo entre eles igual.",
-            "LLL (Lado-Lado-Lado): todos os lados proporcionais com a mesma razão.",
-            "Lados correspondentes: os lados que ficam na mesma posição relativa nos dois triângulos (ex: ambos opostos ao maior ângulo, ou ambos menores lados)."
+            "LLL (Lado-Lado-Lado): todos os lados proporcionais com a mesma razão k.",
+            "Lados correspondentes: os lados que ficam opostos ao mesmo ângulo nos dois triângulos. Identifique o maior ângulo em cada triângulo — os lados opostos a eles são correspondentes."
           ]
         },
         {
           "type": "worked_example",
           "problem": "Dois triângulos têm ângulos 40°, 60° e 80° cada. São semelhantes?",
           "steps": [
-            "Verifique os ângulos: 40° = 40°, 60° = 60°, 80° = 80°.",
-            "Os três ângulos são iguais → critério AA (basta dois ângulos iguais).",
+            "Identifique os ângulos de cada triângulo: 40°, 60°, 80° no primeiro; 40°, 60°, 80° no segundo.",
+            "Verifique: 40° = 40°, 60° = 60°. Dois ângulos iguais já bastam — critério AA.",
             "Conclusão: os triângulos são semelhantes."
           ],
-          "conclusion": "Quando dois ângulos são iguais, o terceiro obrigatoriamente também é (soma = 180°)."
+          "conclusion": "Quando dois ângulos são iguais, o terceiro obrigatoriamente também é (soma = 180°). Por isso o critério AA precisa de apenas 2 ângulos."
         },
         {
           "type": "worked_example",
           "problem": "Um triângulo tem lados 3, 4 e 5. Outro tem lados 6, 8 e 10. São semelhantes? Qual é a razão de semelhança?",
           "steps": [
-            "Compare os lados na mesma ordem: $6 \\div 3 = 2$, $8 \\div 4 = 2$, $10 \\div 5 = 2$.",
-            "A razão entre lados correspondentes é sempre 2.",
+            "Compare os lados na mesma ordem (menor com menor, médio com médio, maior com maior): $6 \\div 3 = 2$, $8 \\div 4 = 2$, $10 \\div 5 = 2$.",
+            "A razão entre lados correspondentes é sempre 2 — constante.",
             "Critério LLL confirmado: os triângulos são semelhantes com razão de semelhança k = 2.",
             "Isso significa: qualquer lado do segundo triângulo é o dobro do lado correspondente do primeiro."
           ]
@@ -77,7 +90,18 @@
             "Multiplicação cruzada: $6 \\times EF = 9 \\times 8 = 72$.",
             "$EF = 72 \\div 6 = 12$."
           ],
-          "conclusion": "EF = 12. Para calcular lado desconhecido: coloque-o na proporção e isole-o por multiplicação cruzada."
+          "conclusion": "EF = 12. Regra: lados do mesmo triângulo ficam sempre no mesmo nível da fração (numerador ou denominador). O lado desconhecido fica sozinho após multiplicação cruzada."
+        },
+        {
+          "type": "visual_explanation",
+          "title": "Erros comuns nesta missão",
+          "text": "Atenção aos erros que aparecem com frequência em provas — cada um tem uma causa específica:",
+          "items": [
+            "Erro 1 — Comparar lados de posições diferentes: os lados correspondentes devem estar opostos ao mesmo ângulo, não necessariamente na mesma posição visual no diagrama.",
+            "Erro 2 — Inverter a proporção: se você montou AB/BC = DE/EF em vez de AB/DE = BC/EF, o resultado fica errado. Lados do mesmo triângulo ficam sempre no mesmo nível da fração.",
+            "Erro 3 — Confundir semelhança com congruência: semelhantes têm mesma forma mas tamanhos diferentes; congruentes têm mesma forma E mesmo tamanho (k = 1).",
+            "Erro 4 — Aplicar razão de semelhança à área: se k = 2, a área do maior é 4× (k²) a do menor, não 2× (k). Lados escalam com k, áreas escalam com k²."
+          ]
         },
         {
           "type": "hint",
@@ -88,10 +112,11 @@
           "title": "Resumo",
           "points": [
             "Triângulos semelhantes têm mesma forma, tamanhos diferentes.",
-            "Para confirmar, use AA, LAL ou LLL.",
+            "Para confirmar, use AA (2 ângulos), LAL ou LLL.",
             "A razão de semelhança k é igual para todos os lados correspondentes.",
-            "Se k = 2, os lados do segundo triângulo são o dobro do primeiro.",
-            "Para calcular lado desconhecido: monte a proporção $\\dfrac{a}{a'} = \\dfrac{b}{b'}$ e resolva por multiplicação cruzada."
+            "Se k = 2, os lados do segundo são o dobro do primeiro.",
+            "Para lado desconhecido: monte $\\dfrac{a}{a'} = \\dfrac{b}{b'}$ e resolva por multiplicação cruzada.",
+            "Lados escalam com k; áreas escalam com k²."
           ]
         }
       ],
@@ -117,7 +142,7 @@
             {
               "text": "São congruentes porque têm a mesma forma.",
               "isCorrect": false,
-              "feedback": "Mesma forma indica semelhança. Para congruência, os lados precisariam ter o mesmo tamanho, não só a mesma proporção.",
+              "feedback": "Mesma forma indica semelhança. Para congruência, os lados precisariam ter o mesmo tamanho (k = 1), não só a mesma proporção.",
               "errorCategory": "interpretação"
             },
             {
@@ -143,13 +168,13 @@
             {
               "text": "Sim, porque ambos têm o ângulo de 50°.",
               "isCorrect": false,
-              "feedback": "Um ângulo igual não basta. Precisamos verificar se um segundo ângulo também coincide. Calcule o terceiro ângulo de cada triângulo.",
+              "feedback": "Um ângulo igual não basta. Precisamos verificar se um segundo ângulo também coincide. Calcule o terceiro ângulo de cada triângulo: 180-50-70=60 e 180-50-60=70. Os conjuntos são iguais.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "Sim, porque os três ângulos dos dois triângulos são iguais.",
               "isCorrect": true,
-              "feedback": "Correto! Primeiro: 50°+70°+60°=180°. Segundo: 50°+60°+70°=180°. Os conjuntos de ângulos são idênticos. Eles são semelhantes.",
+              "feedback": "Correto! Primeiro: 50°+70°+60°=180°. Segundo: 50°+60°+70°=180°. Os conjuntos de ângulos são idênticos. Eles são semelhantes pelo critério AA.",
               "errorCategory": null
             },
             {
@@ -167,8 +192,8 @@
           "statement": "Dois triângulos semelhantes têm lados correspondentes de 5 cm e 15 cm. Se o perímetro do menor é 18 cm, qual é o perímetro do maior?",
           "correctNumericAnswer": 54,
           "tolerance": 0.5,
-          "numericFeedbackCorrect": "Correto! Razão de semelhança $= 15 \\div 5 = 3$. Perímetro do maior $= 18 \\times 3 = 54$ cm.",
-          "numericFeedbackWrong": "A razão de semelhança é $15 \\div 5 = 3$. O perímetro do maior é $18 \\times 3 = 54$ cm. Os perímetros aumentam na mesma razão que os lados."
+          "numericFeedbackCorrect": "Correto! Razão de semelhança $= 15 \\div 5 = 3$. Perímetro do maior $= 18 \\times 3 = 54$ cm. Perímetros escalam na mesma razão que os lados.",
+          "numericFeedbackWrong": "A razão de semelhança é $15 \\div 5 = 3$. O perímetro do maior é $18 \\times 3 = 54$ cm. Os perímetros aumentam na mesma razão que os lados (não ao quadrado — isso vale só para área)."
         },
         {
           "type": "multiple_choice",
@@ -179,25 +204,25 @@
             {
               "text": "x = 12",
               "isCorrect": true,
-              "feedback": "Correto. $\\frac{AB}{DE} = \\frac{BC}{EF} \\Rightarrow \\frac{6}{9} = \\frac{8}{x} \\Rightarrow x = 8 \\times 9 \\div 6 = 12$.",
+              "feedback": "Correto. $\\dfrac{AB}{DE} = \\dfrac{BC}{EF} \\Rightarrow \\dfrac{6}{9} = \\dfrac{8}{x} \\Rightarrow 6x = 72 \\Rightarrow x = 12$.",
               "errorCategory": null
             },
             {
               "text": "x = 11",
               "isCorrect": false,
-              "feedback": "Cuidado no cálculo. A proporção é $\\frac{AB}{DE} = \\frac{BC}{EF}$. Substitua: $\\frac{6}{9} = \\frac{8}{x} \\Rightarrow 6x = 72 \\Rightarrow x = 12$.",
+              "feedback": "Cuidado no cálculo. A proporção é $\\dfrac{AB}{DE} = \\dfrac{BC}{EF}$. Substitua: $\\dfrac{6}{9} = \\dfrac{8}{x} \\Rightarrow 6x = 72 \\Rightarrow x = 12$, não 11.",
               "errorCategory": "cálculo numérico"
             },
             {
               "text": "x = 6",
               "isCorrect": false,
-              "feedback": "Você pode ter igualado lados que não são correspondentes. Lados correspondentes são os que ficam na mesma posição relativa em cada triângulo.",
+              "feedback": "Você pode ter igualado lados que não são correspondentes. Lados correspondentes são os opostos ao mesmo ângulo. $\\dfrac{AB}{DE} = \\dfrac{BC}{EF} \\Rightarrow x = 12$.",
               "errorCategory": "identificação de elementos"
             },
             {
-              "text": "$x = \\frac{16}{3} \\approx 5{,}3$",
+              "text": "$x = \\dfrac{16}{3} \\approx 5{,}3$",
               "isCorrect": false,
-              "feedback": "Parece que você inverteu a razão: usou $\\frac{6}{9} = \\frac{2}{3}$ em vez de $\\frac{9}{6} = \\frac{3}{2}$. Isso levaria a $x = 8 \\times \\frac{2}{3} = \\frac{16}{3} \\approx 5{,}3$. Como o segundo triângulo é maior, a razão correta é $\\frac{9}{6} = \\frac{3}{2}$, então $x = 8 \\times \\frac{3}{2} = 12$.",
+              "feedback": "Você inverteu a razão: usou $\\dfrac{DE}{AB} = \\dfrac{EF}{BC}$ em vez de $\\dfrac{AB}{DE} = \\dfrac{BC}{EF}$. Como DEF é maior, $x = 8 \\times \\dfrac{9}{6} = 12$.",
               "errorCategory": "proporção"
             }
           ]
@@ -211,25 +236,25 @@
             {
               "text": "6 m",
               "isCorrect": true,
-              "feedback": "Correto. Os triângulos formados pela luz do sol são semelhantes. $\\dfrac{\\text{Árvore}}{\\text{sombra}} = \\dfrac{\\text{Poste}}{\\text{sombra}} \\Rightarrow \\dfrac{h}{8} = \\dfrac{3}{4} \\Rightarrow h = 6$ m.",
+              "feedback": "Correto. Os triângulos formados pela luz do sol são semelhantes (mesma inclinação). $\\dfrac{\\text{Árvore}}{\\text{sombra da árvore}} = \\dfrac{\\text{Poste}}{\\text{sombra do poste}} \\Rightarrow \\dfrac{h}{8} = \\dfrac{3}{4} \\Rightarrow h = 6$ m.",
               "errorCategory": null
             },
             {
               "text": "24 m",
               "isCorrect": false,
-              "feedback": "Você pode ter multiplicado em vez de dividir. A proporção é $\\frac{h}{8} = \\frac{3}{4}$. Resolvendo: $h = 3 \\times 8 \\div 4 = 6$ m.",
+              "feedback": "Você pode ter multiplicado em vez de dividir. A proporção é $\\dfrac{h}{8} = \\dfrac{3}{4}$. Resolvendo: $h = 3 \\times 8 \\div 4 = 6$ m, não 24.",
               "errorCategory": "operação algébrica"
             },
             {
               "text": "1,5 m",
               "isCorrect": false,
-              "feedback": "Verifique se você inverteu sombra e altura. A proporção correta é objeto/sombra = objeto/sombra. $\\frac{h}{8} = \\frac{3}{4} \\Rightarrow h = 6$ m.",
+              "feedback": "Você pode ter invertido sombra e altura. A proporção correta é objeto/sombra = objeto/sombra. $\\dfrac{h}{8} = \\dfrac{3}{4} \\Rightarrow h = 6$ m, não 1,5.",
               "errorCategory": "proporção"
             },
             {
               "text": "5 m",
               "isCorrect": false,
-              "feedback": "Talvez tenha calculado 8−3 = 5. Mas o método correto é proporção: $\\frac{h}{8} = \\frac{3}{4} \\Rightarrow h = 6$ m.",
+              "feedback": "Talvez tenha calculado 8−3 = 5. Mas o método correto é proporção: $\\dfrac{h}{8} = \\dfrac{3}{4} \\Rightarrow h = 6$ m.",
               "errorCategory": "fórmula inadequada"
             }
           ]
@@ -241,7 +266,7 @@
       "title": "Relações Métricas no Triângulo Retângulo",
       "shortTitle": "Rel. Métricas",
       "goal": "Aplicar as relações entre altura, catetos e projeções no triângulo retângulo.",
-      "estimatedMinutes": 10,
+      "estimatedMinutes": 12,
       "isOptional": false,
       "prerequisites": [
         "semelhanca-triangulos"
@@ -259,21 +284,21 @@
         },
         {
           "type": "visual_explanation",
-          "title": "Nomenclatura padrão",
-          "text": "Nesta missão usaremos os seguintes nomes — leia com atenção antes de ver as fórmulas:",
+          "title": "Nomenclatura padrão — leia antes das fórmulas",
+          "text": "Nesta missão usaremos os seguintes nomes — é obrigatório saber o que cada letra representa antes de usar as fórmulas:",
           "items": [
-            "c = hipotenusa (o lado oposto ao ângulo reto, sempre o maior)",
-            "a e b = catetos (os dois lados que formam o ângulo reto)",
-            "h = altura relativa à hipotenusa (traçada do vértice do ângulo reto até a hipotenusa)",
-            "m = projeção do cateto a sobre a hipotenusa (o trecho da hipotenusa 'embaixo' do cateto a)",
-            "n = projeção do cateto b sobre a hipotenusa (o trecho 'embaixo' do cateto b)",
-            "m + n = c (as duas projeções juntas formam a hipotenusa inteira)"
+            "c = hipotenusa: o lado oposto ao ângulo reto, sempre o maior lado do triângulo retângulo.",
+            "a e b = catetos: os dois lados que formam o ângulo reto (saem do vértice onde está o 90°).",
+            "h = altura relativa à hipotenusa: traçada do vértice do ângulo reto até a hipotenusa, formando um ângulo de 90° com ela.",
+            "m = projeção do cateto a sobre a hipotenusa: o trecho da hipotenusa 'embaixo' do cateto a (do lado de B).",
+            "n = projeção do cateto b sobre a hipotenusa: o trecho 'embaixo' do cateto b (do lado de C).",
+            "m + n = c: as duas projeções juntas formam a hipotenusa inteira — use isso para verificar seus cálculos."
           ]
         },
         {
           "type": "concept",
-          "title": "O ponto-chave desta missão",
-          "text": "Com os elementos acima, a semelhança entre os três triângulos gerados pela altura h produz três relações métricas:",
+          "title": "As três relações métricas",
+          "text": "Com os elementos acima, a semelhança entre os três triângulos gerados pela altura h produz três relações métricas. Memorize qual elemento aparece em cada fórmula:",
           "highlight": "$h^2 = m \\cdot n$   |   $a^2 = m \\cdot c$   |   $b^2 = n \\cdot c$"
         },
         {
@@ -281,31 +306,43 @@
           "problem": "Um triângulo retângulo tem hipotenusa c = 25 cm. As projeções dos catetos são m = 9 cm e n = 16 cm. Calcule a altura h.",
           "steps": [
             "Dados: c = 25, m = 9, n = 16. Queremos: h.",
-            "Verifique: m + n = 9 + 16 = 25 = c. ✓",
-            "Use a relação: $h^2 = m \\cdot n$",
-            "$h^2 = 9 \\times 16 = 144$",
-            "$h = \\sqrt{144} = 12$ cm"
+            "Verifique antes de calcular: m + n = 9 + 16 = 25 = c. ✓ Os dados são consistentes.",
+            "Use a relação da altura: $h^2 = m \\cdot n$.",
+            "$h^2 = 9 \\times 16 = 144$.",
+            "$h = \\sqrt{144} = 12$ cm."
           ],
-          "conclusion": "h = 12 cm"
+          "conclusion": "h = 12 cm. Sempre verifique m + n = c antes de calcular para garantir que os dados estão corretos."
         },
         {
           "type": "worked_example",
           "problem": "Com os mesmos dados (m = 9, n = 16, c = 25), calcule os catetos a e b.",
           "steps": [
-            "Para o cateto a: $a^2 = m \\cdot c = 9 \\times 25 = 225 \\Rightarrow a = 15$ cm",
-            "Para o cateto b: $b^2 = n \\cdot c = 16 \\times 25 = 400 \\Rightarrow b = 20$ cm",
-            "Confira com Pitágoras: $15^2 + 20^2 = 225 + 400 = 625 = 25^2$. ✓"
-          ]
+            "Para o cateto a — use a relação com a projeção m de a: $a^2 = m \\cdot c = 9 \\times 25 = 225 \\Rightarrow a = 15$ cm.",
+            "Para o cateto b — use a relação com a projeção n de b: $b^2 = n \\cdot c = 16 \\times 25 = 400 \\Rightarrow b = 20$ cm.",
+            "Confirmação com Pitágoras: $a^2 + b^2 = 225 + 400 = 625 = 25^2 = c^2$. ✓"
+          ],
+          "conclusion": "a = 15, b = 20. Regra de memória: cateto a usa m (a projeção do mesmo cateto); cateto b usa n (a projeção do mesmo cateto)."
         },
         {
           "type": "worked_example",
           "problem": "Num triângulo retângulo, os catetos são a = 6 e b = 8. Calcule a altura h relativa à hipotenusa usando a fórmula alternativa.",
           "steps": [
-            "Dados: a = 6, b = 8. Queremos: h. Não temos m nem n — usamos a fórmula $h = \\dfrac{a \\cdot b}{c}$.",
+            "Dados: a = 6, b = 8. Queremos: h. Não temos m nem n — usamos a fórmula derivada $h = \\dfrac{a \\cdot b}{c}$.",
             "Passo 1 — calcule a hipotenusa por Pitágoras: $c = \\sqrt{a^2 + b^2} = \\sqrt{6^2 + 8^2} = \\sqrt{36 + 64} = \\sqrt{100} = 10$.",
             "Passo 2 — aplique a fórmula: $h = \\dfrac{a \\cdot b}{c} = \\dfrac{6 \\times 8}{10} = \\dfrac{48}{10} = 4{,}8$."
           ],
-          "conclusion": "h = 4,8. Use $h = \\dfrac{a \\cdot b}{c}$ sempre que conhecer os dois catetos e precisar da altura, sem ter m e n."
+          "conclusion": "h = 4,8. Use $h = \\dfrac{a \\cdot b}{c}$ sempre que conhecer os dois catetos e precisar da altura sem ter m e n."
+        },
+        {
+          "type": "visual_explanation",
+          "title": "Erros comuns nesta missão",
+          "text": "Os erros mais frequentes com relações métricas — cada um tem uma causa específica:",
+          "items": [
+            "Erro 1 — Usar h² = m + n em vez de h² = m·n: a relação usa o PRODUTO das projeções, não a soma. A soma m + n = c dá a hipotenusa, não h.",
+            "Erro 2 — Usar a projeção errada na fórmula do cateto: a² = m·c usa a projeção m do cateto a; b² = n·c usa a projeção n do cateto b. Trocar m por n inverte os resultados.",
+            "Erro 3 — Esquecer de extrair a raiz: $h^2 = 144$ não é h = 144. Extraia a raiz: $h = \\sqrt{144} = 12$.",
+            "Erro 4 — Não verificar m + n = c antes de calcular: se os valores não somam a hipotenusa, você identificou m ou n errado e qualquer cálculo será inválido."
+          ]
         },
         {
           "type": "hint",
@@ -315,11 +352,11 @@
           "type": "summary",
           "title": "Resumo das relações",
           "points": [
-            "$h^2 = m \\cdot n$ (altura = raiz do produto das projeções)",
-            "$a^2 = m \\cdot c$ (cateto a = raiz da projeção de a × hipotenusa)",
-            "$b^2 = n \\cdot c$ (cateto b = raiz da projeção de b × hipotenusa)",
-            "$m + n = c$ (projeções somam a hipotenusa)",
-            "$h = \\dfrac{a \\cdot b}{c}$ (use quando conhecer catetos e hipotenusa)"
+            "$h^2 = m \\cdot n$ — altura = raiz do produto das projeções.",
+            "$a^2 = m \\cdot c$ — cateto a = raiz da (projeção de a × hipotenusa).",
+            "$b^2 = n \\cdot c$ — cateto b = raiz da (projeção de b × hipotenusa).",
+            "$m + n = c$ — as projeções somam a hipotenusa. Use para verificar os dados.",
+            "$h = \\dfrac{a \\cdot b}{c}$ — use quando conhecer os catetos e a hipotenusa."
           ]
         }
       ],
@@ -333,25 +370,25 @@
             {
               "text": "h = 6",
               "isCorrect": true,
-              "feedback": "Correto. $h^2 = m \\cdot n = 4 \\times 9 = 36$. $h = \\sqrt{36} = 6$.",
+              "feedback": "Correto. $h^2 = m \\cdot n = 4 \\times 9 = 36 \\Rightarrow h = \\sqrt{36} = 6$.",
               "errorCategory": null
             },
             {
               "text": "h = 6,5",
               "isCorrect": false,
-              "feedback": "Você pode ter usado $h = \\frac{m+n}{2} = \\frac{13}{2} = 6{,}5$. Mas a relação correta é $h^2 = m \\cdot n$ (produto, não média). $h = \\sqrt{4 \\times 9} = 6$.",
+              "feedback": "Você usou $h = \\dfrac{m+n}{2} = \\dfrac{13}{2} = 6{,}5$ (média). Mas a relação correta é $h^2 = m \\cdot n$ (produto). $h = \\sqrt{4 \\times 9} = 6$.",
               "errorCategory": "fórmula inadequada"
             },
             {
               "text": "h = 36",
               "isCorrect": false,
-              "feedback": "Você calculou $h^2 = 36$, mas não extraiu a raiz. $h = \\sqrt{36} = 6$.",
+              "feedback": "Você calculou $h^2 = 36$ corretamente, mas não extraiu a raiz quadrada. $h = \\sqrt{36} = 6$, não 36.",
               "errorCategory": "operação algébrica"
             },
             {
               "text": "h = 13",
               "isCorrect": false,
-              "feedback": "$h \\neq m + n$. A relação é $h^2 = m \\cdot n$ (produto, não soma). $h = \\sqrt{4 \\times 9} = 6$.",
+              "feedback": "Você usou $h = m + n = 13$. Mas $m + n = c$ (a hipotenusa), não h. A relação é $h^2 = m \\cdot n$ (produto). $h = \\sqrt{4 \\times 9} = 6$.",
               "errorCategory": "fórmula inadequada"
             }
           ]
@@ -365,25 +402,25 @@
             {
               "text": "a = 10",
               "isCorrect": true,
-              "feedback": "Correto. $a^2 = m \\cdot c = 5 \\times 20 = 100$. $a = \\sqrt{100} = 10$.",
+              "feedback": "Correto. $a^2 = m \\cdot c = 5 \\times 20 = 100 \\Rightarrow a = \\sqrt{100} = 10$.",
               "errorCategory": null
             },
             {
               "text": "a = 4",
               "isCorrect": false,
-              "feedback": "$a^2 = m \\cdot c = 5 \\times 20 = 100$, portanto $a = 10$. Verifique o produto antes de extrair a raiz.",
+              "feedback": "$a^2 = m \\cdot c = 5 \\times 20 = 100$, portanto $a = \\sqrt{100} = 10$, não 4. Verifique se você dividiu m ÷ c em vez de multiplicar.",
               "errorCategory": "cálculo numérico"
             },
             {
               "text": "a = 25",
               "isCorrect": false,
-              "feedback": "Você pode ter somado $m + c$. A relação é $a^2 = m \\cdot c$ (produto). $a = \\sqrt{5 \\times 20} = \\sqrt{100} = 10$.",
+              "feedback": "Você somou $m + c = 25$ em vez de multiplicar. A relação é $a^2 = m \\cdot c$ (produto). $a = \\sqrt{5 \\times 20} = \\sqrt{100} = 10$.",
               "errorCategory": "fórmula inadequada"
             },
             {
               "text": "a = 100",
               "isCorrect": false,
-              "feedback": "Você calculou $a^2 = 100$ corretamente, mas não extraiu a raiz. $a = \\sqrt{100} = 10$.",
+              "feedback": "Você calculou $a^2 = 100$ corretamente, mas esqueceu de extrair a raiz. $a = \\sqrt{100} = 10$, não 100.",
               "errorCategory": "operação algébrica"
             }
           ]
@@ -397,25 +434,25 @@
             {
               "text": "n = 9",
               "isCorrect": true,
-              "feedback": "Correto. $h^2 = m \\cdot n \\Rightarrow 36 = 4 \\cdot n \\Rightarrow n = 9$.",
+              "feedback": "Correto. $h^2 = m \\cdot n \\Rightarrow 36 = 4 \\cdot n \\Rightarrow n = \\dfrac{36}{4} = 9$.",
               "errorCategory": null
             },
             {
               "text": "n = 2",
               "isCorrect": false,
-              "feedback": "Você pode ter subtraído h − m = 6 − 4 = 2. A relação é $h^2 = m \\cdot n$. Portanto $n = \\frac{h^2}{m} = \\frac{36}{4} = 9$.",
+              "feedback": "Você calculou $h - m = 6 - 4 = 2$. Mas a relação é $h^2 = m \\cdot n$, então $n = \\dfrac{h^2}{m} = \\dfrac{36}{4} = 9$.",
               "errorCategory": "fórmula inadequada"
             },
             {
               "text": "n = 24",
               "isCorrect": false,
-              "feedback": "Verifique o isolamento de $n$. $h^2 = m \\cdot n \\Rightarrow 36 = 4n \\Rightarrow n = 9$, não 24.",
+              "feedback": "Você pode ter calculado $h \\cdot m = 6 \\times 4 = 24$. Mas isole n: $36 = 4n \\Rightarrow n = 9$, não 24.",
               "errorCategory": "operação algébrica"
             },
             {
               "text": "n = 1,5",
               "isCorrect": false,
-              "feedback": "Você dividiu h por m em vez de $h^2$ por m. $n = \\frac{h^2}{m} = \\frac{36}{4} = 9$, não $\\frac{h}{m} = \\frac{6}{4} = 1{,}5$.",
+              "feedback": "Você calculou $\\dfrac{h}{m} = \\dfrac{6}{4} = 1{,}5$ em vez de $\\dfrac{h^2}{m} = \\dfrac{36}{4} = 9$. Lembre: a fórmula usa $h^2$, não h.",
               "errorCategory": "proporção"
             }
           ]
@@ -427,8 +464,8 @@
           "statement": "Num triângulo retângulo, os catetos são a = 6 e b = 8. Calcule a altura h relativa à hipotenusa.",
           "correctNumericAnswer": 4.8,
           "tolerance": 0.1,
-          "numericFeedbackCorrect": "Correto! $c = \\sqrt{36+64} = 10$. $h = \\dfrac{a \\cdot b}{c} = \\dfrac{6 \\times 8}{10} = 4{,}8$.",
-          "numericFeedbackWrong": "Primeiro calcule $c = \\sqrt{6^2+8^2} = \\sqrt{100} = 10$. Depois use $h = \\dfrac{a \\cdot b}{c} = \\dfrac{48}{10} = 4{,}8$. Essa fórmula foi apresentada no resumo da lição."
+          "numericFeedbackCorrect": "Correto! $c = \\sqrt{6^2+8^2} = \\sqrt{100} = 10$. $h = \\dfrac{a \\cdot b}{c} = \\dfrac{6 \\times 8}{10} = 4{,}8$.",
+          "numericFeedbackWrong": "Primeiro calcule $c = \\sqrt{6^2+8^2} = \\sqrt{100} = 10$. Depois use $h = \\dfrac{a \\cdot b}{c} = \\dfrac{48}{10} = 4{,}8$. Use essa fórmula quando tiver os catetos e precisar da altura sem ter m e n."
         },
         {
           "type": "multiple_choice",
@@ -439,25 +476,25 @@
             {
               "text": "$h = \\dfrac{60}{13} \\approx 4{,}6$",
               "isCorrect": true,
-              "feedback": "Correto. $b = \\sqrt{13^2-5^2} = \\sqrt{169-25} = \\sqrt{144} = 12$. $h = \\dfrac{a \\cdot b}{c} = \\dfrac{5 \\times 12}{13} = \\dfrac{60}{13} \\approx 4{,}62$.",
+              "feedback": "Correto. Passo 1: $b = \\sqrt{13^2-5^2} = \\sqrt{169-25} = \\sqrt{144} = 12$. Passo 2: $h = \\dfrac{a \\cdot b}{c} = \\dfrac{5 \\times 12}{13} = \\dfrac{60}{13} \\approx 4{,}62$.",
               "errorCategory": null
             },
             {
               "text": "h = 5",
               "isCorrect": false,
-              "feedback": "h não é igual ao cateto a. Primeiro calcule $b = \\sqrt{13^2 - 5^2} = 12$, depois $h = \\dfrac{a \\cdot b}{c} = \\dfrac{5 \\times 12}{13} = \\dfrac{60}{13}$.",
+              "feedback": "h não é igual ao cateto a. Você precisa: (1) calcular b com Pitágoras: $b = \\sqrt{169-25} = 12$; (2) usar $h = \\dfrac{a \\cdot b}{c} = \\dfrac{60}{13} \\approx 4{,}6$.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "h = 6",
               "isCorrect": false,
-              "feedback": "Verifique o cálculo. $b = \\sqrt{169-25} = 12$. $h = \\dfrac{a \\cdot b}{c} = \\dfrac{60}{13} \\approx 4{,}6$, não 6.",
+              "feedback": "Verifique o cálculo. $b = \\sqrt{169-25} = 12$. $h = \\dfrac{a \\cdot b}{c} = \\dfrac{5 \\times 12}{13} = \\dfrac{60}{13} \\approx 4{,}6$, não 6.",
               "errorCategory": "cálculo numérico"
             },
             {
               "text": "h = 2,5",
               "isCorrect": false,
-              "feedback": "Talvez tenha calculado $h = \\frac{a}{2} = \\frac{5}{2} = 2{,}5$. A fórmula correta é $h = \\dfrac{a \\cdot b}{c}$. Calcule $b = \\sqrt{13^2-5^2} = 12$ e use $h = \\dfrac{60}{13} \\approx 4{,}6$.",
+              "feedback": "Você pode ter calculado $h = \\dfrac{a}{2} = 2{,}5$. A fórmula correta é $h = \\dfrac{a \\cdot b}{c}$. Calcule $b = 12$ e use $h = \\dfrac{60}{13} \\approx 4{,}6$.",
               "errorCategory": "fórmula inadequada"
             }
           ]
@@ -469,35 +506,49 @@
       "title": "Trigonometria no Triângulo Retângulo",
       "shortTitle": "Trigonometria",
       "goal": "Usar seno, cosseno e tangente para calcular lados e ângulos em triângulos retângulos.",
-      "estimatedMinutes": 10,
+      "estimatedMinutes": 12,
       "isOptional": false,
       "prerequisites": [],
       "blocks": [
         {
           "type": "intro",
           "title": "Missão",
-          "text": "Trigonometria não é decorar fórmulas. É entender a relação entre ângulo e proporção de lados — e usar essa relação para calcular o que você não sabe a partir do que você sabe."
+          "text": "Trigonometria não é decorar fórmulas. É entender a relação entre ângulo e proporção de lados — e usar essa relação para calcular o que você não sabe a partir do que você sabe. Essa ferramenta aparece em física, engenharia, navegação e em toda questão de triângulo retângulo que envolve ângulo."
+        },
+        {
+          "type": "visual_explanation",
+          "title": "Vocabulário essencial",
+          "text": "Termos que você precisa saber antes de começar — cada um tem significado preciso:",
+          "items": [
+            "Ângulo reto: ângulo de exatamente 90°, marcado com um quadradinho no canto do triângulo.",
+            "Hipotenusa: lado oposto ao ângulo reto — sempre o maior lado do triângulo retângulo.",
+            "Cateto: cada um dos dois lados que formam o ângulo reto (saem do vértice com 90°).",
+            "Cateto oposto a α: o cateto que fica do lado oposto ao ângulo α, sem tocá-lo.",
+            "Cateto adjacente a α: o cateto que toca o ângulo α (além da hipotenusa).",
+            "Atenção: oposto e adjacente MUDAM dependendo de qual ângulo você está usando. Para α = 30°, o oposto é diferente do oposto para α = 60°.",
+            "Pré-requisito: saber identificar o ângulo reto, a hipotenusa e os catetos. Se não sabe, revise triângulos retângulos."
+          ]
         },
         {
           "type": "concept",
           "title": "A ideia fundamental",
-          "text": "Num triângulo retângulo, para um ângulo α específico, a razão entre dois lados é sempre a mesma — independente do tamanho do triângulo. Por exemplo: em qualquer triângulo retângulo com um ângulo de 30°, a razão cateto-oposto/hipotenusa é sempre 0,5. Triângulo com hipotenusa 10, 20 ou 100 — o oposto será sempre metade da hipotenusa. É isso que o seno, o cosseno e a tangente registram.",
+          "text": "Num triângulo retângulo, para um ângulo α específico, a razão entre dois lados é sempre a mesma — independente do tamanho do triângulo. Por exemplo: em qualquer triângulo retângulo com um ângulo de 30°, o cateto oposto é sempre metade da hipotenusa. Triângulo pequeno ou grande — sempre 0,5. É isso que o seno, o cosseno e a tangente registram: a razão fixa para cada ângulo.",
           "highlight": "$\\text{sen}\\,\\alpha = \\dfrac{\\text{cateto oposto}}{\\text{hipotenusa}}$   |   $\\text{cos}\\,\\alpha = \\dfrac{\\text{cateto adjacente}}{\\text{hipotenusa}}$   |   $\\text{tg}\\,\\alpha = \\dfrac{\\text{cateto oposto}}{\\text{cateto adjacente}}$"
         },
         {
           "type": "diagram",
           "diagramId": "trigonometry",
-          "caption": "Ângulo reto em C. O cateto oposto e o adjacente mudam dependendo de qual ângulo você usa."
+          "caption": "Ângulo reto em C. O cateto oposto e o adjacente mudam dependendo de qual ângulo (α ou β) você usa."
         },
         {
           "type": "visual_explanation",
           "title": "Como identificar oposto e adjacente",
-          "text": "Dado o ângulo α que você está usando no cálculo:",
+          "text": "Dado o ângulo α que você está usando no cálculo, identifique os lados assim:",
           "items": [
             "Cateto oposto: o lado que fica 'do outro lado' do triângulo, sem tocar o ângulo α.",
             "Cateto adjacente: o lado que toca o ângulo α (além da hipotenusa).",
-            "Hipotenusa: sempre o lado oposto ao ângulo reto (90°) — o maior lado do triângulo.",
-            "Atenção: oposto e adjacente mudam dependendo de qual ângulo você está usando."
+            "Hipotenusa: sempre o lado oposto ao ângulo reto (90°) — o maior lado, independente do ângulo que você usa.",
+            "Dica: aponte para o ângulo α. O cateto adjacente é o lado que está 'ao seu lado' (tocando α). O cateto oposto é o que está 'na frente' (não toca α)."
           ]
         },
         {
@@ -505,21 +556,23 @@
           "problem": "Num triângulo retângulo, o ângulo α = 30° e a hipotenusa = 20 cm. Calcule o cateto oposto a α.",
           "steps": [
             "Dado: α = 30°, hipotenusa = 20 cm. Queremos: cateto oposto.",
-            "Tenho ângulo, hipotenusa e quero o oposto → uso seno.",
-            "$\\text{sen}\\, 30° = \\dfrac{\\text{cateto oposto}}{\\text{hipotenusa}}$",
-            "$0{,}5 = \\dfrac{\\text{cateto oposto}}{20}$",
-            "$\\text{cateto oposto} = 0{,}5 \\times 20 = 10$ cm"
+            "Identifico quais dois lados estão no problema: hipotenusa (tenho) e cateto oposto (quero).",
+            "A função que relaciona oposto e hipotenusa é o SENO: $\\text{sen}\\,\\alpha = \\dfrac{\\text{cateto oposto}}{\\text{hipotenusa}}$.",
+            "Substitua os valores: $\\text{sen}\\,30° = \\dfrac{\\text{cateto oposto}}{20}$.",
+            "Use o valor da tabela: $\\text{sen}\\,30° = 0{,}5$. Portanto $0{,}5 = \\dfrac{\\text{cateto oposto}}{20}$.",
+            "$\\text{cateto oposto} = 0{,}5 \\times 20 = 10$ cm."
           ],
-          "conclusion": "Cateto oposto = 10 cm"
+          "conclusion": "Cateto oposto = 10 cm. Estratégia: identifique os dois lados envolvidos → escolha a função trigonométrica que os relaciona → substitua e resolva."
         },
         {
           "type": "visual_explanation",
-          "title": "Valores que você precisa saber",
-          "text": "Valores trigonométricos dos ângulos mais comuns (memorize ou tenha à mão na prova):",
+          "title": "Valores trigonométricos que você precisa saber",
+          "text": "Valores dos ângulos mais comuns (memorize ou tenha à mão na prova):",
           "items": [
-            "30°: sen = 0,5,  cos = $\\dfrac{\\sqrt{3}}{2} \\approx 0{,}866$,  tg = $\\dfrac{1}{\\sqrt{3}} \\approx 0{,}577$",
-            "45°: sen = $\\dfrac{\\sqrt{2}}{2} \\approx 0{,}707$,  cos = $\\dfrac{\\sqrt{2}}{2} \\approx 0{,}707$,  tg = 1",
-            "60°: sen = $\\dfrac{\\sqrt{3}}{2} \\approx 0{,}866$,  cos = 0,5,  tg = $\\sqrt{3} \\approx 1{,}732$"
+            "30°: sen = 0,5 | cos = $\\dfrac{\\sqrt{3}}{2} \\approx 0{,}866$ | tg = $\\dfrac{1}{\\sqrt{3}} \\approx 0{,}577$",
+            "45°: sen = $\\dfrac{\\sqrt{2}}{2} \\approx 0{,}707$ | cos = $\\dfrac{\\sqrt{2}}{2} \\approx 0{,}707$ | tg = 1",
+            "60°: sen = $\\dfrac{\\sqrt{3}}{2} \\approx 0{,}866$ | cos = 0,5 | tg = $\\sqrt{3} \\approx 1{,}732$",
+            "Padrão de memória: sen 30° = cos 60° = 0,5 (ângulos complementares trocam sen e cos)."
           ]
         },
         {
@@ -527,16 +580,27 @@
           "problem": "Num triângulo retângulo, o cateto oposto a α mede 3 cm e o cateto adjacente mede $3\\sqrt{3}$ cm. Qual é o ângulo α?",
           "steps": [
             "Dado: oposto = 3, adjacente = $3\\sqrt{3}$. Queremos: o ângulo α.",
-            "Tenho oposto e adjacente, sem a hipotenusa → uso tangente.",
-            "$\\text{tg}\\,\\alpha = \\dfrac{\\text{oposto}}{\\text{adjacente}} = \\dfrac{3}{3\\sqrt{3}} = \\dfrac{1}{\\sqrt{3}}$",
+            "Os lados disponíveis são oposto e adjacente — sem a hipotenusa. A função que usa esses dois lados é a TANGENTE.",
+            "$\\text{tg}\\,\\alpha = \\dfrac{\\text{oposto}}{\\text{adjacente}} = \\dfrac{3}{3\\sqrt{3}} = \\dfrac{1}{\\sqrt{3}}$.",
             "Consulto a tabela: $\\text{tg}\\,30° = \\dfrac{1}{\\sqrt{3}} \\approx 0{,}577$.",
             "Logo, $\\alpha = 30°$."
           ],
-          "conclusion": "Para encontrar o ângulo: calcule a razão trigonométrica com os lados dados e identifique o ângulo pela tabela."
+          "conclusion": "α = 30°. Para encontrar o ângulo: calcule a razão trigonométrica com os lados dados e identifique o ângulo pela tabela (ou use arcsen, arccos, arctg na calculadora)."
+        },
+        {
+          "type": "visual_explanation",
+          "title": "Erros comuns nesta missão",
+          "text": "Os erros mais frequentes em trigonometria — cada um tem uma causa clara:",
+          "items": [
+            "Erro 1 — Trocar oposto com adjacente: o cateto oposto a α NÃO toca α; o adjacente toca. Mudar de ângulo (ex.: usar 60° em vez de 30°) inverte oposto e adjacente.",
+            "Erro 2 — Usar seno quando deveria usar cosseno: escolha pela função que liga exatamente os dois lados do seu problema. Não tem atalho — identifique oposto/adjacente/hipotenusa primeiro.",
+            "Erro 3 — Dividir em vez de multiplicar ao isolar o lado: sen α = oposto/hipotenusa → oposto = sen α × hipotenusa. Nunca oposto = hipotenusa ÷ sen α (isso daria a hipotenusa dado o oposto).",
+            "Erro 4 — Confundir sen 30° com sen 60°: sen 30° = 0,5 e sen 60° = √3/2 ≈ 0,866. O maior ângulo tem o maior seno. Não chute — consulte a tabela."
+          ]
         },
         {
           "type": "hint",
-          "text": "Como escolher a função certa: (1) identifique os dois lados envolvidos no problema — o que você conhece e o que quer calcular; (2) veja qual função trigonométrica relaciona exatamente esses dois lados com o ângulo dado. Se não há hipotenusa, use tangente."
+          "text": "Como escolher a função certa: (1) identifique os dois lados envolvidos no problema — o que você conhece e o que quer calcular; (2) veja qual função trigonométrica relaciona exatamente esses dois lados com o ângulo dado. Se não há hipotenusa, use tangente. Se há hipotenusa e oposto, seno. Se há hipotenusa e adjacente, cosseno."
         },
         {
           "type": "summary",
@@ -545,7 +609,8 @@
             "$\\text{sen}\\,\\alpha = \\dfrac{\\text{oposto}}{\\text{hipotenusa}}$ → use quando envolver oposto e hipotenusa.",
             "$\\text{cos}\\,\\alpha = \\dfrac{\\text{adjacente}}{\\text{hipotenusa}}$ → use quando envolver adjacente e hipotenusa.",
             "$\\text{tg}\\,\\alpha = \\dfrac{\\text{oposto}}{\\text{adjacente}}$ → use quando não envolve a hipotenusa.",
-            "Para encontrar o ângulo: calcule a razão com os lados e consulte a tabela (ou use arcsen, arccos, arctg)."
+            "Para encontrar o ângulo: calcule a razão com os lados e consulte a tabela.",
+            "Valores-chave: sen 30° = cos 60° = 0,5; sen 60° = cos 30° = √3/2; tg 45° = 1."
           ]
         }
       ],
@@ -559,25 +624,25 @@
             {
               "text": "Cosseno: $\\text{cos}\\,\\alpha = \\dfrac{\\text{adjacente}}{\\text{hipotenusa}}$",
               "isCorrect": true,
-              "feedback": "Correto. O cosseno relaciona o cateto adjacente com a hipotenusa.",
+              "feedback": "Correto. O cosseno é a função que relaciona cateto adjacente com hipotenusa. $\\text{adjacente} = \\text{cos}\\,\\alpha \\times \\text{hipotenusa}$.",
               "errorCategory": null
             },
             {
               "text": "Seno: $\\text{sen}\\,\\alpha = \\dfrac{\\text{oposto}}{\\text{hipotenusa}}$",
               "isCorrect": false,
-              "feedback": "O seno relaciona o cateto oposto com a hipotenusa. Como você quer o adjacente, use cosseno.",
+              "feedback": "O seno relaciona cateto OPOSTO com hipotenusa. Como você quer o ADJACENTE, a função correta é cosseno: $\\text{cos}\\,\\alpha = \\text{adjacente}/\\text{hipotenusa}$.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "Tangente: $\\text{tg}\\,\\alpha = \\dfrac{\\text{oposto}}{\\text{adjacente}}$",
               "isCorrect": false,
-              "feedback": "A tangente não envolve a hipotenusa. Como você tem a hipotenusa, use cosseno.",
+              "feedback": "A tangente não envolve a hipotenusa — ela usa oposto e adjacente. Como o problema fornece a hipotenusa, use cosseno para encontrar o adjacente.",
               "errorCategory": "fórmula inadequada"
             },
             {
               "text": "Cossecante: csc α = hipotenusa/oposto",
               "isCorrect": false,
-              "feedback": "Cossecante é o inverso do seno. Para este caso, use a função básica: cosseno.",
+              "feedback": "Cossecante é o inverso do seno e não é função básica de trigonometria no ensino fundamental. Use cosseno: $\\text{adjacente} = \\text{cos}\\,\\alpha \\times \\text{hipotenusa}$.",
               "errorCategory": "fórmula inadequada"
             }
           ]
@@ -591,25 +656,25 @@
             {
               "text": "5 cm",
               "isCorrect": true,
-              "feedback": "Correto. $\\text{sen}\\,30^\\circ = \\dfrac{\\text{oposto}}{10} \\Rightarrow 0{,}5 = \\dfrac{\\text{oposto}}{10} \\Rightarrow \\text{oposto} = 5$ cm.",
+              "feedback": "Correto. $\\text{sen}\\,30° = \\dfrac{\\text{oposto}}{10} \\Rightarrow 0{,}5 = \\dfrac{\\text{oposto}}{10} \\Rightarrow \\text{oposto} = 5$ cm.",
               "errorCategory": null
             },
             {
               "text": "8,66 cm",
               "isCorrect": false,
-              "feedback": "$8{,}66$ cm seria o cateto adjacente ($\\text{cos}\\,30^\\circ \\times 10$). Para o oposto, use seno: $0{,}5 \\times 10 = 5$ cm.",
+              "feedback": "$8{,}66$ cm seria o cateto ADJACENTE ($\\text{cos}\\,30° \\times 10 = \\frac{\\sqrt{3}}{2} \\times 10$). Para o OPOSTO, use seno: $0{,}5 \\times 10 = 5$ cm.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "20 cm",
               "isCorrect": false,
-              "feedback": "Você dividiu em vez de multiplicar. $\\text{sen}\\,30^\\circ = \\dfrac{\\text{oposto}}{\\text{hipotenusa}} \\Rightarrow \\text{oposto} = 0{,}5 \\times 10 = 5$, não $\\dfrac{10}{0{,}5}$.",
+              "feedback": "Você dividiu hipotenusa por sen em vez de multiplicar. $\\text{sen}\\,30° = \\dfrac{\\text{oposto}}{10} \\Rightarrow \\text{oposto} = 0{,}5 \\times 10 = 5$ cm.",
               "errorCategory": "operação algébrica"
             },
             {
               "text": "3 cm",
               "isCorrect": false,
-              "feedback": "Verifique o valor de $\\text{sen}\\,30^\\circ = 0{,}5$. $\\text{Oposto} = 0{,}5 \\times 10 = 5$ cm.",
+              "feedback": "Verifique o valor de $\\text{sen}\\,30° = 0{,}5$ (metade). $\\text{Oposto} = 0{,}5 \\times 10 = 5$ cm.",
               "errorCategory": "cálculo numérico"
             }
           ]
@@ -623,25 +688,25 @@
             {
               "text": "8 cm",
               "isCorrect": true,
-              "feedback": "Correto. $\\text{tg}\\,45^\\circ = 1 \\Rightarrow \\dfrac{\\text{oposto}}{8} = 1 \\Rightarrow \\text{oposto} = 8$ cm. Com 45°, os dois catetos são iguais.",
+              "feedback": "Correto. $\\text{tg}\\,45° = 1 \\Rightarrow \\dfrac{\\text{oposto}}{8} = 1 \\Rightarrow \\text{oposto} = 8$ cm. Com 45°, os dois catetos são iguais.",
               "errorCategory": null
             },
             {
               "text": "4 cm",
               "isCorrect": false,
-              "feedback": "$\\text{tg}\\,45^\\circ = 1$, portanto $\\text{oposto} = \\text{tg}\\,45^\\circ \\times \\text{adjacente} = 1 \\times 8 = 8$, não 4.",
+              "feedback": "$\\text{tg}\\,45° = 1$, portanto $\\text{oposto} = 1 \\times 8 = 8$ cm. Você pode ter dividido 8 por 2, mas isso não vem de nenhuma propriedade do ângulo 45°.",
               "errorCategory": "cálculo numérico"
             },
             {
               "text": "11,3 cm",
               "isCorrect": false,
-              "feedback": "$11{,}3$ cm seria a hipotenusa ($8\\sqrt{2}$). O cateto oposto usa tangente: $\\text{tg}\\,45^\\circ \\times 8 = 1 \\times 8 = 8$ cm.",
+              "feedback": "$11{,}3$ cm seria a HIPOTENUSA ($8\\sqrt{2} \\approx 11{,}3$). O cateto OPOSTO usa tangente: $\\text{tg}\\,45° \\times 8 = 1 \\times 8 = 8$ cm.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "5,66 cm",
               "isCorrect": false,
-              "feedback": "Você pode ter calculado $\\dfrac{8}{\\sqrt{2}}$. Mas $\\text{tg}\\,45^\\circ = 1$, portanto oposto $= 8$ cm.",
+              "feedback": "Você pode ter calculado $\\dfrac{8}{\\sqrt{2}} \\approx 5{,}66$. Mas $\\text{tg}\\,45° = 1$, portanto oposto $= 1 \\times 8 = 8$ cm.",
               "errorCategory": "fórmula inadequada"
             }
           ]
@@ -655,25 +720,25 @@
             {
               "text": "α = 30°",
               "isCorrect": true,
-              "feedback": "Correto. $\\text{tg}\\,\\alpha = \\dfrac{5}{5\\sqrt{3}} = \\dfrac{1}{\\sqrt{3}} \\approx 0{,}577$. Portanto $\\alpha = \\text{arctg}\\left(\\dfrac{1}{\\sqrt{3}}\\right) = 30°$.",
+              "feedback": "Correto. $\\text{tg}\\,\\alpha = \\dfrac{5}{5\\sqrt{3}} = \\dfrac{1}{\\sqrt{3}} \\approx 0{,}577$. Pela tabela: $\\text{tg}\\,30° = \\dfrac{1}{\\sqrt{3}}$. Portanto $\\alpha = 30°$.",
               "errorCategory": null
             },
             {
               "text": "α = 60°",
               "isCorrect": false,
-              "feedback": "$\\text{tg}\\, 60° = \\sqrt{3} \\approx 1{,}73$. Mas $\\text{tg}\\,\\alpha = \\dfrac{5}{5\\sqrt{3}} = \\dfrac{1}{\\sqrt{3}}$, que corresponde a 30°.",
+              "feedback": "$\\text{tg}\\,60° = \\sqrt{3} \\approx 1{,}73$. Mas $\\text{tg}\\,\\alpha = \\dfrac{5}{5\\sqrt{3}} = \\dfrac{1}{\\sqrt{3}} \\approx 0{,}58$. Esse valor corresponde a 30°, não 60°.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "α = 45°",
               "isCorrect": false,
-              "feedback": "$\\text{tg}\\, 45° = 1$, o que exigiria oposto = adjacente. Aqui o adjacente é $\\sqrt{3}$ vezes maior, então α = 30°.",
+              "feedback": "$\\text{tg}\\,45° = 1$, o que exigiria oposto = adjacente. Aqui o adjacente é $\\sqrt{3}$ vezes maior que o oposto, então α = 30°.",
               "errorCategory": "cálculo numérico"
             },
             {
               "text": "α = 90°",
               "isCorrect": false,
-              "feedback": "α não pode ser 90° em um ângulo de triângulo retângulo que não seja o ângulo reto. Calcule $\\text{tg}\\,\\alpha = \\dfrac{1}{\\sqrt{3}} \\Rightarrow \\alpha = 30°$.",
+              "feedback": "α não pode ser 90° em um ângulo não reto do triângulo retângulo. Calcule $\\text{tg}\\,\\alpha = \\dfrac{1}{\\sqrt{3}} \\Rightarrow \\alpha = 30°$.",
               "errorCategory": "conceito base"
             }
           ]
@@ -687,25 +752,25 @@
             {
               "text": "$3\\sqrt{3}$ m ≈ 5,2 m",
               "isCorrect": true,
-              "feedback": "Correto. A escada é a hipotenusa (6 m). Queremos o cateto oposto ao ângulo de 60°. $\\text{sen}\\, 60° = \\dfrac{\\text{oposto}}{6} \\Rightarrow \\text{oposto} = 6 \\times \\dfrac{\\sqrt{3}}{2} = 3\\sqrt{3} \\approx 5{,}2$ m.",
+              "feedback": "Correto. A escada é a hipotenusa (6 m). O ângulo é 60° com o chão. A parede é o cateto oposto a esse ângulo. $\\text{sen}\\,60° = \\dfrac{\\text{oposto}}{6} \\Rightarrow \\text{oposto} = 6 \\times \\dfrac{\\sqrt{3}}{2} = 3\\sqrt{3} \\approx 5{,}2$ m.",
               "errorCategory": null
             },
             {
               "text": "3 m",
               "isCorrect": false,
-              "feedback": "3 m seria o cateto adjacente ($\\text{cos}\\, 60° \\times 6 = 0{,}5 \\times 6 = 3$). Para a altura (cateto oposto), use seno: $6 \\times \\text{sen}\\, 60° = 3\\sqrt{3}$.",
+              "feedback": "3 m seria o cateto adjacente ($\\text{cos}\\,60° \\times 6 = 0{,}5 \\times 6 = 3$). Para a ALTURA (cateto oposto), use seno: $6 \\times \\text{sen}\\,60° = 6 \\times \\dfrac{\\sqrt{3}}{2} = 3\\sqrt{3} \\approx 5{,}2$ m.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "6 m",
               "isCorrect": false,
-              "feedback": "6 m é o comprimento total da escada (hipotenusa). A altura na parede é menor: $6 \\times \\text{sen}\\, 60° = 3\\sqrt{3} \\approx 5{,}2$ m.",
+              "feedback": "6 m é o comprimento total da escada (hipotenusa). A altura na parede é menor: $6 \\times \\text{sen}\\,60° = 3\\sqrt{3} \\approx 5{,}2$ m.",
               "errorCategory": "identificação de elementos"
             },
             {
               "text": "$6\\sqrt{3}$ m",
               "isCorrect": false,
-              "feedback": "Você multiplicou $6 \\times \\sqrt{3}$. Mas $\\text{sen}\\, 60° = \\dfrac{\\sqrt{3}}{2}$, portanto altura $= 6 \\times \\dfrac{\\sqrt{3}}{2} = 3\\sqrt{3}$, não $6\\sqrt{3}$.",
+              "feedback": "Você usou $6 \\times \\sqrt{3}$. Mas $\\text{sen}\\,60° = \\dfrac{\\sqrt{3}}{2}$, portanto altura $= 6 \\times \\dfrac{\\sqrt{3}}{2} = 3\\sqrt{3}$, não $6\\sqrt{3}$.",
               "errorCategory": "cálculo numérico"
             }
           ]
@@ -717,7 +782,7 @@
       "title": "Sistemas com Equações do 2º Grau",
       "shortTitle": "Sistemas",
       "goal": "Resolver sistemas envolvendo equações quadráticas usando substituição e combinação.",
-      "estimatedMinutes": 10,
+      "estimatedMinutes": 14,
       "isOptional": false,
       "prerequisites": [],
       "blocks": [
@@ -728,7 +793,13 @@
         },
         {
           "type": "concept",
-          "title": "A estratégia",
+          "title": "Pré-requisito: equações do 2º grau",
+          "text": "Uma equação do 2º grau tem a forma $ax^2 + bx + c = 0$, onde $a \\neq 0$. Chama-se 2º grau porque a variável está elevada ao quadrado. Para resolver, use fatoração (quando possível) ou a Fórmula de Bhaskara. Nesta missão, você vai resolver sistemas onde uma das equações é do 2° grau — por isso é essencial saber resolver equações quadráticas antes de avançar.",
+          "highlight": "$ax^2 + bx + c = 0 \\Rightarrow x = \\dfrac{-b \\pm \\sqrt{b^2 - 4ac}}{2a}$"
+        },
+        {
+          "type": "concept",
+          "title": "A estratégia central",
           "text": "Quando um sistema tem uma equação do 1º grau e uma do 2º grau, o melhor caminho é isolar uma variável na equação do 1º grau e substituir na do 2º grau. Isso transforma dois problemas em um.",
           "highlight": "Isole na equação mais simples → Substitua na mais complexa → Resolva a equação resultante."
         },
@@ -741,34 +812,45 @@
           "type": "worked_example",
           "problem": "Resolva o sistema: { $x + y = 5$ | $x^2 + y^2 = 13$ }",
           "steps": [
-            "Da primeira equação (mais simples), isole y: $y = 5 - x$.",
+            "Da primeira equação (mais simples — 1º grau), isole y: $y = 5 - x$.",
             "Substitua em $x^2 + y^2 = 13$: $x^2 + (5-x)^2 = 13$.",
-            "Expanda $(5-x)^2$ usando $(a-b)^2 = a^2 - 2ab + b^2$: $(5-x)^2 = 25 - 10x + x^2$.",
-            "Substituindo: $x^2 + 25 - 10x + x^2 = 13$.",
+            "Expanda $(5-x)^2$ usando a regra $(a-b)^2 = a^2 - 2ab + b^2$: $(5-x)^2 = 25 - 10x + x^2$.",
+            "Substituindo tudo: $x^2 + 25 - 10x + x^2 = 13$.",
             "Simplifique: $2x^2 - 10x + 12 = 0$.",
-            "Divida por 2: $x^2 - 5x + 6 = 0$.",
+            "Divida por 2 para simplificar: $x^2 - 5x + 6 = 0$.",
             "Fatore: $(x-2)(x-3) = 0 \\Rightarrow x = 2$ ou $x = 3$.",
             "Para $x = 2$: $y = 5 - 2 = 3$. Para $x = 3$: $y = 5 - 3 = 2$.",
             "Verifique: $2^2 + 3^2 = 4 + 9 = 13$ ✓ e $2 + 3 = 5$ ✓."
           ],
-          "conclusion": "Este sistema tem duas soluções: (2, 3) e (3, 2)."
+          "conclusion": "Este sistema tem duas soluções: (2, 3) e (3, 2). Sempre verifique as soluções nas equações originais."
         },
         {
           "type": "concept",
-          "title": "Identidade útil: $x^2 + y^2$ sem calcular $x$ e $y$",
-          "text": "Em alguns sistemas você conhece $x + y$ e $x \\cdot y$, mas precisa de $x^2 + y^2$ sem encontrar $x$ e $y$ separadamente. Desenvolva $(x+y)^2$:",
+          "title": "Identidade útil: calcular $x^2 + y^2$ sem encontrar x e y",
+          "text": "Em alguns sistemas você conhece $x + y$ e $x \\cdot y$, mas precisa de $x^2 + y^2$ diretamente. Basta desenvolver $(x+y)^2$ e isolar o que você quer:",
           "highlight": "$(x+y)^2 = x^2 + 2xy + y^2 \\Rightarrow x^2 + y^2 = (x+y)^2 - 2xy$"
         },
         {
           "type": "worked_example",
           "problem": "Você sabe que $x + y = 7$ e $xy = 12$. Encontre $x$ e $y$.",
           "steps": [
-            "Quando conhecemos a soma S = x + y e o produto P = xy, os dois números são as raízes da equação: $t^2 - S \\cdot t + P = 0$.",
+            "Quando conhecemos a soma S = x + y e o produto P = xy, os dois números são as raízes da equação quadrática: $t^2 - S \\cdot t + P = 0$.",
             "Substitua S = 7 e P = 12: $t^2 - 7t + 12 = 0$.",
             "Fatore: $(t - 3)(t - 4) = 0 \\Rightarrow t = 3$ ou $t = 4$.",
             "Verifique: $3 + 4 = 7$ ✓ e $3 \\times 4 = 12$ ✓."
           ],
-          "conclusion": "Os números são 3 e 4. Sempre que tiver x + y = S e xy = P, forme $t^2 - St + P = 0$ e fatore."
+          "conclusion": "Os números são 3 e 4. Atalho: sempre que tiver x + y = S e xy = P, forme $t^2 - St + P = 0$ e fatore."
+        },
+        {
+          "type": "visual_explanation",
+          "title": "Erros comuns nesta missão",
+          "text": "Os erros mais frequentes ao resolver sistemas com equações do 2º grau:",
+          "items": [
+            "Erro 1 — Esquecer o termo do meio ao expandir $(a \\pm b)^2$: $(x+y)^2 = x^2 + 2xy + y^2$, NÃO $x^2 + y^2$. O termo $2xy$ no meio é obrigatório — sem ele o resultado fica errado.",
+            "Erro 2 — Perder uma das soluções: sistemas com equação do 2° grau geralmente têm duas soluções. Verifique ambas no enunciado antes de descartar uma delas.",
+            "Erro 3 — Isolar na equação mais complexa: sempre isole na equação mais simples (1° grau) e substitua na mais complexa. Isolar num sistema com $x^2$ gera raiz quadrada e mais dificuldade.",
+            "Erro 4 — Não verificar as soluções: substitua x e y nas duas equações originais. Um erro de cálculo pode ter gerado um valor que não satisfaz o sistema."
+          ]
         },
         {
           "type": "hint",
@@ -778,12 +860,12 @@
           "type": "summary",
           "title": "Resumo",
           "points": [
-            "Isole uma variável na equação mais simples.",
+            "Isole uma variável na equação mais simples (1° grau).",
             "Substitua na equação do 2º grau.",
             "Ao expandir $(a \\pm b)^2$, use $a^2 \\pm 2ab + b^2$ — não esqueça o termo do meio.",
             "Resolva a equação resultante (geralmente do 2º grau).",
             "Para cada valor encontrado, calcule o valor da outra variável.",
-            "Verifique as soluções nas equações originais.",
+            "Verifique SEMPRE as soluções nas equações originais.",
             "Atalho: se precisar de $x^2 + y^2$, use $(x+y)^2 - 2xy = x^2 + y^2$."
           ]
         }
@@ -798,25 +880,25 @@
             {
               "text": "Fatorar $x^2 - y^2$ como $(x-y)(x+y)$.",
               "isCorrect": true,
-              "feedback": "Correto. $x^2 - y^2 = (x-y)(x+y)$. Como $x - y = 2$, temos $2(x+y) = 8 \\Rightarrow x + y = 4$. Resolve-se então o sistema linear $x - y = 2$ e $x + y = 4$. Esse é o caminho mais direto.",
+              "feedback": "Correto. $x^2 - y^2 = (x-y)(x+y)$. Como $x - y = 2$, temos $2(x+y) = 8 \\Rightarrow x + y = 4$. Resolve-se então o sistema linear $x - y = 2$ e $x + y = 4$. Caminho mais direto.",
               "errorCategory": null
             },
             {
               "text": "Isolar x na primeira equação: x = y + 2.",
               "isCorrect": false,
-              "feedback": "Isolar $x$ funciona e leva ao resultado correto. Porém há um caminho mais eficiente: fatorar $x^2 - y^2 = (x-y)(x+y)$ e usar $x - y = 2$ diretamente, evitando substituição e expansão.",
+              "feedback": "Isolar $x$ funciona e leva ao resultado correto. Porém há um caminho mais eficiente: $x^2 - y^2 = (x-y)(x+y) = 2(x+y) = 8 \\Rightarrow x + y = 4$. Evita substituição e expansão.",
               "errorCategory": "fórmula inadequada"
             },
             {
               "text": "Aplicar Bhaskara imediatamente.",
               "isCorrect": false,
-              "feedback": "Bhaskara resolve equações do 2° grau individuais. Primeiro reduza o sistema: $x^2 - y^2 = (x-y)(x+y) = 2(x+y) = 8 \\Rightarrow x + y = 4$.",
+              "feedback": "Bhaskara resolve equações individuais do 2° grau, não sistemas. Primeiro reduza: $x^2 - y^2 = (x-y)(x+y) = 2(x+y) = 8 \\Rightarrow x + y = 4$. Depois resolva o sistema linear.",
               "errorCategory": "fórmula inadequada"
             },
             {
               "text": "Substituir y = 0 para testar.",
               "isCorrect": false,
-              "feedback": "Testar $y = 0$ não resolve o sistema — apenas verifica se $(x, 0)$ é solução. O caminho correto é fatorar $x^2 - y^2 = (x-y)(x+y)$ e usar a primeira equação.",
+              "feedback": "Testar valores específicos não resolve o sistema — apenas verifica se determinado ponto é solução. O caminho correto é fatorar $x^2 - y^2 = (x-y)(x+y)$ e usar a primeira equação.",
               "errorCategory": "conceito base"
             }
           ]
@@ -836,19 +918,19 @@
             {
               "text": "x = 5, y = 2",
               "isCorrect": false,
-              "feedback": "Verifique: $5 + 2 = 7$ ✓, mas $5 \\times 2 = 10 \\neq 12$. Resolva $x^2 - 7x + 12 = 0 \\Rightarrow x = 3$ ou $x = 4$.",
+              "feedback": "Verifique: $5 + 2 = 7$ ✓, mas $5 \\times 2 = 10 \\neq 12$. As condições não são satisfeitas simultaneamente. Resolva $x^2 - 7x + 12 = 0 \\Rightarrow x = 3$ ou $x = 4$.",
               "errorCategory": "cálculo numérico"
             },
             {
               "text": "x = 6, y = 1",
               "isCorrect": false,
-              "feedback": "Verifique: $6 + 1 = 7$ ✓, mas $6 \\times 1 = 6 \\neq 12$. A resposta é $x = 3$, $y = 4$.",
+              "feedback": "Verifique: $6 + 1 = 7$ ✓, mas $6 \\times 1 = 6 \\neq 12$. As duas equações precisam ser satisfeitas ao mesmo tempo. A resposta é $x = 3$, $y = 4$.",
               "errorCategory": "cálculo numérico"
             },
             {
               "text": "O sistema não tem solução.",
               "isCorrect": false,
-              "feedback": "O sistema tem duas soluções: $(3, 4)$ e $(4, 3)$. Resolva $x^2 - 7x + 12 = 0$.",
+              "feedback": "O sistema tem duas soluções: $(3, 4)$ e $(4, 3)$. Resolva $x^2 - 7x + 12 = 0 \\Rightarrow (x-3)(x-4) = 0$.",
               "errorCategory": "conceito base"
             }
           ]
@@ -862,25 +944,25 @@
             {
               "text": "x = 2, y = 3",
               "isCorrect": true,
-              "feedback": "Correto. Da primeira: $y = 2x - 1$. Substitua: $x^2 + 2x - 1 = 7 \\Rightarrow x^2 + 2x - 8 = 0 \\Rightarrow (x+4)(x-2) = 0$. $x = 2 \\Rightarrow y = 3$. $x = -4 \\Rightarrow y = -9$ ($x = -4$ é rejeitado pois a questão pede $x > 0$).",
+              "feedback": "Correto. Da primeira: $y = 2x - 1$. Substitua: $x^2 + 2x - 1 = 7 \\Rightarrow x^2 + 2x - 8 = 0 \\Rightarrow (x+4)(x-2) = 0$. Para $x = 2$: $y = 3$. Para $x = -4$: $y = -9$ (rejeitado, pois $x > 0$).",
               "errorCategory": null
             },
             {
               "text": "x = −4, y = −9",
               "isCorrect": false,
-              "feedback": "$x = -4$ e $y = -9$ também é uma solução válida do sistema! Verifique: $2(-4) - (-9) = 1$ ✓ e $(-4)^2 + (-9) = 16 - 9 = 7$ ✓. Se a questão pediu a solução com $x$ positivo, então $x = 2$, $y = 3$.",
+              "feedback": "$x = -4$, $y = -9$ é uma solução válida do sistema! Mas a questão pede $x > 0$. Verifique: $2(-4) - (-9) = 1$ ✓ e $(-4)^2 + (-9) = 7$ ✓. Como $x = -4 < 0$, essa solução é rejeitada.",
               "errorCategory": "interpretação"
             },
             {
               "text": "x = 1, y = 1",
               "isCorrect": false,
-              "feedback": "Verifique: $2(1) - 1 = 1$ ✓, mas $1^2 + 1 = 2 \\neq 7$. Resolva corretamente: $y = 2x - 1$, substitua e use Bhaskara.",
+              "feedback": "Verifique: $2(1) - 1 = 1$ ✓, mas $1^2 + 1 = 2 \\neq 7$. A segunda equação não é satisfeita. Resolva formalmente: $y = 2x - 1$, substitua e use Bhaskara ou fatoração.",
               "errorCategory": "cálculo numérico"
             },
             {
               "text": "O sistema tem infinitas soluções.",
               "isCorrect": false,
-              "feedback": "Sistemas com equação quadrática têm no máximo duas soluções. Este sistema tem as soluções (2, 3) e (−4, −9).",
+              "feedback": "Sistemas com equação quadrática têm no máximo duas soluções. Este sistema tem as soluções $(2, 3)$ e $(-4, -9)$. Com a restrição $x > 0$, a resposta é $(2, 3)$.",
               "errorCategory": "conceito base"
             }
           ]
@@ -892,8 +974,8 @@
           "statement": "Num sistema { $x + y = 10$ | $x \\cdot y = 24$ }, qual é o valor de $x^2 + y^2$?",
           "correctNumericAnswer": 52,
           "tolerance": 0.5,
-          "numericFeedbackCorrect": "Correto! Use a identidade apresentada na lição: $x^2 + y^2 = (x+y)^2 - 2xy = 100 - 48 = 52$.",
-          "numericFeedbackWrong": "Use a identidade: $x^2 + y^2 = (x+y)^2 - 2xy = 10^2 - 2 \\times 24 = 100 - 48 = 52$. Essa identidade foi apresentada no bloco 'Identidade útil' da lição."
+          "numericFeedbackCorrect": "Correto! Use a identidade apresentada na lição: $x^2 + y^2 = (x+y)^2 - 2xy = 10^2 - 2 \\times 24 = 100 - 48 = 52$.",
+          "numericFeedbackWrong": "Use a identidade: $x^2 + y^2 = (x+y)^2 - 2xy = 10^2 - 2 \\times 24 = 100 - 48 = 52$. Essa identidade foi apresentada no bloco 'Identidade útil' da lição — você não precisa encontrar x e y separadamente."
         },
         {
           "type": "multiple_choice",
@@ -904,25 +986,25 @@
             {
               "text": "3 e 6",
               "isCorrect": true,
-              "feedback": "Correto. $x + y = 9$ e $x^2 + y^2 = 45$. Use $x^2 + y^2 = (x+y)^2 - 2xy \\Rightarrow 45 = 81 - 2xy \\Rightarrow xy = 18$. Então $x$ e $y$ são raízes de $t^2 - 9t + 18 = 0 \\Rightarrow (t-3)(t-6) = 0$.",
+              "feedback": "Correto. $x + y = 9$ e $x^2 + y^2 = 45$. Use a identidade: $x^2 + y^2 = (x+y)^2 - 2xy \\Rightarrow 45 = 81 - 2xy \\Rightarrow xy = 18$. Então x e y são raízes de $t^2 - 9t + 18 = 0 \\Rightarrow (t-3)(t-6) = 0$.",
               "errorCategory": null
             },
             {
               "text": "4 e 5",
               "isCorrect": false,
-              "feedback": "Verifique: $4+5 = 9$ ✓, mas $4^2+5^2 = 16+25 = 41 \\neq 45$. Resolva o sistema formalmente usando $(x+y)^2 - 2xy = x^2 + y^2$.",
+              "feedback": "Verifique: $4+5 = 9$ ✓, mas $4^2+5^2 = 16+25 = 41 \\neq 45$. Não satisfaz a segunda condição. Resolva formalmente usando $(x+y)^2 - 2xy = x^2 + y^2$.",
               "errorCategory": "pressa/chute"
             },
             {
               "text": "2 e 7",
               "isCorrect": false,
-              "feedback": "Verifique: $2+7 = 9$ ✓, mas $2^2+7^2 = 4+49 = 53 \\neq 45$. A resposta correta é 3 e 6.",
+              "feedback": "Verifique: $2+7 = 9$ ✓, mas $2^2+7^2 = 4+49 = 53 \\neq 45$. Use a identidade: $xy = \\frac{81-45}{2} = 18$, e forme $t^2 - 9t + 18 = 0$.",
               "errorCategory": "pressa/chute"
             },
             {
               "text": "1 e 8",
               "isCorrect": false,
-              "feedback": "Verifique: $1+8 = 9$ ✓, mas $1^2+8^2 = 1+64 = 65 \\neq 45$. Use o sistema formal para encontrar 3 e 6.",
+              "feedback": "Verifique: $1+8 = 9$ ✓, mas $1^2+8^2 = 1+64 = 65 \\neq 45$. Use a abordagem formal para encontrar 3 e 6.",
               "errorCategory": "pressa/chute"
             }
           ]
