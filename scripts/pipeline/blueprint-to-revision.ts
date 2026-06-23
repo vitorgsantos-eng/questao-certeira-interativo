@@ -256,7 +256,7 @@ function blueprintToRevision(bp: Blueprint): ContentRevision {
       subtitle: rev.description.slice(0, 60),
       subject: rev.subject,
       tone: 'performance',
-      missionMapBadge: `${missions.length} missão${missions.length !== 1 ? 'ões' : ''}`,
+      missionMapBadge: missions.length === 1 ? '1 missão' : `${missions.length} missões`,
     },
     missions,
   }
