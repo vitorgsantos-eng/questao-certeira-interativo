@@ -1,0 +1,14 @@
+{
+  "sourceId": "autoral-proporcionalidade-demo-2026",
+  "sourceType": "own-authorship",
+  "title": "Rascunho autoral — Proporcionalidade e Regra de Três (Demo Pipeline)",
+  "author": "Questão Certeira — conteúdo autoral sintético",
+  "origin": "Conteúdo criado do zero para validar o pipeline. Não derivado de nenhum material externo protegido.",
+  "licenseOrPermission": "Autoral — todos os direitos reservados ao projeto Questão Certeira Interativo.",
+  "copyrightRisk": "low",
+  "allowedUse": "Uso irrestrito dentro do projeto. Pode ser importado para Supabase após revisão humana.",
+  "extractionDate": "2026-06-23",
+  "humanReviewer": "Vitor",
+  "notes": "Exemplo sintético para validar a esteira do Bloco 6. Não representa conteúdo pedagógico de produção.",
+  "derivedRevisionSlug": "revisao-demo-pipeline"
+}

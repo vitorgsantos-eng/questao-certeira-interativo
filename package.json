@@ -14,7 +14,11 @@
     "test": "npx tsx scripts/test-validation-logic.ts && npx tsx scripts/test-session-signing.ts && npx tsx scripts/test-rate-limiting.ts && npx tsx scripts/generate-access-codes.ts data/students.sample.json --dry-run",
     "test:generate-codes": "tsx scripts/generate-access-codes.ts data/students.sample.json --dry-run",
     "import-revision": "tsx scripts/import-revision.ts",
-    "generate-codes": "tsx scripts/generate-access-codes.ts"
+    "generate-codes": "tsx scripts/generate-access-codes.ts",
+    "pipeline:extract-pdf": "tsx scripts/pipeline/extract-pdf-text.ts",
+    "pipeline:validate-blueprint": "tsx scripts/pipeline/validate-blueprint.ts",
+    "pipeline:blueprint-to-revision": "tsx scripts/pipeline/blueprint-to-revision.ts",
+    "pipeline:validate-demo": "npm run pipeline:validate-blueprint -- content/pipeline/blueprints/examples/blueprint-demo-autoral.json && npm run pipeline:blueprint-to-revision -- content/pipeline/blueprints/examples/blueprint-demo-autoral.json && npm run validate-content -- content/pipeline/drafts/examples/revisao-demo-pipeline.json"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.1",
@@ -32,11 +36,13 @@
     "@types/bcryptjs": "^2.4.6",
     "@types/katex": "^0.16.8",
     "@types/node": "^20",
+    "@types/pdf-parse": "^1.1.5",
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "autoprefixer": "^10.5.0",
     "eslint": "^8",
     "eslint-config-next": "15.5.19",
+    "pdf-parse": "^2.4.5",
     "postcss": "^8",
     "tailwindcss": "^3.4.1",
     "tsx": "^4.19.2",

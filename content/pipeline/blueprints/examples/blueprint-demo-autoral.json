@@ -1,0 +1,98 @@
+{
+  "blueprintVersion": "1.0",
+  "targetRevision": {
+    "revisionSlug": "revisao-demo-pipeline",
+    "title": "Revisão Demo — Proporcionalidade e Regra de Três",
+    "grade": "7º ano",
+    "subject": "Matemática",
+    "description": "Revisão sintética autoral para validar o pipeline externo de PDFs. Cobre proporção direta, proporção inversa e regra de três simples."
+  },
+  "sourceSummary": {
+    "sourceId": "autoral-proporcionalidade-demo-2026",
+    "scope": "Conteúdo criado do zero para fins de validação técnica do pipeline. Não derivado de nenhum material externo.",
+    "copyrightRisk": "low",
+    "notes": "Blueprint 100% autoral e sintético. Pode ser versionado e importado livremente."
+  },
+  "learningObjectives": [
+    "Reconhecer grandezas diretamente proporcionais e inversamente proporcionais.",
+    "Aplicar regra de três simples para resolver problemas práticos.",
+    "Identificar o tipo de proporcionalidade antes de montar a proporção."
+  ],
+  "missions": [
+    {
+      "slug": "proporcao-direta",
+      "title": "Proporção Direta — Quando mais é mais",
+      "shortTitle": "Proporção Direta",
+      "goal": "O aluno será capaz de identificar grandezas diretamente proporcionais e resolver problemas usando regra de três direta.",
+      "estimatedMinutes": 8,
+      "prerequisites": [],
+      "concepts": [
+        "Duas grandezas são diretamente proporcionais quando, ao aumentar uma, a outra aumenta na mesma razão.",
+        "Exemplo: distância e tempo (a velocidade constante). Se o tempo dobra, a distância dobra.",
+        "A razão entre os valores correspondentes é sempre a mesma: A₁/B₁ = A₂/B₂."
+      ],
+      "workedExamples": [
+        {
+          "problem": "Um carro percorre 120 km em 2 horas. Quantos km percorre em 5 horas à mesma velocidade?",
+          "steps": [
+            "Identifique: distância e tempo são diretamente proporcionais (velocidade constante).",
+            "Monte a proporção: 120/2 = x/5.",
+            "Resolva: x = 120 × 5 / 2 = 300 km."
+          ],
+          "conclusion": "Em 5 horas, o carro percorre 300 km."
+        }
+      ],
+      "questionPlan": {
+        "minimumQuestions": 5,
+        "difficulties": ["basic", "intermediate", "challenge"],
+        "skills": ["identificar-proporcionalidade", "montar-regra-de-tres", "calcular-valor-desconhecido"],
+        "commonErrors": [
+          "Inverter a proporção (colocar 2/120 em vez de 120/2).",
+          "Confundir proporção direta com inversa.",
+          "Não manter as mesmas unidades nos dois membros."
+        ]
+      }
+    },
+    {
+      "slug": "proporcao-inversa",
+      "title": "Proporção Inversa — Quando mais é menos",
+      "shortTitle": "Proporção Inversa",
+      "goal": "O aluno será capaz de identificar grandezas inversamente proporcionais e resolver problemas usando regra de três inversa.",
+      "estimatedMinutes": 8,
+      "prerequisites": ["proporcao-direta"],
+      "concepts": [
+        "Duas grandezas são inversamente proporcionais quando, ao aumentar uma, a outra diminui na mesma razão.",
+        "Exemplo: número de trabalhadores e tempo para concluir uma tarefa. Mais trabalhadores → menos tempo.",
+        "Na regra de três inversa, inverte-se um dos membros antes de resolver: A₁/A₂ = B₂/B₁."
+      ],
+      "workedExamples": [
+        {
+          "problem": "3 pintores pintam uma casa em 12 dias. Em quantos dias 4 pintores pintariam a mesma casa?",
+          "steps": [
+            "Identifique: pintores e dias são inversamente proporcionais (mais pintores → menos dias).",
+            "Monte a proporção inversa: 3/4 = x/12 — inverta um dos membros: 3 × 12 = 4 × x.",
+            "Resolva: x = 36 / 4 = 9 dias."
+          ],
+          "conclusion": "4 pintores pintam a casa em 9 dias."
+        }
+      ],
+      "questionPlan": {
+        "minimumQuestions": 5,
+        "difficulties": ["basic", "intermediate", "challenge"],
+        "skills": ["identificar-proporcionalidade-inversa", "inverter-membros-proporcao", "resolver-regra-de-tres-inversa"],
+        "commonErrors": [
+          "Tratar proporção inversa como direta.",
+          "Esquecer de inverter um dos membros.",
+          "Errar na multiplicação cruzada."
+        ]
+      }
+    }
+  ],
+  "humanReview": {
+    "pedagogicalReviewRequired": true,
+    "copyrightReviewRequired": false,
+    "approved": true,
+    "reviewer": "Vitor",
+    "reviewDate": "2026-06-23"
+  }
+}

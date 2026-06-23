@@ -29,6 +29,32 @@
 - [x] Guia de criação de nova revisão em `docs/content/`
 - [ ] Smoke test com segunda revisão em banco real (pendência manual)
 
+## Checklist do pipeline externo de PDFs (Bloco 6)
+
+- [x] Estrutura `content/pipeline/` criada com `raw/`, `extracted/`, `blueprints/`, `drafts/`, `provenance/`, `reviews/`
+- [x] `content/pipeline/.gitignore` — PDFs e extrações protegidos de versionamento
+- [x] Schema de provenance criado e documentado
+- [x] Exemplo sintético de provenance (`provenance-demo-autoral.json`)
+- [x] Schema de blueprint pedagógico criado (`blueprints/schema.json`)
+- [x] Exemplo sintético de blueprint (`blueprint-demo-autoral.json`)
+- [x] Validador de blueprint (`validate-blueprint.ts`)
+- [x] Gerador de draft JSON (`blueprint-to-revision.ts`)
+- [x] Draft demo validável com 0 erros (`revisao-demo-pipeline.json`)
+- [x] Checklist autoral/humano criado (`checklist-autoral-template.md`)
+- [x] Documentação operacional completa (`docs/content/pdf-pipeline-guide.md`, `blueprint-pedagogico.md`, `checklist-autoral-e-revisao-humana.md`)
+- [x] Scripts npm adicionados: `pipeline:extract-pdf`, `pipeline:validate-blueprint`, `pipeline:blueprint-to-revision`, `pipeline:validate-demo`
+- [x] `pdf-parse` (Apache-2.0) adicionado como devDependency — sem custo, sem API externa
+- [x] `npm run lint` — sem novos erros
+- [x] `npm run type-check` — sem erros
+- [x] `npm run build` — sem erros
+- [x] `npm run validate-content:all` — 0 erros (revisões existentes inalteradas)
+- [x] `npm test` — passa
+- [x] Nenhum PDF protegido versionado
+- [x] Nenhum texto extraído de material protegido versionado
+- [x] Nenhum secret versionado
+- [x] Nenhuma IA adicionada ao app
+- [x] Nenhum serviço pago adicionado
+
 ## Checklist pedagógico
 
 - [x] Cada missão tem pelo menos 5 questões

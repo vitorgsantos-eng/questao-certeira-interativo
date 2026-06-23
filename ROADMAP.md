@@ -163,6 +163,50 @@ Backlog futuro restante: registro dinâmico de componentes visuais (sem alterar 
 - [ ] Coleta de feedback qualitativo
 - [ ] Ajustes baseados no piloto
 
+## Fase 10d — Bloco 6: Pipeline Externo de PDFs ✅ (2026-06-23)
+
+### VIT-42 — Convenção de fontes brutas e provenance ✅
+- [x] `content/pipeline/` criado com estrutura completa
+- [x] `content/pipeline/.gitignore` protege PDFs, extrações e outputs temporários
+- [x] `content/pipeline/provenance/schema.json` com todos os campos obrigatórios
+- [x] `content/pipeline/provenance/examples/provenance-demo-autoral.json` sintético
+
+### VIT-43 — Extrator local de texto de PDFs ✅
+- [x] `scripts/pipeline/extract-pdf-text.ts` criado
+- [x] Dependência `pdf-parse` (Apache-2.0) adicionada como devDependency
+- [x] Script recusa arquivo inexistente, identifica PDF possivelmente escaneado
+- [x] Texto extraído vai para `content/pipeline/extracted/` (gitignored)
+- [x] Relatório `.extraction-report.json` gerado com metadados
+
+### VIT-44 — Blueprint pedagógico intermediário ✅
+- [x] `content/pipeline/blueprints/schema.json` com schema completo
+- [x] `content/pipeline/blueprints/examples/blueprint-demo-autoral.json` sintético/autoral
+- [x] `scripts/pipeline/validate-blueprint.ts` criado
+- [x] `docs/content/blueprint-pedagogico.md` criado
+
+### VIT-45 — Gerador de draft JSON a partir de blueprint ✅
+- [x] `scripts/pipeline/blueprint-to-revision.ts` criado
+- [x] Draft gerado em `content/pipeline/drafts/examples/revisao-demo-pipeline.json`
+- [x] Draft validado com 0 erros pelo `validate-content`
+- [x] Script aborta se blueprint não aprovado
+
+### VIT-46 — Checklist autoral e revisão humana ✅
+- [x] `content/pipeline/reviews/checklist-autoral-template.md` criado
+- [x] `docs/content/checklist-autoral-e-revisao-humana.md` criado
+
+### VIT-47 — Demo fim a fim validável ✅
+- [x] `npm run pipeline:validate-blueprint` — 0 erros
+- [x] `npm run pipeline:blueprint-to-revision` — draft gerado
+- [x] `npm run validate-content` no draft — 0 erros, 0 warnings
+- [x] `npm run pipeline:validate-demo` — pipeline completo funcional
+
+### Documentação operacional ✅
+- [x] `docs/content/pdf-pipeline-guide.md` — guia completo do pipeline
+- [x] `docs/content/blueprint-pedagogico.md` — o que é e como preencher
+- [x] `docs/content/checklist-autoral-e-revisao-humana.md` — gate autoral
+- [x] `content/pipeline/README.md` — visão geral da estrutura
+- [x] Scripts npm: `pipeline:extract-pdf`, `pipeline:validate-blueprint`, `pipeline:blueprint-to-revision`, `pipeline:validate-demo`
+
 ## Backlog futuro (pós-MVP)
 - Mais turmas e revisões (motor já suporta)
 - Smoke test com segunda revisão em banco real

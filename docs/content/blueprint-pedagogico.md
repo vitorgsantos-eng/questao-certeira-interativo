@@ -1,0 +1,143 @@
+# Blueprint Pedagógico — O que é e como preencher
+
+**Motor Questão Certeira Interativo — Bloco 6**
+
+---
+
+## O que é um blueprint
+
+Um blueprint pedagógico é um documento intermediário entre o material bruto e o JSON final de revisão. Ele captura a **intenção pedagógica** da revisão: o que o aluno deve aprender, como os conceitos serão apresentados e como as questões serão planejadas.
+
+O blueprint **não** é o JSON final. Ele é preenchido pelo autor e validado antes da geração automática do draft.
+
+---
+
+## Por que usar um blueprint
+
+1. **Separa pensar de escrever.** O autor decide a estrutura pedagógica antes de escrever cada questão.
+2. **Força revisão humana.** O blueprint só gera draft se `humanReview.approved = true`.
+3. **Rastrea origem.** O `sourceSummary` liga o blueprint à sua fonte no `provenance.json`.
+4. **Documenta intenção.** Futuros revisores entendem por que cada missão existe.
+
+---
+
+## Schema
+
+Ver `content/pipeline/blueprints/schema.json`.
+
+## Exemplo completo
+
+Ver `content/pipeline/blueprints/examples/blueprint-demo-autoral.json`.
+
+---
+
+## Campos obrigatórios
+
+### `blueprintVersion`
+Atualmente: `"1.0"`.
+
+### `targetRevision`
+Define a revisão que será gerada:
+
+```json
+{
+  "revisionSlug": "revisao-7ano-proporcionalidade",
+  "title": "Proporcionalidade e Regra de Três — 7º Ano",
+  "grade": "7º ano",
+  "subject": "Matemática",
+  "description": "Revisão sobre grandezas proporcionais e regra de três simples."
+}
+```
+
+O `revisionSlug` deve ser único no projeto e seguir o padrão `revisao-[ano]-[assunto]`.
+
+### `sourceSummary`
+Rastreia a origem do material:
+
+```json
+{
+  "sourceId": "apostila-mat-7ano-2024",
+  "scope": "Capítulos 4 e 5 — proporcionalidade",
+  "copyrightRisk": "medium",
+  "notes": "Material usado como referência de estudo. Conteúdo final será reescrito."
+}
+```
+
+- `copyrightRisk: "high"` → revisão de copyright obrigatória antes de gerar draft.
+- O `sourceId` deve existir em `content/pipeline/provenance/`.
+
+### `learningObjectives`
+Lista de objetivos de aprendizagem. Mínimo: 1.
+
+```json
+[
+  "Identificar grandezas diretamente e inversamente proporcionais.",
+  "Aplicar regra de três simples em contextos práticos."
+]
+```
+
+### `missions`
+Array de missões. Cada missão tem:
+
+| Campo | Descrição |
+|-------|-----------|
+| `slug` | Identificador único em `kebab-case` |
+| `title` | Título completo |
+| `shortTitle` | Título curto para exibição |
+| `goal` | "O aluno será capaz de..." |
+| `estimatedMinutes` | 1–30 |
+| `prerequisites` | Slugs de missões anteriores (array, pode ser vazio) |
+| `concepts` | Lista de conceitos a apresentar (mínimo 1) |
+| `workedExamples` | Lista de exemplos resolvidos (mínimo 1) |
+| `questionPlan` | Planejamento das questões |
+
+**`questionPlan`:**
+
+```json
+{
+  "minimumQuestions": 5,
+  "difficulties": ["basic", "intermediate", "challenge"],
+  "skills": ["identificar-proporcao-direta", "montar-regra-de-tres"],
+  "commonErrors": ["Inverter a proporção", "Confundir proporção direta com inversa"]
+}
+```
+
+### `humanReview`
+Gate obrigatório antes de gerar draft:
+
+```json
+{
+  "pedagogicalReviewRequired": true,
+  "copyrightReviewRequired": false,
+  "approved": true,
+  "reviewer": "Vitor",
+  "reviewDate": "2026-06-23"
+}
+```
+
+- `approved: false` → o script `blueprint-to-revision.ts` **aborta**.
+- `copyrightReviewRequired: true` com `reviewer: null` → **aborta**.
+
+---
+
+## Validação
+
+```bash
+npm run pipeline:validate-blueprint -- content/pipeline/blueprints/meu-blueprint.json
+```
+
+Erros comuns:
+- `approved: false` → preencha `reviewer` e `reviewDate` após revisar
+- `minimumQuestions < 5` → ajuste o `questionPlan`
+- `concepts` vazio → descreva pelo menos 1 conceito central
+- `workedExamples` vazio → inclua pelo menos 1 exemplo resolvido
+
+---
+
+## Diferença: blueprint vs draft vs revisão
+
+| Artefato | Onde fica | Quem cria | Quando usar |
+|----------|-----------|-----------|-------------|
+| Blueprint | `content/pipeline/blueprints/` | Autor + script | Antes de gerar o JSON |
+| Draft | `content/pipeline/drafts/` | Script gerador | Rascunho com placeholders |
+| Revisão | `content/revisions/` | Autor (pós-checklist) | Após revisão humana completa |

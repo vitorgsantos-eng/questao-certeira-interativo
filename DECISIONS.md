@@ -109,3 +109,37 @@
 **Motivo:** o motor precisa renderizar visuais específicos sem saber antecipadamente quais existem. O `diagramId` no JSON permite que novos diagramas sejam adicionados registrando-se apenas um ID no switch do motor e criando o componente — sem alterar o motor em outros pontos.
 
 **Trade-off:** o motor ainda precisa conhecer os IDs dos diagramas para renderizá-los. Para uma segunda revisão com novos diagramas, o motor precisará ser atualizado com os novos IDs. Isso é aceitável no MVP; uma solução mais genérica (registro dinâmico) pode ser feita em bloco futuro.
+
+---
+
+## 14. (Bloco 6) Por que usar pipeline intermediário com blueprint
+
+**Decisão:** criar um formato intermediário (blueprint pedagógico) entre o material bruto e o JSON final, em vez de gerar JSONs diretamente de PDFs.
+
+**Motivo:** um PDF bruto não contém intenção pedagógica estruturada. O blueprint força o autor a definir objetivos, conceitos, exemplos e planejamento de questões antes de gerar qualquer JSON. Isso impede geração de conteúdo pobre e reduz retrabalho.
+
+---
+
+## 15. (Bloco 6) Por que usar pdf-parse como devDependency
+
+**Decisão:** `pdf-parse` (Apache-2.0) adicionado como `devDependency` para extração local de texto de PDFs textuais.
+
+**Motivo:** pacote gratuito, permissivo, sem API externa, sem custo. Usado apenas em scripts locais de pipeline — nunca no runtime do app. OCR não está no escopo deste bloco.
+
+**Risco mitigado:** `pdf-parse` não funciona com PDFs escaneados. O script detecta extração insuficiente e alerta o operador, sem silenciar o problema.
+
+---
+
+## 16. (Bloco 6) Por que drafts ficam em content/pipeline/drafts/, não em content/revisions/
+
+**Decisão:** drafts gerados pelo pipeline ficam em `content/pipeline/drafts/` e só são promovidos para `content/revisions/` após checklist autoral aprovado por humano.
+
+**Motivo:** drafts contêm placeholders que precisam ser reescritos. Promover automaticamente para `content/revisions/` aumentaria o risco de importar conteúdo não revisado para o banco. O gate humano é obrigatório.
+
+---
+
+## 17. (Bloco 6) Por que provenance.json é obrigatório por revisão
+
+**Decisão:** toda revisão gerada pelo pipeline deve ter um arquivo `provenance.json` rastreando a origem do material.
+
+**Motivo:** sem rastreabilidade, é impossível auditar riscos autorais futuros. O provenance também serve como documentação pedagógica: por que este material foi usado, quem aprovou, e que uso é permitido.

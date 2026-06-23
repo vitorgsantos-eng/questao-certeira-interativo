@@ -1,0 +1,72 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Provenance",
+  "description": "Rastreabilidade de origem de material usado como insumo para criação de revisão autoral.",
+  "type": "object",
+  "required": [
+    "sourceId",
+    "sourceType",
+    "title",
+    "author",
+    "origin",
+    "licenseOrPermission",
+    "copyrightRisk",
+    "allowedUse",
+    "extractionDate",
+    "humanReviewer",
+    "derivedRevisionSlug"
+  ],
+  "properties": {
+    "sourceId": {
+      "type": "string",
+      "description": "Identificador único da fonte. Ex: 'apostila-matematica-9ano-2024'."
+    },
+    "sourceType": {
+      "type": "string",
+      "enum": ["pdf-textual", "pdf-scanned", "docx", "web-page", "book", "own-authorship", "public-domain", "licensed"],
+      "description": "Tipo da fonte primária."
+    },
+    "title": {
+      "type": "string",
+      "description": "Título do material de origem."
+    },
+    "author": {
+      "type": "string",
+      "description": "Autor ou instituição responsável pelo material original."
+    },
+    "origin": {
+      "type": "string",
+      "description": "Descrição da origem: onde foi obtido, por quem, em que contexto."
+    },
+    "licenseOrPermission": {
+      "type": "string",
+      "description": "Licença do material (CC-BY, domínio público, permissão explícita, uso privado/estudo, etc.)."
+    },
+    "copyrightRisk": {
+      "type": "string",
+      "enum": ["low", "medium", "high"],
+      "description": "Avaliação do risco autoral. 'low' = domínio público ou autoral; 'medium' = uso educacional com cuidado; 'high' = material protegido — revisão humana obrigatória."
+    },
+    "allowedUse": {
+      "type": "string",
+      "description": "O que pode ser feito com este material: estudo/referência, adaptação autoral, reprodução parcial, etc."
+    },
+    "extractionDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Data em que o material foi extraído/processado (YYYY-MM-DD)."
+    },
+    "humanReviewer": {
+      "type": ["string", "null"],
+      "description": "Nome do revisor humano que aprovou o uso. Null se ainda não revisado."
+    },
+    "notes": {
+      "type": "string",
+      "description": "Observações adicionais sobre a origem, limitações ou alertas."
+    },
+    "derivedRevisionSlug": {
+      "type": ["string", "null"],
+      "description": "Slug da revisão gerada a partir deste material. Null se ainda não gerada."
+    }
+  }
+}
