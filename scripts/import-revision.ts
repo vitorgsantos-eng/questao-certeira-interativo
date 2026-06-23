@@ -13,8 +13,25 @@ import type {
   ContentQuestionJSON,
 } from '../src/types'
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL
-const serviceKey = process.env.SUPABASE_SERVICE_ROLE_KEY
+function loadEnvLocal(): Record<string, string> {
+  const envPath = path.resolve(process.cwd(), '.env.local')
+  if (!fs.existsSync(envPath)) return {}
+  const vars: Record<string, string> = {}
+  for (const raw of fs.readFileSync(envPath, 'utf-8').split('\n')) {
+    const line = raw.trim()
+    if (!line || line.startsWith('#')) continue
+    const eqIdx = line.indexOf('=')
+    if (eqIdx === -1) continue
+    const key = line.slice(0, eqIdx).trim()
+    const val = line.slice(eqIdx + 1).trim().replace(/^["']|["']$/g, '')
+    vars[key] = val
+  }
+  return vars
+}
+
+const env = loadEnvLocal()
+const supabaseUrl = env['NEXT_PUBLIC_SUPABASE_URL'] || process.env.NEXT_PUBLIC_SUPABASE_URL
+const serviceKey = env['SUPABASE_SERVICE_ROLE_KEY'] || process.env.SUPABASE_SERVICE_ROLE_KEY
 
 if (!supabaseUrl || !serviceKey) {
   console.error('Missing NEXT_PUBLIC_SUPABASE_URL or SUPABASE_SERVICE_ROLE_KEY')
