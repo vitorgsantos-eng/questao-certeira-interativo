@@ -166,9 +166,16 @@ function validateBlueprint(bp: Blueprint) {
       ok(`${m.concepts.length} conceito(s) definido(s)`)
     }
 
+    // Bloco 7: revisões de Matemática exigem >= 2 exemplos resolvidos
+    const isMath = (bp.targetRevision?.subject ?? '').toLowerCase().includes('matem')
+    const minWorkedExamples = isMath ? 2 : 1
+
     if (!m.workedExamples || m.workedExamples.length === 0) {
-      error('workedExamples ausente — defina pelo menos 1 exemplo resolvido')
+      error(`workedExamples ausente — defina pelo menos ${minWorkedExamples} exemplo(s) resolvido(s)`)
     } else {
+      if (m.workedExamples.length < minWorkedExamples) {
+        error(`workedExamples insuficientes: ${m.workedExamples.length} encontrado(s), mínimo ${minWorkedExamples} para ${bp.targetRevision?.subject ?? 'esta disciplina'}`)
+      }
       for (let e = 0; e < m.workedExamples.length; e++) {
         const ex = m.workedExamples[e]
         if (!ex.problem) error(`workedExample ${e + 1}: problem ausente`)
@@ -193,8 +200,10 @@ function validateBlueprint(bp: Blueprint) {
         for (const d of qp.difficulties) {
           if (!validDifficulties.includes(d)) error(`dificuldade inválida: '${d}'`)
         }
-        if (!qp.difficulties.includes('basic')) warn('Sem dificuldade "basic" planejada')
-        if (!qp.difficulties.includes('challenge')) warn('Sem dificuldade "challenge" planejada')
+        // Bloco 7: as três dificuldades são obrigatórias
+        if (!qp.difficulties.includes('basic')) error('questionPlan.difficulties deve incluir "basic" (questão básica obrigatória)')
+        if (!qp.difficulties.includes('intermediate')) error('questionPlan.difficulties deve incluir "intermediate" (questão intermediária obrigatória)')
+        if (!qp.difficulties.includes('challenge')) error('questionPlan.difficulties deve incluir "challenge" (questão desafio obrigatória)')
       }
 
       if (!qp.skills || qp.skills.length === 0) {
@@ -203,8 +212,13 @@ function validateBlueprint(bp: Blueprint) {
         ok(`${qp.skills.length} habilidade(s) mapeada(s)`)
       }
 
+      // Bloco 7: commonErrors >= 3 obrigatório
       if (!qp.commonErrors || qp.commonErrors.length === 0) {
-        warn('questionPlan.commonErrors ausente — recomendado para melhorar feedbacks')
+        error('questionPlan.commonErrors ausente — documente ao menos 3 erros comuns (obrigatório pelo padrão de qualidade do Bloco 7)')
+      } else if (qp.commonErrors.length < 3) {
+        error(`questionPlan.commonErrors insuficiente: ${qp.commonErrors.length} erro(s) documentado(s), mínimo 3 exigido`)
+      } else {
+        ok(`${qp.commonErrors.length} erro(s) comum(ns) documentado(s)`)
       }
     }
   }

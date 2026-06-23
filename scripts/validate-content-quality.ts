@@ -5,11 +5,15 @@
  * Validador de qualidade pedagógica para revisões do Questão Certeira Interativo.
  * Complementa validate-content.ts (estrutura) com critérios pedagógicos.
  *
+ * Modos:
+ *   Diagnóstico (padrão) — erros saem com código 1; warnings saem com código 0.
+ *   Estrito (--strict)   — erros E warnings saem com código 1. Use no CI da revisão piloto.
+ *
  * Critérios verificados:
  *  - Presença de elemento visual (diagram ou visual_explanation) por missão
  *  - Mínimo de 2 worked_example por missão em revisões de Matemática
  *  - Presença de hint e summary por missão
- *  - Presença de [PLACEHOLDER] em qualquer texto (erro)
+ *  - Presença de [PLACEHOLDER] em qualquer texto (sempre erro)
  *  - Feedbacks muito curtos (< 40 chars)
  *  - Fórmulas prováveis sem delimitadores $...$ (texto com ^, sqrt, sen, cos etc.)
  *  - Ausência de dificuldades basic e challenge nas questões
@@ -18,6 +22,7 @@
  * Uso:
  *   tsx scripts/validate-content-quality.ts content/revisions/
  *   tsx scripts/validate-content-quality.ts content/revisions/revisao-9ano.json
+ *   tsx scripts/validate-content-quality.ts content/revisions/revisao-9ano.json --strict
  */
 
 import fs from 'fs'
@@ -162,7 +167,7 @@ function validateMission(mission: Mission, missionIndex: number, isMath: boolean
     warn(r, `${label}: sem bloco 'summary'. Adicione um resumo ao final da lição.`)
   }
 
-  // 4. [PLACEHOLDER] em blocos
+  // 4. [PLACEHOLDER] em blocos (sempre erro, independente do modo)
   for (const block of blocks) {
     const texts = allBlockTexts(block)
     if (hasPlaceholder(texts)) {
@@ -265,13 +270,18 @@ function collectFiles(target: string): string[] {
 }
 
 function main() {
-  const arg = process.argv[2]
-  if (!arg) {
-    console.error('Uso: tsx scripts/validate-content-quality.ts <arquivo-ou-diretório>')
+  const args = process.argv.slice(2)
+  const strict = args.includes('--strict')
+  const target = args.find(a => !a.startsWith('--'))
+
+  if (!target) {
+    console.error('Uso: tsx scripts/validate-content-quality.ts <arquivo-ou-diretório> [--strict]')
+    console.error('  Modo diagnóstico (padrão): warnings saem com código 0.')
+    console.error('  Modo estrito (--strict): warnings saem com código 1. Use no CI.')
     process.exit(1)
   }
 
-  const targetPath = path.resolve(arg)
+  const targetPath = path.resolve(target)
   if (!fs.existsSync(targetPath)) {
     console.error(`Caminho não encontrado: ${targetPath}`)
     process.exit(1)
@@ -283,7 +293,8 @@ function main() {
     process.exit(0)
   }
 
-  console.log(`\nValidando qualidade pedagógica de ${files.length} arquivo(s)...\n`)
+  const modeLabel = strict ? ' [modo estrito — warnings são erros]' : ' [modo diagnóstico]'
+  console.log(`\nValidando qualidade pedagógica de ${files.length} arquivo(s)...${modeLabel}\n`)
 
   let totalErrors = 0
   let totalWarnings = 0
@@ -298,7 +309,10 @@ function main() {
       console.log(`\n${shortName}`)
       console.log('─'.repeat(50))
       for (const e of errors) console.log(`  ✗ ERRO    ${e}`)
-      for (const w of warnings) console.log(`  ⚠ WARNING ${w}`)
+      for (const w of warnings) {
+        const prefix = strict ? '  ✗ ERRO    ' : '  ⚠ WARNING '
+        console.log(`${prefix}${w}`)
+      }
     } else {
       console.log(`✓ ${shortName}`)
     }
@@ -308,16 +322,24 @@ function main() {
   }
 
   console.log('\n' + '═'.repeat(50))
-  console.log(`Qualidade: ${totalErrors} erro(s), ${totalWarnings} warning(s) em ${filesWithIssues}/${files.length} arquivo(s).\n`)
 
-  if (totalErrors > 0) {
-    console.error('✗ Erros críticos encontrados. Corrija antes de importar.')
-    process.exit(1)
-  }
-
-  if (totalWarnings > 0) {
-    console.log('⚠ Warnings encontrados. Revise antes de usar em produção.')
-    process.exit(0)
+  if (strict) {
+    const total = totalErrors + totalWarnings
+    console.log(`Qualidade (strict): ${total} problema(s) em ${filesWithIssues}/${files.length} arquivo(s).\n`)
+    if (total > 0) {
+      console.error('✗ Problemas encontrados em modo estrito. Corrija antes de importar.')
+      process.exit(1)
+    }
+  } else {
+    console.log(`Qualidade: ${totalErrors} erro(s), ${totalWarnings} warning(s) em ${filesWithIssues}/${files.length} arquivo(s).\n`)
+    if (totalErrors > 0) {
+      console.error('✗ Erros críticos encontrados. Corrija antes de importar.')
+      process.exit(1)
+    }
+    if (totalWarnings > 0) {
+      console.log('⚠ Warnings encontrados. Revise antes de usar em produção.')
+      process.exit(0)
+    }
   }
 
   console.log('✓ Qualidade pedagógica validada.')

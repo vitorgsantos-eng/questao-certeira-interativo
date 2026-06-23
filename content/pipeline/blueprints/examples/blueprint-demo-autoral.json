@@ -40,6 +40,15 @@
             "Resolva: x = 120 × 5 / 2 = 300 km."
           ],
           "conclusion": "Em 5 horas, o carro percorre 300 km."
+        },
+        {
+          "problem": "Se 4 kg de arroz custam R$ 20, quanto custam 7 kg?",
+          "steps": [
+            "Identifique: quantidade e preço são diretamente proporcionais (preço fixo por kg).",
+            "Monte a proporção: 4/20 = 7/x.",
+            "Resolva por multiplicação cruzada: 4x = 140, portanto x = 35."
+          ],
+          "conclusion": "7 kg de arroz custam R$ 35."
         }
       ],
       "questionPlan": {
@@ -74,6 +83,15 @@
             "Resolva: x = 36 / 4 = 9 dias."
           ],
           "conclusion": "4 pintores pintam a casa em 9 dias."
+        },
+        {
+          "problem": "Uma torneira enche um tanque em 6 horas. Quantas horas levam 2 torneiras iguais?",
+          "steps": [
+            "Identifique: número de torneiras e tempo são inversamente proporcionais (mais torneiras → menos tempo).",
+            "Monte a proporção inversa, invertendo um dos membros: 1 × 6 = 2 × x.",
+            "Resolva: x = 6 / 2 = 3 horas."
+          ],
+          "conclusion": "2 torneiras enchem o tanque em 3 horas."
         }
       ],
       "questionPlan": {

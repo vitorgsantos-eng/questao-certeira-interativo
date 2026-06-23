@@ -178,7 +178,25 @@ O script `scripts/validate-content-quality.ts` verifica automaticamente:
 - Fórmulas prováveis sem `$...$`.
 - Ausência de dificuldades `basic` e `challenge`.
 
-Rode: `npm run validate-content:quality`
+### Modo diagnóstico (padrão)
+
+Erros saem com código 1. Warnings saem com código 0 (não bloqueiam CI nem importação).
+
+Use para auditar todo o diretório de revisões e identificar o que melhorar:
+
+```
+npm run validate-content:quality
+```
+
+### Modo estrito (`--strict`)
+
+Erros **e** warnings saem com código 1. Usado no CI para a revisão piloto.
+
+```
+npm run validate-content:quality:pilot
+```
+
+**Regra:** toda revisão que entra no CI ou será importada para produção deve passar em modo estrito sem nenhum warning.
 
 ---
 
