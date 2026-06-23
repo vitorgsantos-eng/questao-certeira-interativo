@@ -1,0 +1,21 @@
+# Fontes brutas e extrações — NUNCA versionar
+raw/**
+!raw/.gitkeep
+
+extracted/**
+!extracted/.gitkeep
+
+# PDFs e documentos brutos
+*.pdf
+*.docx
+*.doc
+*.odt
+
+# Outputs temporários de extração
+*.extracted.txt
+*.extracted.md
+*.extraction-report.json
+
+# Dados sensíveis ou de alunos reais
+students.local.json
+access-codes-*.json
