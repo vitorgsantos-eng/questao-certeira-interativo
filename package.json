@@ -18,7 +18,9 @@
     "pipeline:extract-pdf": "tsx scripts/pipeline/extract-pdf-text.ts",
     "pipeline:validate-blueprint": "tsx scripts/pipeline/validate-blueprint.ts",
     "pipeline:blueprint-to-revision": "tsx scripts/pipeline/blueprint-to-revision.ts",
-    "pipeline:validate-demo": "npm run pipeline:validate-blueprint -- content/pipeline/blueprints/examples/blueprint-demo-autoral.json && npm run pipeline:blueprint-to-revision -- content/pipeline/blueprints/examples/blueprint-demo-autoral.json && npm run validate-content -- content/pipeline/drafts/examples/revisao-demo-pipeline.json"
+    "pipeline:validate-demo": "npm run pipeline:validate-blueprint -- content/pipeline/blueprints/examples/blueprint-demo-autoral.json && npm run pipeline:blueprint-to-revision -- content/pipeline/blueprints/examples/blueprint-demo-autoral.json && npm run validate-content -- content/pipeline/drafts/examples/revisao-demo-pipeline.json",
+    "validate-content:quality": "tsx scripts/validate-content-quality.ts content/revisions/",
+    "validate-content:quality:pilot": "tsx scripts/validate-content-quality.ts content/revisions/revisao-9ano-triangulos-sistemas.json --strict"
   },
   "dependencies": {
     "@supabase/ssr": "^0.5.1",

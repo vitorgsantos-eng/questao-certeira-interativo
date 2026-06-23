@@ -34,3 +34,8 @@ Thumbs.db
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Agent / goal operational files (not part of the repository)
+.agents/
+bloco*_goal*.md
+instrucoes_goal_*.md

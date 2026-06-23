@@ -100,6 +100,49 @@
 - [ ] Revisão ativa no banco (`status = 'active'`)
 - [ ] Códigos de acesso gerados e distribuídos
 
+## Checklist de qualidade pedagógica e visual (Bloco 7)
+
+### Critérios pedagógicos
+- [x] Cada missão permite estudar o assunto do zero
+- [x] Cada missão tem vocabulário e pré-requisitos explícitos
+- [x] Cada fórmula central é explicada (não apenas exibida)
+- [x] Cada missão tem pelo menos 2 exemplos resolvidos (Matemática)
+- [x] Cada missão tem pelo menos 3 erros comuns explicitados
+- [x] Questões seguem progressão básica → intermediária → desafio
+- [x] Feedbacks incorretos explicam o erro e mostram o caminho correto
+- [x] Feedbacks corretos explicam o raciocínio
+- [x] Gabaritos conferidos manualmente ✓
+
+### Critérios visuais
+- [x] Fórmulas centrais renderizam com KaTeX legível
+- [x] Fórmulas únicas importantes usam display mode (centralizado)
+- [x] Cada missão tem ao menos um diagrama didático
+- [x] Diagramas possuem legenda explicativa (caption)
+- [x] Diagramas funcionam em mobile (viewBox + w-full)
+- [x] Nenhuma dependência de imagem externa
+
+### Critérios técnicos
+- [x] `npm run lint` passa (1 warning pré-existente não-bloqueante)
+- [x] `npm run type-check` passa
+- [x] `npm run build` passa
+- [x] `npm run validate-content:all` passa (0 erros)
+- [x] `npm test` passa
+- [x] `npm run pipeline:validate-demo` passa
+- [x] `npm run validate-content:quality` passa (0 erros)
+- [x] Nenhum secret versionado
+- [x] Nenhuma API paga adicionada
+- [x] Nenhuma IA adicionada ao runtime
+
+### Novos artefatos (Bloco 7)
+- [x] `src/components/math/MathFormulaBlock.tsx` — display-mode KaTeX
+- [x] `docs/content/math-rendering-quality.md` — convenção oficial de fórmulas
+- [x] `docs/content/quality-standard.md` — padrão mínimo pedagógico
+- [x] `scripts/validate-content-quality.ts` — validador pedagógico
+- [x] `validate-content:quality` adicionado ao package.json
+- [x] Blueprint pedagógico atualizado com critérios de qualidade
+
+---
+
 ## Checklist de teste no celular
 
 - [x] Página inicial responsiva

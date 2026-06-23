@@ -1,6 +1,8 @@
 # Blueprint Pedagógico — O que é e como preencher
 
-**Motor Questão Certeira Interativo — Bloco 6**
+**Motor Questão Certeira Interativo — Bloco 6 + Bloco 7**
+
+> **Padrão de qualidade:** todo blueprint deve gerar revisões que atendam ao `docs/content/quality-standard.md`. Leia esse documento antes de criar um blueprint.
 
 ---
 
@@ -102,6 +104,13 @@ Array de missões. Cada missão tem:
 }
 ```
 
+> **Padrão mínimo (Bloco 7):** o blueprint deve documentar, para cada missão:
+> - `prerequisites` — lista de pré-requisitos do aluno (pode ser `[]`).
+> - `concepts` — ao menos 1 conceito central com explicação (não só o nome).
+> - `workedExamples` — ao menos 2 para revisões de Matemática.
+> - `questionPlan.commonErrors` — ao menos 3 erros comuns previstos.
+> - Visual previsto: que tipo de diagrama ou elemento visual acompanhará a missão.
+
 ### `humanReview`
 Gate obrigatório antes de gerar draft:
 
@@ -120,7 +129,7 @@ Gate obrigatório antes de gerar draft:
 
 ---
 
-## Validação
+## Validação do blueprint
 
 ```bash
 npm run pipeline:validate-blueprint -- content/pipeline/blueprints/meu-blueprint.json
@@ -130,7 +139,50 @@ Erros comuns:
 - `approved: false` → preencha `reviewer` e `reviewDate` após revisar
 - `minimumQuestions < 5` → ajuste o `questionPlan`
 - `concepts` vazio → descreva pelo menos 1 conceito central
-- `workedExamples` vazio → inclua pelo menos 1 exemplo resolvido
+- `workedExamples < 2` (Matemática) → inclua ao menos 2 exemplos resolvidos
+- `commonErrors < 3` → documente ao menos 3 erros comuns
+- `difficulties` sem `basic`, `intermediate` ou `challenge` → inclua as 3 dificuldades
+
+## Validação da revisão gerada
+
+Após gerar o draft e revisar o conteúdo, valide a qualidade pedagógica:
+
+### Modo diagnóstico
+
+Audita todo o diretório de revisões. Warnings não bloqueiam (exit 0). Use para diagnóstico:
+
+```bash
+npm run validate-content:quality
+```
+
+### Modo estrito
+
+Warnings **bloqueiam** (exit 1). Obrigatório para a revisão piloto e para qualquer revisão antes de importar para produção:
+
+```bash
+npm run validate-content:quality:pilot
+```
+
+A revisão piloto (`revisao-9ano-triangulos-sistemas.json`) é sempre validada em modo estrito no CI (`npm run validate-content:quality:pilot`). Toda nova revisão que entrar no CI deve também passar nesse padrão — adicione um script `validate-content:quality:<slug>` equivalente em `package.json`.
+
+---
+
+## Critérios de qualidade pedagógica exigidos
+
+Antes de marcar `approved: true`, confirme que o blueprint atende:
+
+| Critério | Campo do blueprint |
+|----------|-------------------|
+| Missão tem abertura contextual definida | `missions[].concepts` ou notes |
+| Vocabulário e pré-requisitos documentados | `missions[].prerequisites` + concepts |
+| Ao menos 1 conceito central com sentido | `missions[].concepts` (≥1) |
+| Exemplos resolvidos planejados (≥2 para Matemática) | `missions[].workedExamples` (≥2) |
+| Erros comuns mapeados (≥3) | `missions[].questionPlan.commonErrors` (≥3) |
+| Visual previsto | notes ou campo adicional |
+| Feedbacks pedagógicos planejados | `missions[].questionPlan.skills` |
+| Progressão basic → intermediate → challenge | `missions[].questionPlan.difficulties` |
+
+Ver detalhes em `docs/content/quality-standard.md`.
 
 ---
 

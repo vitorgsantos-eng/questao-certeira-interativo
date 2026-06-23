@@ -43,6 +43,9 @@ jobs:
       - name: Validate content files
         run: npm run validate-content:all
 
+      - name: Validate content quality — piloto (strict)
+        run: npm run validate-content:quality:pilot
+
       - name: Run tests
         run: npm test
         env:

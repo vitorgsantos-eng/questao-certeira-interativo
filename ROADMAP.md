@@ -207,6 +207,46 @@ Backlog futuro restante: registro dinâmico de componentes visuais (sem alterar 
 - [x] `content/pipeline/README.md` — visão geral da estrutura
 - [x] Scripts npm: `pipeline:extract-pdf`, `pipeline:validate-blueprint`, `pipeline:blueprint-to-revision`, `pipeline:validate-demo`
 
+---
+
+## Fase 10e: Bloco 7 — Qualidade pedagógica e visual do piloto ✅ (2026-06-23)
+
+> **Objetivo:** elevar a qualidade do piloto para que um aluno aprenda do zero, sem material auxiliar.
+
+### VIT-48 — Renderização matemática elegante ✅
+- [x] `MathFormulaBlock` criado para display-mode KaTeX centralizado
+- [x] `LessonBlock` atualizado: single-formula highlights usam display mode
+- [x] `docs/content/math-rendering-quality.md` — convenção oficial de fórmulas
+- [x] KaTeX mantido local, sem API externa, LaTeX sempre de JSON controlado
+
+### VIT-50 — Revisão piloto para aprendizagem guiada ✅
+- [x] Missão 1 (Semelhança): vocabulário essencial adicionado, erros comuns detalhados
+- [x] Missão 2 (Relações Métricas): erros comuns adicionados, conclusões enriquecidas
+- [x] Missão 3 (Trigonometria): vocabulário completo adicionado, erros comuns detalhados
+- [x] Missão 4 (Sistemas): pré-requisito de equações do 2º grau explicado, erros comuns
+- [x] Todos os feedbacks revisados — nenhum genérico
+- [x] Gabaritos conferidos manualmente
+
+### VIT-51 — Recursos visuais didáticos ✅
+- [x] Cada missão possui pelo menos 1 diagrama com caption
+- [x] Visuais existentes auditados: SimilarTrianglesDiagram, RightTriangleMetricsDiagram, TrigonometryDiagram, SystemsStrategyCard
+- [x] Todos funcionam em mobile (viewBox + w-full)
+
+### VIT-28 — Padrão pedagógico formalizado ✅
+- [x] `docs/content/quality-standard.md` — critérios mínimos por missão
+- [x] Blueprint pedagógico atualizado com critérios do Bloco 7
+
+### VIT-34 — Validação de qualidade automática ✅
+- [x] `scripts/validate-content-quality.ts` — validador pedagógico complementar
+- [x] Script npm `validate-content:quality` adicionado
+- [x] Valida: visual, worked_examples, hint, summary, feedbacks curtos, placeholders, dificuldades
+
+### Padrão reutilizável ✅
+- [x] `docs/content/quality-standard.md` serve como referência para todas as próximas revisões
+- [x] Pipeline do Bloco 6 atualizado: blueprint exige documentar vocabulário, erros comuns, visuais
+
+---
+
 ## Backlog futuro (pós-MVP)
 - Mais turmas e revisões (motor já suporta)
 - Smoke test com segunda revisão em banco real
