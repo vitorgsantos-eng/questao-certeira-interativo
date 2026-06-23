@@ -143,3 +143,21 @@
 **Decisão:** toda revisão gerada pelo pipeline deve ter um arquivo `provenance.json` rastreando a origem do material.
 
 **Motivo:** sem rastreabilidade, é impossível auditar riscos autorais futuros. O provenance também serve como documentação pedagógica: por que este material foi usado, quem aprovou, e que uso é permitido.
+
+---
+
+## 18. (Bloco 7) Por que separar validação estrutural de validação pedagógica
+
+**Decisão:** manter dois scripts de validação distintos: `validate-content.ts` (estrutura JSON) e `validate-content-quality.ts` (critérios pedagógicos).
+
+**Motivo:** critérios pedagógicos como "feedback muito curto" ou "missão sem visual" não pertencem à validação estrutural — ela deve ser rápida e determinística. O validador pedagógico pode evoluir independentemente do schema, e ser incluído em revisões de conteúdo sem impactar a validação estrutural do CI.
+
+---
+
+## 19. (Bloco 7) Por que usar display-mode KaTeX para fórmulas únicas
+
+**Decisão:** fórmulas únicas no campo `highlight` de blocos `concept` são renderizadas em display-mode (centralizado, tamanho maior) via `MathFormulaBlock`. Fórmulas múltiplas com pipe-separator continuam sendo chips inline via `MathText`.
+
+**Motivo:** fórmulas únicas e importantes (ex.: Bhaskara, identidade algébrica) ganham legibilidade em display-mode, especialmente no mobile. A detecção é simples (começa e termina com `$`, sem pipe) e não requer mudança de schema.
+
+**Trade-off:** a detecção heurística (`starts/ends with $`, exactly 2 `$` signs) falha se o highlight tiver texto misturado com uma fórmula. Nesse caso, usar `MathText` inline é o fallback natural — o autor deve usar pipe-sep para múltiplas fórmulas.

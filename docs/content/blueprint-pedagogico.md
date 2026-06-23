@@ -1,6 +1,8 @@
 # Blueprint Pedagógico — O que é e como preencher
 
-**Motor Questão Certeira Interativo — Bloco 6**
+**Motor Questão Certeira Interativo — Bloco 6 + Bloco 7**
+
+> **Padrão de qualidade:** todo blueprint deve gerar revisões que atendam ao `docs/content/quality-standard.md`. Leia esse documento antes de criar um blueprint.
 
 ---
 
@@ -102,6 +104,13 @@ Array de missões. Cada missão tem:
 }
 ```
 
+> **Padrão mínimo (Bloco 7):** o blueprint deve documentar, para cada missão:
+> - `prerequisites` — lista de pré-requisitos do aluno (pode ser `[]`).
+> - `concepts` — ao menos 1 conceito central com explicação (não só o nome).
+> - `workedExamples` — ao menos 2 para revisões de Matemática.
+> - `questionPlan.commonErrors` — ao menos 3 erros comuns previstos.
+> - Visual previsto: que tipo de diagrama ou elemento visual acompanhará a missão.
+
 ### `humanReview`
 Gate obrigatório antes de gerar draft:
 
@@ -131,6 +140,25 @@ Erros comuns:
 - `minimumQuestions < 5` → ajuste o `questionPlan`
 - `concepts` vazio → descreva pelo menos 1 conceito central
 - `workedExamples` vazio → inclua pelo menos 1 exemplo resolvido
+
+---
+
+## Critérios de qualidade pedagógica exigidos
+
+Antes de marcar `approved: true`, confirme que o blueprint atende:
+
+| Critério | Campo do blueprint |
+|----------|-------------------|
+| Missão tem abertura contextual definida | `missions[].concepts` ou notes |
+| Vocabulário e pré-requisitos documentados | `missions[].prerequisites` + concepts |
+| Ao menos 1 conceito central com sentido | `missions[].concepts` (≥1) |
+| Exemplos resolvidos planejados (≥2 para Matemática) | `missions[].workedExamples` (≥2) |
+| Erros comuns mapeados (≥3) | `missions[].questionPlan.commonErrors` (≥3) |
+| Visual previsto | notes ou campo adicional |
+| Feedbacks pedagógicos planejados | `missions[].questionPlan.skills` |
+| Progressão basic → intermediate → challenge | `missions[].questionPlan.difficulties` |
+
+Ver detalhes em `docs/content/quality-standard.md`.
 
 ---
 
